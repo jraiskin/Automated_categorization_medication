@@ -1,4 +1,4 @@
-Explain:
+# Explain:
     Deep learning
         Learn mappings (NN) and intermediate representations (layers depth)
         Theorems from deep learning, approximating functions
@@ -8,7 +8,10 @@ Explain:
         Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations
     
 
-Literature review - general topics
+# Baseline
+Train a linear classifier, SVM / log-reg on the input data (character-wise vector with fixed length?)
+
+# Literature review - general topics
 
 text sequence -> class (hierarchical structure?)
 
