@@ -1,19 +1,19 @@
 ## Explain:
-Deep learning
-    - Learn mappings (NN) and intermediate representations (layers depth)
-    - Theorems from deep learning, approximating functions
+Deep learning:
+- Learn mappings (NN) and intermediate representations (layers depth)
+- Theorems from deep learning, approximating functions
 
 Data strucrute
-    - ATC codes, hierarchical structure
-    - Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations
+- ATC codes, hierarchical structure
+- Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations
     
 
 ## Baseline
-Train a linear classifier, SVM / log-reg on the input data (character-wise vector with fixed length?)
+- Train a linear classifier, SVM / log-reg on the input data (character-wise vector with fixed length?)
 
 ## Literature review - general topics
 
-text sequence -> class (hierarchical structure?)
+#### text sequence -> class (hierarchical structure?)
 
 - RNN classification
 - Bidirectional RNN classification
