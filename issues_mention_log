@@ -1,9 +1,0 @@
-Explain:
-    Deep learning
-        Learn mappings (NN) and intermediate representations (layers depth)
-        Theorems from deep learning, approximating functions
-    
-    Data strucrute
-        ATC codes, hierarchical structure
-        Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations
-    
