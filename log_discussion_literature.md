@@ -32,7 +32,7 @@ Data strucrute
     - [Large Margin Methods for Label Sequence Learning]
     (http://www.eecs.yorku.ca/course_archive/2005-06/F/6002B/Readings/EuroSpeech2003.pdf)
         
-        
+        Risk functions (Hamming risk), Conditional random fields (CRFs)
 
 - NN robust classification methods wrt misspelling
 - NN overfitting
