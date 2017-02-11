@@ -41,10 +41,10 @@ Data strucrute
     - [A C-LSTM Neural Network for Text Classification]
     (https://arxiv.org/abs/1511.08630)
     
-        Propose C-LSTM model, utilizes components from CNN and LSTM to extract features and represent latent vectors.
-        Gives a descent overview of related work, N-gram feature extraction through convolution, 
-        LSTM, padding and word vector initialization.
-        
+        Propose C-LSTM model, utilizes components from CNN and LSTM to extract features and represent latent vectors.
+        Gives a descent overview of related work, N-gram feature extraction through convolution, LSTM, 
+        padding and word vector initialization.
+    
     - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
     (https://arxiv.org/abs/1406.1078)
     
@@ -55,6 +55,7 @@ Data strucrute
     
         TBC
     
+
 - Bidirectional RNN classification
 - char2char, seq2seq
     
@@ -62,7 +63,7 @@ Data strucrute
     (https://arxiv.org/abs/1409.3215)
     
         TBC
-    
+        
 - Hierarchical structures classification (no mention of NN)
     - [A survey of hierarchical classification across different application domains] 
     (http://link.springer.com/article/10.1007/s10618-010-0175-9)
