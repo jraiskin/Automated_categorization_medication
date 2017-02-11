@@ -12,25 +12,31 @@ Data strucrute
 - Train a linear classifier, SVM / log-reg (TBC)
 
 ## Literature review - general topics
-
-#### text sequence -> class (hierarchical structure?)
-
 - RNN classification
+    - [Finding Structure in Time]
+    (http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/abstract)
+    
+        Introduced RNN (simple RNN, later referred to as SRN)
+    
+    - [Long Short-Term Memory]
+    (http://dl.acm.org/citation.cfm?id=1246450)
+    
+        Introduced LSTM
+    
     - [Learning to Diagnose with LSTM Recurrent Neural Networks]
     (https://arxiv.org/abs/1511.03677)
     
-        
+        TBC
     
     - [Sequential Short-Text Classification with Recurrent and Convolutional Neural Networks]
     (https://arxiv.org/abs/1603.03827)
     
-        
+        TBC
     
     - [Recurrent Neural Networks for Robust Real-World Text Classification]
     (http://dl.acm.org/citation.cfm?id=1331869)
     
         xRNN model, 2 hidden layer, controlled by a hysteresis function
-        
     
     - [A C-LSTM Neural Network for Text Classification]
     (https://arxiv.org/abs/1511.08630)
@@ -38,32 +44,25 @@ Data strucrute
         Propose C-LSTM model, utilizes components from CNN and LSTM to extract features and represent latent vectors.
         Gives a descent overview of related work, N-gram feature extraction through convolution, 
         LSTM, padding and word vector initialization.
-    
-    - [name]
-    (url)
-    
         
+    - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
+    (https://arxiv.org/abs/1406.1078)
     
-    - [name]
-    (url)
+        TBC
     
-        
+    - [Recurrent Neural Network for Text Classification with Multi-Task Learning]
+    (https://arxiv.org/abs/1605.05101)
     
-    - [name]
-    (url)
+        TBC
     
-        
-    
-
 - Bidirectional RNN classification
 - char2char, seq2seq
     
     - [Sequence to Sequence Learning with Neural Networks]
     (https://arxiv.org/abs/1409.3215)
     
-        
+        TBC
     
-
 - Hierarchical structures classification (no mention of NN)
     - [A survey of hierarchical classification across different application domains] 
     (http://link.springer.com/article/10.1007/s10618-010-0175-9)
@@ -86,16 +85,16 @@ Data strucrute
     (http://journals.sagepub.com/doi/abs/10.1366/0003702001948619)
     
         Hierarchical classification, different classifer for each level and for each node
-
+    
     - [Hierarchical text classification and evaluation] 
     (http://ieeexplore.ieee.org/abstract/document/989560/?reload=true)
     
-        
+        TBC
     
     - [Large margin hierarchical classification]
     (http://dl.acm.org/citation.cfm?id=1015374)
     
-        
+        TBC
     
 - NN robust classification methods wrt misspelling
 - NN overfitting
@@ -115,5 +114,5 @@ Data strucrute
     - [name]
     (url)
     
-        
+        TBC
     
