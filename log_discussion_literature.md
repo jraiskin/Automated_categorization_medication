@@ -42,8 +42,9 @@ Data strucrute
     (https://arxiv.org/abs/1511.08630)
     
         Propose C-LSTM model, utilizes components from CNN and LSTM to extract features and represent latent vectors.
-        Gives a descent overview of related work, N-gram feature extraction through convolution, LSTM, 
+        Gives a descent overview of related work, N-gram feature extraction through convolution, LSTM,
         padding and word vector initialization.
+        
     
     - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
     (https://arxiv.org/abs/1406.1078)
