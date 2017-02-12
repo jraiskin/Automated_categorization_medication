@@ -103,8 +103,52 @@ Data strucrute
     - L2 regularization
     - early stopping
     - drop-out
+    
+        - [Semi-supervised Sequence Learning]
+        (https://arxiv.org/abs/1511.01432)
+        
+            TBC
+        
+        - [Recurrent Neural Network Regularization]
+        (https://arxiv.org/abs/1409.2329)
+        
+            TBC
+        
+        - [Dropout improves Recurrent Neural Networks for Handwriting Recognition]
+        (https://arxiv.org/abs/1312.4569)
+        
+            TBC
+        
     - auxilary labels
+    
+        - [Using the Future to "Sort Out" the Present: Rankprop and Multitask Learning for Medical Risk Evaluation]
+        (https://papers.nips.cc/paper/1081-using-the-future-to-sort-out-the-present-rankprop-and-multitask-learning-for-medical-risk-evaluation)
+        
+            Learning from the future with multitask learning
+        
+        - [Learning Many Related Tasks at the Same Time With Backpropagation]
+        (http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.6346)
+        
+            Multitask backprop
+        
     - target replication
+        
+        - [Deeply-Supervised Nets]
+        (https://arxiv.org/abs/1409.5185)
+        
+            Companion objective (different to layer-wise pre-training), 
+            introducing a classifier (e.g. SVM) to each layer
+        
+        - [Beyond Short Snippets: Deep Networks for Video Classification]
+        (https://arxiv.org/abs/1503.08909)
+        
+            Target replication after each video frame
+        
+        - [Semi-supervised Sequence Learning]
+        (https://arxiv.org/abs/1511.01432)
+        
+            TBC
+        
 - Target replication in squence data context
 
 #### formatting examples
