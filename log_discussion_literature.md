@@ -77,6 +77,16 @@ Data strucrute
     
         Introducing GAN
     
+    - [Improved Techniques for Training GANs]
+    (https://arxiv.org/abs/1606.03498)
+    
+        TBC
+    
+    - [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks]
+    (https://arxiv.org/abs/1511.06434)
+    
+        TBC
+    
 - Hierarchical structures classification (no mention of NN)
     
     - [A survey of hierarchical classification across different application domains] 
