@@ -13,6 +13,7 @@ Data strucrute
 
 ## Literature review - general topics
 - RNN classification
+    
     - [Finding Structure in Time]
     (http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/abstract)
     
@@ -56,6 +57,7 @@ Data strucrute
         TBC
     
 - Bidirectional RNN classification
+    
     - [Neural Machine Translation by Jointly Learning to Align and Translate]
     (https://arxiv.org/abs/1409.0473)
     
@@ -68,7 +70,15 @@ Data strucrute
     
         TBC
         
+- Generative Adversarial Network (GAN)
+    
+    - [Generative Adversarial Networks]
+    (https://arxiv.org/abs/1406.2661)
+    
+        Introducing GAN
+    
 - Hierarchical structures classification (no mention of NN)
+    
     - [A survey of hierarchical classification across different application domains] 
     (http://link.springer.com/article/10.1007/s10618-010-0175-9)
     
@@ -102,10 +112,15 @@ Data strucrute
         TBC
     
 - NN robust classification methods wrt misspelling
+
 - NN introduction, derivation, optimization, overfitting etc
+    
     - L2 regularization
+    
     - early stopping
+    
     - drop-out
+    
         - [Improving neural networks by preventing co-adaptation of feature detectors]
         (https://arxiv.org/abs/1207.0580)
         
