@@ -45,7 +45,6 @@ Data strucrute
         Gives a descent overview of related work, N-gram feature extraction through convolution, LSTM,
         padding and word vector initialization.
         
-    
     - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
     (https://arxiv.org/abs/1406.1078)
     
@@ -56,8 +55,12 @@ Data strucrute
     
         TBC
     
-
 - Bidirectional RNN classification
+    - [Neural Machine Translation by Jointly Learning to Align and Translate]
+    (https://arxiv.org/abs/1409.0473)
+    
+        RNN encoder-decoder, bi-directional RNN encoder
+    
 - char2char, seq2seq
     
     - [Sequence to Sequence Learning with Neural Networks]
@@ -99,11 +102,21 @@ Data strucrute
         TBC
     
 - NN robust classification methods wrt misspelling
-- NN overfitting
+- NN introduction, derivation, optimization, overfitting etc
     - L2 regularization
     - early stopping
     - drop-out
-    
+        - [Improving neural networks by preventing co-adaptation of feature detectors]
+        (https://arxiv.org/abs/1207.0580)
+        
+            Introducing drop-out
+        
+        - [Dropout: A Simple Way to Prevent Neural Networks from Overfitting]
+        (http://jmlr.org/papers/v15/srivastava14a.html)
+        
+            Show that dropout improves the performance of neural networks on supervised learning tasks in vision,
+            speech recognition, document classification and computational biology.
+        
         - [Semi-supervised Sequence Learning]
         (https://arxiv.org/abs/1511.01432)
         
@@ -149,7 +162,14 @@ Data strucrute
         
             TBC
         
-- Target replication in squence data context
+    - optimization
+        
+        - [Adam: A Method for Stochastic Optimization]
+        (https://arxiv.org/abs/1412.6980v8)
+        
+            Adam, an algorithm for first-order gradient-based optimization of stochastic objective functions,
+            based on adaptive estimates of lower-order moments.
+        
 
 #### formatting examples
 - [x] Finish my changes
