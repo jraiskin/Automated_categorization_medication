@@ -128,7 +128,17 @@ Data strucrute
     - L2 regularization
     
     - early stopping
-    
+        
+        - [On Early Stopping in Gradient Descent Learning]
+        (http://link.springer.com/article/10.1007/s00365-006-0663-2)
+        
+            TBC
+        
+        - [Boosting with early stopping: Convergence and consistency]
+        (https://arxiv.org/abs/math/0508276v1)
+        
+            TBC
+        
     - drop-out
     
         - [Improving neural networks by preventing co-adaptation of feature detectors]
