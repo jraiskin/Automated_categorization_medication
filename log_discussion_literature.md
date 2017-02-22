@@ -5,11 +5,12 @@ Deep learning:
 
 Data strucrute
 - ATC codes, hierarchical structure
-- Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations
+- Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations.
+    This "non-uniqueness" is solved by mapping, disambiguating labels, according to hand-annotated labels (by physicians)
     
 
 ## Baseline
-- Train a linear classifier, SVM / log-reg (TBC)
+- Train a linear classifier, SVM / log-reg / plain-vanilla LSTM (TBC)
 
 ## Literature review - general topics
 - RNN classification
@@ -33,6 +34,11 @@ Data strucrute
     (https://arxiv.org/abs/1603.03827)
     
         TBC
+    
+    - [Character-Aware Neural Language Models]
+    (https://arxiv.org/abs/1508.06615)
+    
+        Combining CNN and LSTM for charachter-level classification
     
     - [Recurrent Neural Networks for Robust Real-World Text Classification]
     (http://dl.acm.org/citation.cfm?id=1331869)
