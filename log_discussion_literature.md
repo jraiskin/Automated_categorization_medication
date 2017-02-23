@@ -1,14 +1,32 @@
-## Explain:
-Deep learning:
-- Learn mappings (NN) and intermediate representations (layers depth)
-- Theorems from deep learning, approximating functions
+## Explain
 
 Data strucrute
 - ATC codes, hierarchical structure
 - Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations.
     This "non-uniqueness" is solved by mapping, disambiguating labels, according to hand-annotated labels (by physicians)
     
-
+## Rough outline
+- Cover, abstract, acknowledgements, table of content
+- Introduction
+    present the problem, current available solutions, motivation to solve
+- Related work
+    - on NN:  
+        neural networks background and history, function approximators that learn intermediate representations (theorems?)  
+        NN increased success in various tasks over the years (vision, speech, text)  
+        background on network architectures: 
+        "neural unit" (piecemeal linear with non linear "activations"), popular activation functions,  
+        fully conected 1 layer NN  
+        introducing depth  
+        convolutional NN ?  
+        GAN  
+        RNN, (bi-directional?)  
+        LSTM (including previous iterations)  
+        short discussion on models considered but not used (char2char, seq2seq, word embeddings such as GloVe and word2vec)  
+        discussion on importance or regulatization in general, especially in NN (# of params etc)  
+        discussion on SGD, batch grad descent, optimization, local minima  
+    - on hierarchical classification:  
+        TBC, according to papers collected
+    
 ## Baseline
 - Train a linear classifier, SVM / log-reg / plain-vanilla LSTM (TBC)
 
