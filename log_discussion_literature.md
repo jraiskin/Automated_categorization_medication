@@ -10,7 +10,7 @@ Data strucrute
 - Introduction
     present the problem, current available solutions, motivation to solve
 - Related work
-    - on NN:  
+    - NN:  
         neural networks background and history, function approximators that learn intermediate representations (theorems?)  
         NN increased success in various tasks over the years (vision, speech, text)  
         background on network architectures: 
@@ -24,8 +24,29 @@ Data strucrute
         short discussion on models considered but not used (char2char, seq2seq, word embeddings such as GloVe and word2vec)  
         discussion on importance or regulatization in general, especially in NN (# of params etc)  
         discussion on SGD, batch grad descent, optimization, local minima  
-    - on hierarchical classification:  
-        TBC, according to papers collected
+    
+    - Hierarchical classification:  
+        TBC, according to papers collected  
+    
+    - Assessment metrics:  
+        binary classification: accuracy, precision, f-score  
+        Cost function requirements, 
+        loss function for classification 
+        (Quadratic, Cross-entropy, Exponentional, Hellinger distance, Kullback–Leibler divergence, Itakura–Saito distance)  
+        cross entropy adjustments for target replication  
+    
+- Experiments
+    - Data  
+        descriptive (inculde visualizations, # of labels, observations etc)  
+        structure, disambiguation of possible non-unique labels  
+        
+    - Baseline  
+    
+    - Approach
+        
+    - Results
+    
+- Conclusion
     
 ## Baseline
 - Train a linear classifier, SVM / log-reg / plain-vanilla LSTM (TBC)
