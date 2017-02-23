@@ -38,13 +38,21 @@ Data strucrute
 - Experiments
     - Data  
         descriptive (inculde visualizations, # of labels, observations etc)  
-        structure, disambiguation of possible non-unique labels  
+        structure, preperation and preprocessing (disambiguation of possible non-unique labels)  
+        
+    - Task evaluation
         
     - Baseline  
     
     - Approach
         
     - Results
+        include evaluation metrics, training time (epochs and wall-time)  
+        compare between different structures, hyper-params and baseline
+        
+    - Discussion
+    
+    - Bibliography, Declaration of originality
     
 - Conclusion
     
