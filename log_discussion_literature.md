@@ -1,15 +1,83 @@
-## Explain:
-Deep learning:
-- Learn mappings (NN) and intermediate representations (layers depth)
-- Theorems from deep learning, approximating functions
+## Explain
 
 Data strucrute
 - ATC codes, hierarchical structure
-- Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations
+- Targets can be non-unique, hand anotated and mapped to a unique set defined by those annotations.
+    This "non-uniqueness" is solved by mapping, disambiguating labels, according to hand-annotated labels (by physicians)
     
+## Rough outline
+- Cover  
 
+- Abstract  
+    presenting the research problem, the main results, conclusion and how the thesis advances the field  
+    
+- Acknowledgements, table of content  
+
+- Introduction  
+    - The research area  
+    - Previous work in this area  
+    - Research problem and why it's worthwhile studying  
+    - Thesis objective: (how) advance knowledge in the field  
+    - Personal motivation: why this topic, why it is important  
+    - Research method (brief)  
+    - Structure: paragraph about each chapter, contribution of the chapter  
+    
+- Related work  
+    - NN:  
+        neural networks background and history, function approximators that learn intermediate representations (theorems?)  
+        NN increased success in various tasks over the years (vision, speech, text)  
+        background on network architectures: 
+        "neural unit" (piecemeal linear with non linear "activations"), popular activation functions,  
+        fully conected 1 layer NN  
+        introducing depth  
+        convolutional NN ?  
+        GAN  
+        RNN, (bi-directional?)  
+        LSTM (including previous iterations)  
+        short discussion on models considered but not used (char2char, seq2seq, word embeddings e.g. GloVe and word2vec)  
+        discussion on importance or regulatization in general, especially in NN (# of params etc)  
+        discussion on gradient-based learning, SGD, batch grad descent, optimization, local minima  
+    
+    - Hierarchical classification:  
+        TBC, according to papers collected  
+    
+    - Assessment metrics:  
+        SHORT: binary classification: accuracy, precision, f-score  
+        Cost function requirements, 
+        loss function for classification  
+        SHORT: Quadratic, Exponentional, Hellinger distance, Kullback–Leibler divergence, Itakura–Saito distance  
+        Cross-entropy in depth, adjustments for target replication  
+    
+- Experiments
+    - Data  
+        descriptive (inculde visualizations, # of labels, observations etc)  
+        structure, preperation and preprocessing (disambiguation of possible non-unique labels)  
+        
+    - Task evaluation
+        
+    - Baseline  
+        (plain vanilla LSTM?)  
+        
+    - Approach  
+        Explore LSTM depth (literature found up to 3 LSTM "layers")  
+        Experinemt (each?) LSTM with different feeding methods: forward, backward, bi-directional  
+        Experinemt with drop-out, target replication  
+        GAN (need to choose network architecture for G and A networks, w&w/o drop-out)  
+        Encoder-decoder (classification as translation)  
+        For each (???) experiment on "flat" vs. hierarchical class structure  
+        
+    - Results  
+        include evaluation metrics, training time (epochs and wall-time)  
+        compare between different structures, hyper-params and baseline
+        
+    - Discussion  
+    
+- Conclusion  
+
+- Bibliography, Declaration of originality  
+    
 ## Baseline
-- Train a linear classifier, SVM / log-reg (TBC)
+- Train a linear classifier, SVM / log-reg / plain-vanilla LSTM (TBC)
 
 ## Literature review - general topics
 - RNN classification
@@ -33,6 +101,11 @@ Data strucrute
     (https://arxiv.org/abs/1603.03827)
     
         TBC
+    
+    - [Character-Aware Neural Language Models]
+    (https://arxiv.org/abs/1508.06615)
+    
+        Combining CNN and LSTM for charachter-level classification
     
     - [Recurrent Neural Networks for Robust Real-World Text Classification]
     (http://dl.acm.org/citation.cfm?id=1331869)
@@ -204,6 +277,17 @@ Data strucrute
         
             Adam, an algorithm for first-order gradient-based optimization of stochastic objective functions,
             based on adaptive estimates of lower-order moments.
+        
+        - [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift]
+        (https://arxiv.org/abs/1502.03167)
+        
+            Normalizing each batch to speed up learning (can be less careful with learning rates).  
+            Can also be considered as a mean to regularize.  
+        
+        - [Highway Networks]
+        (https://arxiv.org/abs/1505.00387)
+        
+            Assisting gradient-based learning of deep networks by allowing information flow downstream.    
         
 
 #### formatting examples
