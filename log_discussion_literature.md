@@ -14,7 +14,6 @@ Data strucrute
 - Acknowledgements, table of content  
 
 - Introduction  
-    On first page:  
     - The research area  
     - Previous work in this area  
     - Research problem and why it's worthwhile studying  
@@ -37,7 +36,7 @@ Data strucrute
         LSTM (including previous iterations)  
         short discussion on models considered but not used (char2char, seq2seq, word embeddings e.g. GloVe and word2vec)  
         discussion on importance or regulatization in general, especially in NN (# of params etc)  
-        discussion on SGD, batch grad descent, optimization, local minima  
+        discussion on gradient-based learning, SGD, batch grad descent, optimization, local minima  
     
     - Hierarchical classification:  
         TBC, according to papers collected  
@@ -278,6 +277,17 @@ Data strucrute
         
             Adam, an algorithm for first-order gradient-based optimization of stochastic objective functions,
             based on adaptive estimates of lower-order moments.
+        
+        - [Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift]
+        (https://arxiv.org/abs/1502.03167)
+        
+            Normalizing each batch to speed up learning (can be less careful with learning rates).  
+            Can also be considered as a mean to regularize.  
+        
+        - [Highway Networks]
+        (https://arxiv.org/abs/1505.00387)
+        
+            Assisting gradient-based learning of deep networks by allowing information flow downstream.    
         
 
 #### formatting examples
