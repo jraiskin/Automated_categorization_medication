@@ -6,10 +6,10 @@ Data strucrute
     This "non-uniqueness" is solved by mapping, disambiguating labels, according to hand-annotated labels (by physicians)
     
 ## Rough outline
-- Cover, abstract, acknowledgements, table of content
-- Introduction
-    present the problem, current available solutions, motivation to solve
-- Related work
+- Cover, abstract, acknowledgements, table of content  
+- Introduction  
+    present the problem, current available solutions, motivation to solve  
+- Related work  
     - NN:  
         neural networks background and history, function approximators that learn intermediate representations (theorems?)  
         NN increased success in various tasks over the years (vision, speech, text)  
@@ -21,7 +21,7 @@ Data strucrute
         GAN  
         RNN, (bi-directional?)  
         LSTM (including previous iterations)  
-        short discussion on models considered but not used (char2char, seq2seq, word embeddings such as GloVe and word2vec)  
+        short discussion on models considered but not used (char2char, seq2seq, word embeddings e.g. GloVe and word2vec)  
         discussion on importance or regulatization in general, especially in NN (# of params etc)  
         discussion on SGD, batch grad descent, optimization, local minima  
     
@@ -29,11 +29,11 @@ Data strucrute
         TBC, according to papers collected  
     
     - Assessment metrics:  
-        binary classification: accuracy, precision, f-score  
+        SHORT: binary classification: accuracy, precision, f-score  
         Cost function requirements, 
-        loss function for classification 
-        (Quadratic, Cross-entropy, Exponentional, Hellinger distance, Kullback–Leibler divergence, Itakura–Saito distance)  
-        cross entropy adjustments for target replication  
+        loss function for classification  
+        SHORT: Quadratic, Exponentional, Hellinger distance, Kullback–Leibler divergence, Itakura–Saito distance  
+        Cross-entropy in depth, adjustments for target replication  
     
 - Experiments
     - Data  
@@ -43,18 +43,25 @@ Data strucrute
     - Task evaluation
         
     - Baseline  
-    
-    - Approach
+        (plain vanilla LSTM?)  
         
-    - Results
+    - Approach  
+        Explore LSTM depth (literature found up to 3 LSTM "layers")  
+        Experinemt (each?) LSTM with different feeding methods: forward, backward, bi-directional  
+        Experinemt with drop-out, target replication  
+        GAN (need to choose network architecture for G and A networks, w&w/o drop-out)  
+        Encoder-decoder (classification as translation)  
+        For each (???) experiment on "flat" vs. hierarchical class structure  
+        
+    - Results  
         include evaluation metrics, training time (epochs and wall-time)  
         compare between different structures, hyper-params and baseline
         
-    - Discussion
+    - Discussion  
     
-    - Bibliography, Declaration of originality
-    
-- Conclusion
+- Conclusion  
+
+- Bibliography, Declaration of originality  
     
 ## Baseline
 - Train a linear classifier, SVM / log-reg / plain-vanilla LSTM (TBC)
