@@ -6,9 +6,23 @@ Data strucrute
     This "non-uniqueness" is solved by mapping, disambiguating labels, according to hand-annotated labels (by physicians)
     
 ## Rough outline
-- Cover, abstract, acknowledgements, table of content  
+- Cover  
+
+- Abstract  
+    presenting the research problem, the main results, conclusion and how the thesis advances the field  
+    
+- Acknowledgements, table of content  
+
 - Introduction  
-    present the problem, current available solutions, motivation to solve  
+    On first page:  
+    - The research area  
+    - Previous work in this area  
+    - Research problem and why it's worthwhile studying  
+    - Thesis objective: (how) advance knowledge in the field  
+    - Personal motivation: why this topic, why it is important  
+    - Research method (brief)  
+    - Structure: paragraph about each chapter, contribution of the chapter  
+    
 - Related work  
     - NN:  
         neural networks background and history, function approximators that learn intermediate representations (theorems?)  
