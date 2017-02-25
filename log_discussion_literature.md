@@ -21,6 +21,7 @@ Data strucrute
     - Personal motivation: why this topic, why it is important  
     - Research method (brief)  
     - Structure: paragraph about each chapter, contribution of the chapter  
+    - Expectations of the reader's knowledge and familiarity with the topics  
     
 - Related work  
     - NN:  
@@ -48,6 +49,16 @@ Data strucrute
         SHORT: Quadratic, Exponentional, Hellinger distance, Kullback–Leibler divergence, Itakura–Saito distance  
         Cross-entropy in depth, adjustments for target replication  
     
+- Method  
+    How we plan to plan to approach the problem, what possible solutions we want to try.  
+    Possible solutions may include (not final):  
+    - Explore LSTM depth (literature found up to 3 LSTM "layers")  
+    - Experinemt (each?) LSTM with different feeding methods: forward, backward, bi-directional  
+    - Experinemt with drop-out, target replication  
+    - GAN (? not sure) (need to choose network architecture for G and A networks, w&w/o drop-out)  
+    - Encoder-decoder (classification as translation)  
+    - For each (???) experiment on "flat" vs. hierarchical class structure  
+    
 - Experiments
     - Data  
         descriptive (inculde visualizations, # of labels, observations etc)  
@@ -56,15 +67,7 @@ Data strucrute
     - Task evaluation
         
     - Baseline  
-        (plain vanilla LSTM?)  
-        
-    - Approach  
-        Explore LSTM depth (literature found up to 3 LSTM "layers")  
-        Experinemt (each?) LSTM with different feeding methods: forward, backward, bi-directional  
-        Experinemt with drop-out, target replication  
-        GAN (need to choose network architecture for G and A networks, w&w/o drop-out)  
-        Encoder-decoder (classification as translation)  
-        For each (???) experiment on "flat" vs. hierarchical class structure  
+        TBC (linear classifier, SVM / log-reg / plain-vanilla LSTM)  
         
     - Results  
         include evaluation metrics, training time (epochs and wall-time)  
@@ -77,7 +80,7 @@ Data strucrute
 - Bibliography, Declaration of originality  
     
 ## Baseline
-- Train a linear classifier, SVM / log-reg / plain-vanilla LSTM (TBC)
+- Train a baseline before trying out more fancy algos.  
 
 ## Literature review - general topics
 - RNN classification
