@@ -243,6 +243,11 @@ Data strucrute
         
             TBC
         
+        - [A Theoretically Grounded Application of Dropout in Recurrent Neural Networks]
+        (https://arxiv.org/abs/1512.05287)
+        
+            TBC
+        
     - auxilary labels
     
         - [Using the Future to "Sort Out" the Present: Rankprop and Multitask Learning for Medical Risk Evaluation]
