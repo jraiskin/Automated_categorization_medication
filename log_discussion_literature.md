@@ -47,6 +47,7 @@ Data strucrute
         Cost function requirements, 
         loss function for classification  
         SHORT: Quadratic, Exponentional, Hellinger distance, Kullback–Leibler divergence, Itakura–Saito distance  
+        Explain why negative log likelihood and perplexity don't make sense (not a language model)  
         Cross-entropy in depth, adjustments for target replication  
     
 - Method  
@@ -108,7 +109,10 @@ Data strucrute
     - [Character-Aware Neural Language Models]
     (https://arxiv.org/abs/1508.06615)
     
-        Combining CNN and LSTM for charachter-level classification
+        CNN on n-grams, fed into an LSTM, for charachter-level classification.  
+        Does not utilize word embeddings at all, thus significantly less parameters to train.  
+        Character embeddings of dimension 4.  
+        Touches on recurrent neural network language model (RNN-LM)  
     
     - [Recurrent Neural Networks for Robust Real-World Text Classification]
     (http://dl.acm.org/citation.cfm?id=1331869)
@@ -125,7 +129,10 @@ Data strucrute
     - [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
     (https://arxiv.org/abs/1406.1078)
     
-        TBC
+        RNN-encoder-decoder setup for machine translation.  
+        Present a modified unit with "update" and "reset" gates.  
+        Encoding to a latent vector-space by the hidden state at time t == "Summary".  
+        Decoding as a function of (Summary, last predicted symbol, last hidden state {of the decoder}).  
     
     - [Recurrent Neural Network for Text Classification with Multi-Task Learning]
     (https://arxiv.org/abs/1605.05101)
@@ -137,7 +144,7 @@ Data strucrute
     - [Neural Machine Translation by Jointly Learning to Align and Translate]
     (https://arxiv.org/abs/1409.0473)
     
-        RNN encoder-decoder, bi-directional RNN encoder
+        RNN encoder-decoder, bi-directional RNN encoder (probably not so relevant otherwise)  
     
 - char2char, seq2seq
     
