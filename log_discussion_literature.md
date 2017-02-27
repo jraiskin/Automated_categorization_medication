@@ -137,14 +137,15 @@ Data strucrute
     - [Recurrent Neural Network for Text Classification with Multi-Task Learning]
     (https://arxiv.org/abs/1605.05101)
     
-        TBC
+        Using RNN architecture to simultaneously train on several text classification tasks.
+        Has reasonably nice visuallizations (probably not so relevant otherwise).  
     
 - Bidirectional RNN classification
     
     - [Neural Machine Translation by Jointly Learning to Align and Translate]
     (https://arxiv.org/abs/1409.0473)
     
-        RNN encoder-decoder, bi-directional RNN encoder (probably not so relevant otherwise)  
+        RNN encoder-decoder, bi-directional RNN encoder (probably not so relevant otherwise).  
     
 - char2char, seq2seq
     
