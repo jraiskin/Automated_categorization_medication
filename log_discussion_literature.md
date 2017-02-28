@@ -209,6 +209,18 @@ Data strucrute
 
 - NN introduction, derivation, optimization, overfitting etc
     
+    - Introduction and historical context
+    
+        - [Neural Networks and Deep Learning]
+        (http://neuralnetworksanddeeplearning.com)
+        
+            Gives a nice overview and introduction to NN
+            
+        - [A logical calculus of the ideas immanent in nervous activity]
+        (https://link.springer.com/article/10.1007/BF02478259)
+        
+            First paper on NN (1943)
+                
     - L2 regularization
     
     - early stopping
