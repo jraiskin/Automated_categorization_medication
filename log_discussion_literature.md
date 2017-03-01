@@ -221,6 +221,11 @@ Data strucrute
         
             First paper on NN (1943)
                 
+        - [Principles of neurodynamics: perceptrons and the theory of brain mechanisms]
+        (https://books.google.ca/books/about/Principles_of_neurodynamics.html?id=7FhRAAAAMAAJ&hl=en)
+        
+            Introducing perceptrons
+                                
     - L2 regularization
     
     - early stopping
