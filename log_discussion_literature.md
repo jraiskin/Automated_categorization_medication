@@ -323,6 +323,30 @@ Data strucrute
             Assisting gradient-based learning of deep networks by allowing information flow downstream.    
         
 
+
+#### progress log  
+- **1/3:** 
+Fixed a lot of small latex and bibtex related bugs. 
+To re-compile bibtex, use "comp-pdf-bib-tex Yarden_master_thesis" (compiles pdf, then bibtex *correctly*, then pdf x 2).
+Started on NN preliminaries (in Related work chapter). Wrote on perceptron.
+SVG file format - print to PDF
+Todo:  
+    - Work on github md file, add a check-box to quoted sources.  
+    - Continue on activation functions, add different kinds of activations + figures.  
+    (https://en.wikipedia.org/wiki/Activation_function,
+    https://en.wikipedia.org/wiki/Heaviside_step_function, 
+    https://en.wikipedia.org/wiki/Sigmoid_function, 
+    https://en.wikipedia.org/wiki/Rectifier_(neural_networks),
+    leaky ReLU,
+    https://en.wikipedia.org/wiki/Hyperbolic_function#Hyperbolic_tangent _)  
+    - Add background (motivation) on recent surge of NN success in vision, etc.  
+    - Add background (motivation) BRIEF on NN as function approximators.  
+    - Write on multi-layer perceptron, fully connected neural network.  
+    - Gradient-based learning methods, backprop.   
+    - **Next step**: RNN (wait with CNN), LSTM
+
+
+
 #### formatting examples
 - [x] Finish my changes
 - [ ] Push my commits to GitHub
