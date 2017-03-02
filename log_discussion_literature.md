@@ -340,6 +340,10 @@ Data strucrute
 
 
 ## progress log  
+**Commands**:  
+comp-pdf-bib-tex Yarden_master_thesis  
+ssh pytharski.math.ethz.ch  
+ethmathSFTP  
 - **1/3:** 
 Fixed a lot of small latex and bibtex related bugs. 
 To re-compile bibtex, use "comp-pdf-bib-tex Yarden_master_thesis" (compiles pdf, then bibtex *correctly*, then pdf x 2).
@@ -362,4 +366,11 @@ Todo:
 - **2/3:** 
 Try and secure a work-station in CAB E81.  
 Focus on state-of-the-art, no so much on a review of methods.  
-
+Set up connection to math deprtment cluster, have TF1.0! (see _commands_).  
+Finished writing about feed-forward NN, backprop (shallow).  
+[Convert ris to bib file] (https://www.bruot.org/ris2bib/)  
+Todo:  
+    - Wite on RNN.  
+    (http://colah.github.io/posts/2015-08-Understanding-LSTMs/)  
+    - Look for state-of-the-art in the field (or in analogous, if doesn't apply).  
+    
