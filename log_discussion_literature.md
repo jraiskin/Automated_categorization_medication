@@ -140,6 +140,21 @@ Data strucrute
         Using RNN architecture to simultaneously train on several text classification tasks.
         Has reasonably nice visuallizations (probably not so relevant otherwise).  
     
+    - [x] [ImageNet Classification with Deep Convolutional Neural Networks]
+    (https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)
+    
+        Introducing AlexNet, CNN image classification  
+    
+    - [x] [Going Deeper with Convolutions]
+    (https://arxiv.org/abs/1409.4842)
+    
+        Introducing the Inception module in a deep CNN  
+    
+    - [x] [Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation]
+    (https://arxiv.org/abs/1609.08144v2)
+    
+        LSTM-based translation NN   
+        
 - Bidirectional RNN classification
     
     - [ ] [Neural Machine Translation by Jointly Learning to Align and Translate]
