@@ -126,7 +126,7 @@ Data strucrute
         Gives a descent overview of related work, N-gram feature extraction through convolution, LSTM,
         padding and word vector initialization.
         
-    - [ ] [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
+    - [x] [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
     (https://arxiv.org/abs/1406.1078)
     
         RNN-encoder-decoder setup for machine translation.  
