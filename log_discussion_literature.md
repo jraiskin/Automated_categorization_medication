@@ -157,6 +157,11 @@ Data strucrute
         
 - Bidirectional RNN classification
     
+    - [x] [Bidirectional recurrent neural networks]
+    (http://dl.acm.org/citation.cfm?id=2205129)
+    
+        Introducing bi-directional RNN.  
+    
     - [ ] [Neural Machine Translation by Jointly Learning to Align and Translate]
     (https://arxiv.org/abs/1409.0473)
     
