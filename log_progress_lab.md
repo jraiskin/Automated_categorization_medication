@@ -33,7 +33,13 @@ Set up connection to math deprtment cluster, have TF1.0! (see _commands_).
 Finished writing about feed-forward NN, backprop (shallow).  
 [Convert ris to bib file] (https://www.bruot.org/ris2bib/)  
 Todo:  
-    - Wite on RNN.  
+    - Write on RNN.  
     (http://colah.github.io/posts/2015-08-Understanding-LSTMs/)  
+    - Look for state-of-the-art in the field (or in analogous, if doesn't apply).  
+- **3/3:** 
+Wrote on RNN and LSTM, equations figures and all.  
+Fixed minor issues in latex equations (reference and aligning).  
+Todo:  
+    - Hierarchical classification.  
     - Look for state-of-the-art in the field (or in analogous, if doesn't apply).  
     
