@@ -84,113 +84,120 @@ Data strucrute
 - Train a baseline before trying out more fancy algos.  
 
 ## Literature review - general topics
-- RNN classification
+- RNN and LSTM classification
     
-    - [x] [Finding Structure in Time]
-    (http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/abstract)
+    - RNN  
     
-        Introduced RNN (simple RNN, later referred to as SRN)
-    
-    - [x] [Long Short-Term Memory]
-    (http://dl.acm.org/citation.cfm?id=1246450)
-    
-        Introduced LSTM
-    
-    - [ ] [Learning to Diagnose with LSTM Recurrent Neural Networks]
-    (https://arxiv.org/abs/1511.03677)
-    
-        TBC
-    
-    - [ ] [Sequential Short-Text Classification with Recurrent and Convolutional Neural Networks]
-    (https://arxiv.org/abs/1603.03827)
-    
-        TBC
-    
-    - [ ] [Character-Aware Neural Language Models]
-    (https://arxiv.org/abs/1508.06615)
-    
-        CNN on n-grams, fed into an LSTM, for charachter-level classification.  
-        Does not utilize word embeddings at all, thus significantly less parameters to train.  
-        Character embeddings of dimension 4.  
-        Touches on recurrent neural network language model (RNN-LM)  
-    
-    - [ ] [Recurrent Neural Networks for Robust Real-World Text Classification]
-    (http://dl.acm.org/citation.cfm?id=1331869)
-    
-        xRNN model, 2 hidden layer, controlled by a hysteresis function
-    
-    - [ ] [A C-LSTM Neural Network for Text Classification]
-    (https://arxiv.org/abs/1511.08630)
-    
-        Propose C-LSTM model, utilizes components from CNN and LSTM to extract features and represent latent vectors.
-        Gives a descent overview of related work, N-gram feature extraction through convolution, LSTM,
-        padding and word vector initialization.
+        - [x] [Finding Structure in Time]
+        (http://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1402_1/abstract)  
         
-    - [x] [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
-    (https://arxiv.org/abs/1406.1078)
-    
-        RNN-encoder-decoder setup for machine translation.  
-        Present a modified unit with "update" and "reset" gates.  
-        Encoding to a latent vector-space by the hidden state at time t == "Summary".  
-        Decoding as a function of (Summary, last predicted symbol, last hidden state {of the decoder}).  
-    
-    - [ ] [Recurrent Neural Network for Text Classification with Multi-Task Learning]
-    (https://arxiv.org/abs/1605.05101)
-    
-        Using RNN architecture to simultaneously train on several text classification tasks.
-        Has reasonably nice visuallizations (probably not so relevant otherwise).  
-    
-    - [x] [ImageNet Classification with Deep Convolutional Neural Networks]
-    (https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)
-    
-        Introducing AlexNet, CNN image classification  
-    
-    - [x] [Going Deeper with Convolutions]
-    (https://arxiv.org/abs/1409.4842)
-    
-        Introducing the Inception module in a deep CNN  
-    
-    - [x] [Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation]
-    (https://arxiv.org/abs/1609.08144v2)
-    
-        LSTM-based translation NN   
+            Introduced RNN (simple RNN, later referred to as SRN)  
         
-- Bidirectional RNN classification
-    
-    - [x] [Bidirectional recurrent neural networks]
-    (http://dl.acm.org/citation.cfm?id=2205129)
-    
-        Introducing bi-directional RNN.  
-    
-    - [ ] [Neural Machine Translation by Jointly Learning to Align and Translate]
-    (https://arxiv.org/abs/1409.0473)
-    
-        RNN encoder-decoder, bi-directional RNN encoder (probably not so relevant otherwise).  
-    
-- char2char, seq2seq
-    
-    - [ ] [Sequence to Sequence Learning with Neural Networks]
-    (https://arxiv.org/abs/1409.3215)
-    
-        TBC
+        - [ ] [Recurrent Neural Network for Text Classification with Multi-Task Learning]
+        (https://arxiv.org/abs/1605.05101)  
         
-- Generative Adversarial Network (GAN)
+            Using RNN architecture to simultaneously train on several text classification tasks.  
+            Has reasonably nice visuallizations (probably not so relevant otherwise).  
+            
+    - LSTM  
     
-    - [ ] [Generative Adversarial Networks]
-    (https://arxiv.org/abs/1406.2661)
+        - [x] [Long Short-Term Memory]
+        (http://dl.acm.org/citation.cfm?id=1246450)  
+        
+            Introduced LSTM  
+        
+        - [ ] [Learning to Diagnose with LSTM Recurrent Neural Networks]
+        (https://arxiv.org/abs/1511.03677)
+        
+            TBC  
+        
+        - [x] [Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation]
+        (https://arxiv.org/abs/1609.08144v2)  
+            
+            LSTM-based translation NN.  
+            
+    - Convolutions  
     
-        Introducing GAN
+        - [ ] [Sequential Short-Text Classification with Recurrent and Convolutional Neural Networks]
+        (https://arxiv.org/abs/1603.03827)
+        
+            TBC  
+        
+        - [ ] [Character-Aware Neural Language Models]
+        (https://arxiv.org/abs/1508.06615)
+        
+            CNN on n-grams, fed into an LSTM, for charachter-level classification.  
+            Does not utilize word embeddings at all, thus significantly less parameters to train.  
+            Character embeddings of dimension 4.  
+            Touches on recurrent neural network language model (RNN-LM)  
+        
+        - [ ] [A C-LSTM Neural Network for Text Classification]
+        (https://arxiv.org/abs/1511.08630)  
+        
+            Propose C-LSTM model, utilizes components from CNN and LSTM to extract features and represent latent vectors.  
+            Gives a descent overview of related work, N-gram feature extraction through convolution, LSTM,
+            padding and word vector initialization.  
+        
+    - Auto-encoder  
+        
+        - [x] [Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation]
+        (https://arxiv.org/abs/1406.1078)  
+        
+            RNN-encoder-decoder setup for machine translation.  
+            Present a modified unit with "update" and "reset" gates.  
+            Encoding to a latent vector-space by the hidden state at time t == "Summary".  
+            Decoding as a function of (Summary, last predicted symbol, last hidden state {of the decoder}).  
+        
+    - Directional variation  
+        
+        - [x] [Bidirectional recurrent neural networks]
+        (http://dl.acm.org/citation.cfm?id=2205129)  
+        
+            Introducing bi-directional RNN.  
+        
+        - [ ] [Neural Machine Translation by Jointly Learning to Align and Translate]
+        (https://arxiv.org/abs/1409.0473)  
+            
+            RNN encoder-decoder, bi-directional RNN encoder (probably not so relevant otherwise).  
+        
+- NN and Deep nets  
+
+    - Convolutions  
     
-    - [ ] [Improved Techniques for Training GANs]
-    (https://arxiv.org/abs/1606.03498)
+        - [x] [ImageNet Classification with Deep Convolutional Neural Networks]
+        (https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)  
+            
+            Introducing AlexNet, CNN image classification.  
+        
+        - [x] [Going Deeper with Convolutions]
+        (https://arxiv.org/abs/1409.4842)  
     
-        TBC
+            Introducing the Inception module in a deep CNN.  
+        
+    - Sequence to Sequence (seq2seq)  
     
-    - [ ] [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks]
-    (https://arxiv.org/abs/1511.06434)
+        - [ ] [Sequence to Sequence Learning with Neural Networks]
+        (https://arxiv.org/abs/1409.3215)
+        
+            TBC  
+        
+    - Generative Adversarial Network (GAN)  
     
-        TBC
+        - [ ] [Generative Adversarial Networks]
+        (https://arxiv.org/abs/1406.2661)  
     
+            Introducing GAN.  
+    
+        - [ ] [Improved Techniques for Training GANs]
+        (https://arxiv.org/abs/1606.03498)  
+            
+            TBC  
+        
+        - [ ] [Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks]
+        (https://arxiv.org/abs/1511.06434)  
+        
+            TBC
+        
 - Hierarchical structures classification (no mention of NN)
     
     - [ ] [A survey of hierarchical classification across different application domains] 
@@ -224,10 +231,8 @@ Data strucrute
     (http://dl.acm.org/citation.cfm?id=1015374)
     
         TBC
-    
-- NN robust classification methods wrt misspelling
 
-- NN introduction, derivation, optimization, overfitting etc
+- NN general, optimization, regularization
     
     - Introduction and historical context
     
