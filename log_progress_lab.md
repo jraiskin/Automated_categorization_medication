@@ -43,3 +43,19 @@ Todo:
     - Hierarchical classification.  
     - Look for state-of-the-art in the field (or in analogous, if doesn't apply).  
     
+- **6/3:** 
+Got data (on the end of Friday 3/3).  
+Initial inspection shows that there are typically a handful of (distinct) examples for each ATC code. 
+This is confirmed by histograms and filtering.  
+Could try and enrich the data by looking at less frequent variants of FREETXT, 
+to see if we could easily label them (e.g. by using the ATC convection table).  
+Reorganized the literature review file on Github.  
+Todo:  
+    - Read through papers
+    (https://arxiv.org/abs/1502.01710,  https://arxiv.org/abs/1607.01759,  
+    https://www.cs.colorado.edu/~jbg/docs/2015_acl_dan.pdf,  
+    http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification)  
+    - Consult Carsten and Patrick regarding possibility to expand the data-set.  
+    - Think of topics to talk with Carsten (print structure?).  
+    - Finish organizing literature review (if not already).  
+
