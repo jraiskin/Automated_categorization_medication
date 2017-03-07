@@ -52,10 +52,26 @@ to see if we could easily label them (e.g. by using the ATC convection table).
 Reorganized the literature review file on Github.  
 Todo:  
     - Read through papers
-    (https://arxiv.org/abs/1502.01710,  https://arxiv.org/abs/1607.01759,  
+    (https://arxiv.org/abs/1502.01710,  
+    https://arxiv.org/abs/1607.01759,  
     https://www.cs.colorado.edu/~jbg/docs/2015_acl_dan.pdf,  
     http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification)  
     - Consult Carsten and Patrick regarding possibility to expand the data-set.  
     - Think of topics to talk with Carsten (print structure?).  
     - Finish organizing literature review (if not already).  
+
+- **7/3:** 
+Migrated functions to utils directory.  
+Wrote functions for n-grams, {char:count}, {n-gram:count}.  
+Created sparse features and labels matricies, to be used by SVM (for benchmark).  
+Fit SVM, linear multiclass produces perfect fit (needs further investigation).  
+Todo:  
+    - Read through papers (still, haven't gotten around to it)  
+    (https://arxiv.org/abs/1502.01710,  
+    https://arxiv.org/abs/1607.01759,  
+    https://www.cs.colorado.edu/~jbg/docs/2015_acl_dan.pdf,  
+    http://papers.nips.cc/paper/5782-character-level-convolutional-networks-for-text-classification)  
+    - Finish working on multiclass SVM.  
+    - Character embeddings?  
+
 
