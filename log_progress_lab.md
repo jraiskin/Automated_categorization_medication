@@ -74,4 +74,11 @@ Todo:
     - Finish working on multiclass SVM.  
     - Character embeddings?  
 
+- **9/3:** 
+Automated the feature creation and filtering process for the SVM linear classifier.  
+Automated SVM hyper-parameters setup, set defaults as kwargs.  
+Added utils (seed, save, load etc.).  
+Initial commit for a simple LSTM model (including Tensorboard, checkpoints).  
+Todo:  
+    - Work on char-level embeddings for the LSTM architecture.  
 
