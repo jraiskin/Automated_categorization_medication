@@ -2,6 +2,13 @@ import getpass
 # getpass.getuser()
 # 'yarden'
 
+import pickle
+#import re
+import inspect
+
+def seed():
+    return 2178
+
 
 def user_opt_gen():
     user_opt = {
@@ -19,6 +26,16 @@ def user_opt_gen():
     return user_opt[cur_user]
 
 
+def save(fname, obj):
+    with open(fname, 'w') as f:
+        pickle.dump(obj, f)
+
+
+def load(fname):
+    with open(fname, 'r') as f:
+        return pickle.load(f)
+
+
 # dict with a more convenient way of calling (key, val)
 class nice_dict(dict):
 
@@ -32,6 +49,11 @@ class nice_dict(dict):
         del self[key]
 
 
+def print_source(function):
+    return print(inspect.getsource(function))
+
+
+# let's easily follow work-flow, use with 'with'
 class in_out:
     def __init__(self, name):
         self.name = name
@@ -68,9 +90,6 @@ if __name__ == '__main__':
     print("\033[1;38m---checkpoint 7---\033[0m")
     print("\033[1;39m---checkpoint 8---\033[0m")
     print("\033[1;40m---checkpoint 9---\033[0m")
-    
-    pcp1()
-    pcp2()
     #    cur_user = getpass.getuser()
     #    user_opt = user_opt[cur_user]
 
