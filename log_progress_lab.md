@@ -82,3 +82,11 @@ Initial commit for a simple LSTM model (including Tensorboard, checkpoints).
 Todo:  
     - Work on char-level embeddings for the LSTM architecture.  
 
+- **10/3:** 
+Tensorflow provides built-in embeddings support with tf.nn.embedding_lookup. Can use example here (https://github.com/dhwajraj/deep-siamese-text-similarity/blob/master/siamese_network.py).  
+Worked on Tensorflow embeddings visualizer and Tensorboard. Still not perfect but not high priority now.  
+Todo:  
+    - Create (filtered) character lists as inputs.  
+    - Create embeddings (lookup) for these inputs.  
+    - Create 'one-hot' representation for the labels.  
+
