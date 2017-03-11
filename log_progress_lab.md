@@ -90,3 +90,12 @@ Todo:
     - Create embeddings (lookup) for these inputs.  
     - Create 'one-hot' representation for the labels.  
 
+- **11/3:** 
+Spliting data into train-test set using train_test_split (sklearn).  
+Transformed observations into filtered character lists.  
+Created variables needed for RNN (character set size, number of unique labels etc.).  
+Started working on LSTM simple model (links in file to tutorials / examples of archtectures, embeddings lookups).  
+Todo:  
+    - Finish LSTM architecture module.  
+    - Create embeddings lookup for characters inputs.  
+
