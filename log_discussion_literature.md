@@ -347,3 +347,12 @@ Data strucrute
         
             Assisting gradient-based learning of deep networks by allowing information flow downstream.    
         
+- Benchmarking, linear classification
+    
+    - [ ] [Bag of Tricks for Efficient Text Classification]
+    (https://arxiv.org/abs/1607.01759)
+    
+        A relatively simple (supposedly effective) linear classifier, 
+        utilizing n-grams and character "bag of words" representation.  
+    
+
