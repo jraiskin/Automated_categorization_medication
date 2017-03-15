@@ -5,6 +5,7 @@ import getpass
 import pickle
 #import re
 import inspect
+import pandas as pd
 
 def seed():
     return 2178
@@ -24,6 +25,25 @@ def user_opt_gen():
     }
     cur_user = getpass.getuser()
     return user_opt[cur_user]
+
+
+def init_data():
+    user_opt = user_opt_gen()
+
+    main_data = pd.read_csv(user_opt['data_path'], 
+                            sep=';', 
+                            header=0, 
+                            encoding='cp850')
+
+    # only observations with ATC labels
+    main_data_labeled = main_data.loc[[isinstance(k, str) for k in main_data['ATC']],:]
+    
+    n = len(main_data_labeled)
+
+    x = main_data_labeled['FREETXT'][:n]
+    y = main_data_labeled['ATC'][:n]
+    
+    return x, y, n, main_data
 
 
 def save(fname, obj):
