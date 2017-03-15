@@ -118,3 +118,20 @@ Todo (this is for more than one day):
         - **X:** Padded list of symbols. Create mapping to index, initialize "embeddings matrix".  
         - **Y:** Create mapping to index.  
         - **Don't regard for now (rather, later):** functions, embedding-visualizer.  
+
+- **14/3:** 
+Worked on LSTM model with some progress but nothing completed yet (despite quite some effort).  
+
+- **15/3:** 
+A successful day!  
+A simple LSTM model is working on a *toy example*.  
+Able to adapt it to the *real data*. I've launched a small experiment with 1000 epoches. 
+It seems to work, cost going down.  
+The model has a dropout wrapper and calculated cross entropy loss.  
+Todo:  
+    - Look for potential flaws / mistakes in the model.  
+    - Clean up code.  
+    - "Functionize" the code, create name scopes, Tensorboard summaries, saver object.  
+    - Check if Wikipedia pages on ATC codes would yield any benefit.  
+    - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
+
