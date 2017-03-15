@@ -7,7 +7,11 @@ ethmathSFTP
 **Guides / Useful Links:**  
 https://wiki.math.ethz.ch/SfSInfo/RemoteAccessIntern  
 https://blogs.ethz.ch/isgdmath/tensorflow/  
-- **1/3:** 
+**Long-Term Goals / Guidelines:**  
+Explain why we did not use Mimic data for training (GSN codes, text too clean w/o variation).  
+Potentially validate LSTM architecture on Mimic data. Perform prediction on text (+timestamp), the class would be the perscription given shortly after (given timestamp). Look for literature if something similar has been done before.  
+
+- **1/3:**
 Fixed a lot of small latex and bibtex related bugs. 
 To re-compile bibtex, use "comp-pdf-bib-tex Yarden_master_thesis" (compiles pdf, then bibtex *correctly*, then pdf x 2).
 Started on NN preliminaries (in Related work chapter). Wrote on perceptron.
@@ -99,3 +103,18 @@ Todo:
     - Finish LSTM architecture module.  
     - Create embeddings lookup for characters inputs.  
 
+- **13/3:** 
+Meeting with Carsten and Patrick.  
+Suggested to output a ranked list (top k) of classes, as a suggestion.  
+Possibly extending the data-set by trying to match patterns from unlabled data with labeled data. Hand over results to Patrick, so that he could sample the output to assess reliability.  
+Padded inputs to have same length (introduced a padding symbol).  
+Made some initial changes to SVM in order to output "top-k" ranked list, alongside probabilities.  
+Todo (this is for more than one day):  
+    - Check if Wikipedia pages on ATC codes would yield any benefit.  
+    - Finish LSTM architecture module.  
+    - Create embeddings lookup for characters inputs. If using "one-hot" representation, change to *untrainable* Identity matrix.  
+    - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
+    - "Un-functionize": make a simple LSTM / RNN **working** architecture.  
+        - **X:** Padded list of symbols. Create mapping to index, initialize "embeddings matrix".  
+        - **Y:** Create mapping to index.  
+        - **Don't regard for now (rather, later):** functions, embedding-visualizer.  
