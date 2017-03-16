@@ -135,3 +135,14 @@ Todo:
     - Check if Wikipedia pages on ATC codes would yield any benefit.  
     - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
 
+- **16/3:** 
+Fixed one-hot initialization (as an identity matrix constant).  
+"Functionized" the code with name scopes (might need some minor additional work).  
+Cleaned out the code (massively).  
+Tensorboad summaries are in place, graph is visible (might also need some minor work).  
+Todo:  
+    - Fix (check) minor name scoping issues in Tensorboard.  
+    - Figure out how saving and recovery work in Tensorboard.  
+    - Check if Wikipedia pages on ATC codes would yield any benefit.  
+    - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
+
