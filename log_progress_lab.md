@@ -146,3 +146,15 @@ Todo:
     - Check if Wikipedia pages on ATC codes would yield any benefit.  
     - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
 
+
+- **17/3:** 
+Cleaned up code, created functions to automate and migrated utils to utils_nn.  
+Set up paths to data files over Euler in utils.  
+Code submission to Euler works as expected! returns output into the folder from which the job was launched.  
+Started woking on embeddings visualizer, visualizing character embeddings (with character labels).  
+Todo:  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+    - Figure out checkpoint saving and loading (https://www.tensorflow.org/programmers_guide/variables).  
+    - Check if Wikipedia pages on ATC codes would yield any benefit.  
+    - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
+
