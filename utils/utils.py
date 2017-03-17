@@ -1,4 +1,4 @@
-import getpass
+from getpass import getuser
 # getpass.getuser()
 # 'yarden'
 
@@ -18,12 +18,16 @@ def user_opt_gen():
     #         'data_path' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv',
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv'
         },
+        'raiskiny' : {
+            'data_path' : r'../data/code/20170303_EXPORT_for_Yarden.csv', 
+            'atc_conversion_data_path' : r'../data/code/Complete_ATCs_and_lacking_translations_V03a_20161206.csv'
+        },
         'Yarden-' : {
             'data_path' : None, 
             'atc_conversion_data_path' : None
         }
     }
-    cur_user = getpass.getuser()
+    cur_user = getuser()
     return user_opt[cur_user]
 
 
