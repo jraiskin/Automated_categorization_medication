@@ -19,8 +19,8 @@ def user_opt_gen():
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv'
         },
         'raiskiny' : {
-            'data_path' : r'../data/code/20170303_EXPORT_for_Yarden.csv', 
-            'atc_conversion_data_path' : r'../data/code/Complete_ATCs_and_lacking_translations_V03a_20161206.csv'
+            'data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/20170303_EXPORT_for_Yarden.csv', 
+            'atc_conversion_data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv'
         },
         'Yarden-' : {
             'data_path' : None, 
