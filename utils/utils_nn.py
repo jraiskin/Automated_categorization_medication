@@ -3,6 +3,11 @@ import numpy as np
 
 from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
 
+try:
+    from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
+except:
+    from utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
+
 def remove_dir_content(path):
     if tf.gfile.Exists(path):
         tf.gfile.DeleteRecursively(path)
@@ -110,3 +115,11 @@ def index_transorm_xy(x,
                         n_class) for label in Y])
     
     return X, Y, Y_dense
+
+
+def write_embeddings_metadata(file_name, dictionary):
+    file = open(file_name,'w')
+    file.write('Character\tIndex')
+    for k, v in dictionary.items():
+        file.write('\n{}\t{}'.format(k, v))
+    file.close()
