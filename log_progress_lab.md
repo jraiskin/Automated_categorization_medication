@@ -158,3 +158,15 @@ Todo:
     - Check if Wikipedia pages on ATC codes would yield any benefit.  
     - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
 
+- **18/3:** 
+Changed the implementation from a (series of) functions to a class!  
+This would enable calling a 'train' method or to load a model from a checkpoint.  
+Limited success on the character embeddings visualizer.  
+Found nice resources [from a blog post](http://andrewmatteson.name/index.php/2017/02/19/using-tensorboard-projector-external-data/) and [an example on github](https://github.com/normanheckscher/mnist-tensorboard-embeddings/blob/master/mnist_t-sne.py).  
+Will try to work on it more today.  
+Todo (basically unchaged):  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+    - Figure out checkpoint saving and loading (https://www.tensorflow.org/programmers_guide/variables).  
+    - Check if Wikipedia pages on ATC codes would yield any benefit.  
+    - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
+
