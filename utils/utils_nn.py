@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import os
 
 from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
 
@@ -8,6 +9,7 @@ try:
 except:
     from utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
 
+    
 def remove_dir_content(path):
     if tf.gfile.Exists(path):
         tf.gfile.DeleteRecursively(path)
@@ -117,9 +119,15 @@ def index_transorm_xy(x,
     return X, Y, Y_dense
 
 
-def write_embeddings_metadata(file_name, dictionary):
-    file = open(file_name,'w')
-    file.write('Character\tIndex')
+def write_embeddings_metadata(log_dir, dictionary, file_name='metadata.tsv'):
+    embed_vis_path = '{}{}'.format(log_dir, file_name)
+    if not os.path.exists(log_dir):
+        os.makedirs(log_dir)
+    file = open(embed_vis_path,'w')
+    file.write('Index\tCharacter')  # tab seperated
     for k, v in dictionary.items():
-        file.write('\n{}\t{}'.format(k, v))
+        file.write('\n{}\t{}'.format(v, k))
     file.close()
+    
+    return embed_vis_path
+    
