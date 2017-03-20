@@ -5,7 +5,6 @@ except:
     from utils import user_opt_gen, nice_dict, seed
     
 
-
 # create a charachter:count dict
 def char_freq_map(*, input_data, filter_by_chars = None, **kwargs):
     char_dict = {}
@@ -72,21 +71,25 @@ def sliding_window(input_str, width):
 # based on 'ngram_freq_map' and 'char_freq_map'
 # enables to only select one feature type and filtering
 def lin_clf_features(*, input_data,
-                     mk_ngrams=None, width, ngram_filter, 
-                     mk_chars=None, char_filter, 
+                     mk_ngrams=None, width, ngram_filter, filter_keys_ngrams=None, 
+                     mk_chars=None, char_filter, filter_keys_chars=None, 
                      **kwargs):
     assert (mk_ngrams or mk_chars), 'Please select either to create n-grams or character features.'
 
     if mk_ngrams:
         # filter ngrams to only those that appear at least 'ngram_filter' times in the input
         if isinstance(ngram_filter, int):
-            print('N-grams filter is applied')
-            filter_keys_ngrams = list(
-                filter_dict_by_val_atleast(
-                    input_dict=ngram_freq_map(input_data=input_data, 
-                                              width=width), 
-                    value=ngram_filter)
-                .keys())
+            print('N-grams filter is applied.')
+            if filter_keys_ngrams is None:
+                filter_keys_ngrams = list(
+                    filter_dict_by_val_atleast(
+                        input_dict=ngram_freq_map(input_data=input_data, 
+                                                  width=width), 
+                        value=ngram_filter)
+                    .keys())
+            else:
+                print('N-grams filter has been detected, using those keys as filters.')
+                filter_keys_ngrams = filter_keys_ngrams
             # apply ngram_freq_map, after figuring out which keys to keep
             X_features_ngrams = [ngram_freq_map(input_data=obs, 
                                                 width=width, 
@@ -104,11 +107,15 @@ def lin_clf_features(*, input_data,
         # filter by character, appear at least 'char_filter' times in the input
         if isinstance(char_filter, int):
             print('Character filter is applied')
-            filter_keys_chars = list(
-                filter_dict_by_val_atleast(
-                    input_dict=char_freq_map(input_data=input_data), 
-                    value=char_filter)
-                .keys())
+            if filter_keys_chars is None:
+                filter_keys_chars = list(
+                    filter_dict_by_val_atleast(
+                        input_dict=char_freq_map(input_data=input_data), 
+                        value=char_filter)
+                    .keys())
+            else:
+                print('Character filter has been detected, using those keys as filters.')
+                filter_keys_chars = filter_keys_chars
             # apply ngram_freq_map, after figuring out which keys to keep
             X_features_chars = [char_freq_map(input_data = obs, 
                                               filter_by_chars=filter_keys_chars) 
@@ -120,11 +127,11 @@ def lin_clf_features(*, input_data,
     else:
         X_features_chars = [{} for ind in range(len(input_data))]
     
-    # merge two dicts
+    # merge two dicts, also return the filter n-grams and characters keys.
     return [nice_dict({** X_features_ngrams[ind] ,**X_features_chars[ind]}) 
-              for ind in range(len(input_data))]
+              for ind in range(len(input_data))], filter_keys_ngrams, filter_keys_chars
 
 
 if __name__ == '__main__':
-    print(nice_dict({'a': 5}))
+    pass
 
