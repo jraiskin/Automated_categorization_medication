@@ -178,9 +178,12 @@ Keep a heap of top 5 suggestion and their similarities. Output top suggestions i
 Once we have validation set, hyper-parameters would be optimized on it.  
 Possible model variations: sampling proportional to f(frequency), with f as log.  
 Hierarchical classification - currently takes the back sit (due to lack of data, perhaps would be feasible with patient data).  
-Todo:  
+**DONE:** 
     - Jaccard sim function, with BOW dictionaries as input.  
     - Compare labeled and unlabeled data with Jaccard sim, keep top 5 suggestions and their similarities. Output top suggestions if sim >= threshold.  
+    - Save a CSV file with text, label, Jaccard_sim.  
+Todo:  
+    - Follow up on suggested labels: send to Patrick.  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
     - Figure out checkpoint saving and loading (https://www.tensorflow.org/programmers_guide/variables).  
 
