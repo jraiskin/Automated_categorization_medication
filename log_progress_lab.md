@@ -170,3 +170,17 @@ Todo (basically unchaged):
     - Check if Wikipedia pages on ATC codes would yield any benefit.  
     - Extract feasible ATC labels from unlabeled observations (n-grams, character BOW features, nearest neighbor?).  
 
+- **20/3:** 
+Meeting with Carsten:  
+Expand the data-set and create a validation set (maybe even test set), utilizing the unlabeled data.
+Map the unlabeled text and labeled text to features (say, n-grams and character 'bag-of-words') and find Jaccard similarity.
+Keep a heap of top 5 suggestion and their similarities. Output top suggestions if sim >= threshold.  
+Once we have validation set, hyper-parameters would be optimized on it.  
+Possible model variations: sampling proportional to f(frequency), with f as log.  
+Hierarchical classification - currently takes the back sit (due to lack of data, perhaps would be feasible with patient data).  
+Todo:  
+    - Jaccard sim function, with BOW dictionaries as input.  
+    - Compare labeled and unlabeled data with Jaccard sim, keep top 5 suggestions and their similarities. Output top suggestions if sim >= threshold.  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+    - Figure out checkpoint saving and loading (https://www.tensorflow.org/programmers_guide/variables).  
+
