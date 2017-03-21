@@ -187,3 +187,16 @@ Todo:
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
     - Figure out checkpoint saving and loading (https://www.tensorflow.org/programmers_guide/variables).  
 
+- **21/3:** 
+Worked on restoring *session* and *checkpoint*, as well as on reproducible results (setting a seed).  
+It seems like restoring a checkpoint (and session) is working, but can't tell for sure, since results are irreproducible. 
+This [stackoverflow post](http://stackoverflow.com/questions/34500052/tensorflow-saving-and-restoring-session) deals with restoring.  
+Other than that, tried to work on setting a seed. My understanding is that it is a graph-wide seed, 
+although [TF documentation}(https://www.tensorflow.org/api_docs/python/tf/Graph) is lacking, as usual.  
+[This code snippent](https://groups.google.com/a/tensorflow.org/forum/#!topic/discuss/Yu3OFF3_GLc) is supposed to work on CPU.  
+Also check out [this post](http://stackoverflow.com/questions/36288235/how-to-get-stable-results-with-tensorflow-setting-random-seed) on setting a graph-wide seed.  
+Todo:  
+    - Work on setting a seed, to get reproducible results.  
+    - Figure out checkpoint saving and loading.  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+
