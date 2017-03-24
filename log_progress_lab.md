@@ -200,3 +200,17 @@ Todo:
     - Figure out checkpoint saving and loading.  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
+- **23/3:** 
+Worked on saving and restoring session chechpoints.  
+Saving and restoring works as expected!  
+Fixed minor issues with saving and printing steps.  
+Still **can't make reproducible code with tf seed**.  
+Patrick gave the go-ahead to use the suggested data as if it was labeled data.  
+Todo:  
+    - Encorporate the suggested data as normal data. Make sure there are no duplicates. Make sure to have (Text, ATC, frequency) information on all data points.  
+    - Modify LSTM class to have a training and validation feed dict. Report accuracy on validation data.  
+    - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
+    - Sample / duplicate data-points proportional to f(frequncy), with f, say, log.  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+
+
