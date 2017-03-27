@@ -213,4 +213,17 @@ Todo:
     - Sample / duplicate data-points proportional to f(frequncy), with f, say, log.  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
+- **26/3:** 
+Corrected path to unlabeled suggestion CSV (for both 'yarden' and 'raiskiny' cluster users).  
+While working on merging suggested file and original file (with syncing frequencies), found out that there were character encoding issues (not able to match text strings).  
+Fixing this issue would likely resolve the "duplicates" issue as well (as they were duplicates due to incorrect encoding).  
+Ran unlabeled data suggestion procedure again on Euler.  
+Todo:  
+    - Encorporate the suggested data as normal data. Make sure there are no duplicates. Make sure to have (Text, ATC, frequency) information on all data points.  
+    - Sample / duplicate data-points proportional to f(frequncy), with f, say, log, or f=1 to unchange the data.  
+    - Clean-up merging data files (migrate to different file, make data generation consistent across different files, including linear model).  
+    - Explore the newly merged data-set (same way initial data was explored). Gain insights as to how to split to train / validation sets.  
+    - Modify LSTM class to have a training and validation feed dict. Report accuracy on validation data.  
+    - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
