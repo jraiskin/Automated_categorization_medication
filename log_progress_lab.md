@@ -227,3 +227,16 @@ Todo:
     - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
+- **27/3:** 
+Results of second run of unlabeled data suggestion procedure were successful. Yielded results can now be matched with original data.  
+Created same data representation from suggested data, along with labels and frequency data.  
+Data is merged and fed into transformations that the LSTM model accepts (array of character indecies).  
+Still left: replicate "rows" according to a given function / rule.  
+Todo:  
+    - Sample / duplicate data-points proportional to f(frequncy), with f, say, log, or f=1 to unchange the data.  
+    - Clean-up merging data files (migrate to different file, make data generation consistent across different files, including linear model).  
+    - Explore the newly merged data-set (same way initial data was explored). Gain insights as to how to split to train / validation sets.  
+    - Modify LSTM class to have a training and validation feed dict. Report accuracy on validation data.  
+    - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+
