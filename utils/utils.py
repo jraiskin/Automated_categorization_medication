@@ -49,8 +49,46 @@ def init_data():
 
     x = main_data_labeled['FREETXT'][:n]
     y = main_data_labeled['ATC'][:n]
+    y = [i for i in y]  # make into a list
     
     return x, y, n, main_data
+
+
+# initialize data from suggestions CSV file
+def init_data_suggest():
+    _, _, _, main_data = init_data()
+    
+    user_opt = user_opt_gen()
+    suggested_data = pd.read_csv(user_opt['suggested_labels'], 
+                                 sep=',', 
+                                 names=['Text', 'ATC', 'Jaccard_sim'], 
+                                 encoding='cp850')
+    
+    x_suggest = [i for i in suggested_data['Text']]
+    y_suggest = [i for i in suggested_data['ATC']]
+    
+    main_freq = main_data['CNT']
+    main_text = main_data['FREETXT']
+    
+    # match frequency from main file with text from suggestions CSV file
+    freq_suggest = [main_freq[[text == t for t in main_text]] for text in x_suggest]
+    # extract values and convert to int (instead of np.int64)
+    freq_suggest = [int(i.values[0]) for i in freq_suggest]
+    # n_suggest = len(freq_suggest)
+    
+    # check that lengths match
+    cond = len(freq_suggest) == len(x_suggest)
+    # check that all are int
+    cond = cond and not any(x for x in freq_suggest if not isinstance(x, int))
+    # check that there are unexpected values
+    cond = cond and not any(x for x in freq_suggest if x <= 0)
+    cond = cond and not any(x for x in freq_suggest if x > 100)
+    cond = cond and not any(x for x in freq_suggest if x == [])
+    # also performed some manual inspection, comparing against the CSV files
+    # list(zip(x_suggest, freq_suggest))[:10]
+    assert cond, 'The variable "freq_suggest" failed one of the completeness tests.'
+    
+    return x_suggest, y_suggest, freq_suggest
 
 
 def save(fname, obj):

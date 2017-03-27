@@ -37,13 +37,17 @@ def index_to_dense(index, length):
     return output_list
 
 
-def text_filter_pad_to_index(text, y, char_filter, *args, **kwagrs):
+def text_filter_pad_to_index(text, y, char_filter, filter_keys_chars=None, *args, **kwagrs):
     # filter by character, appear at least 'char_filter' times in the input
-    filter_keys_chars = list(
-        filter_dict_by_val_atleast(
-            input_dict=char_freq_map(input_data=text), 
-            value=char_filter)
-        .keys())    
+    # or except a pre-defined filter
+    if filter_keys_chars is None:
+        filter_keys_chars = list(
+            filter_dict_by_val_atleast(
+                input_dict=char_freq_map(input_data=text), 
+                value=char_filter)
+            .keys())    
+    else:
+        filter_keys_chars = filter_keys_chars
     
     # create a list of character lists
     x_char = [list(line) for line in text]
@@ -63,7 +67,7 @@ def text_filter_pad_to_index(text, y, char_filter, *args, **kwagrs):
                                         pad_symbol=pad))
     
     # additional statistics based on filtered features
-    label_set = y.unique()
+    label_set = set(y)
     n_label = len(label_set)
     # number of unique characters iin input ('x_char_filtered')
     char_set = set([char for line in x_char_filtered_pad for char in line])
@@ -72,7 +76,8 @@ def text_filter_pad_to_index(text, y, char_filter, *args, **kwagrs):
                      'n_class': n_label,
                      'n_char': n_char,
                      'char_set': char_set, 
-                     'label_set': label_set
+                     'label_set': label_set, 
+                     'filter_keys_chars': filter_keys_chars
                     }
     
     return x_char_filtered_pad, statistics_dict
