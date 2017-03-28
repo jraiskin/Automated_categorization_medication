@@ -6,9 +6,15 @@ import pickle
 #import re
 import inspect
 import pandas as pd
+import numpy as np
+from math import ceil
+
 
 def seed():
     return 2178
+
+
+np.random.seed(seed())
 
 
 def user_opt_gen():
@@ -89,6 +95,56 @@ def init_data_suggest():
     assert cond, 'The variable "freq_suggest" failed one of the completeness tests.'
     
     return x_suggest, y_suggest, freq_suggest
+
+
+def unscale(freq):
+    return int(1)
+
+
+def log_scale(freq, shift = 0.0, scale = 1.0):
+    eps = 0.001
+    return int(ceil(np.log10((freq + shift + eps) / scale)
+                    ))
+
+
+def replicate_dict(x, y, freq, scale_func=unscale):
+    row_replicate_dict = {}
+    for ind, (obs, label, freq) in enumerate(zip(x, y, freq), start=1):
+    #     print(ind, obs, label, freq)
+        row_replicate_dict[ind] = (np.array([obs, ] * scale_func(freq)), 
+                                   label)
+        
+    return row_replicate_dict
+
+
+def scale_permute_data(*, x, y, freq, scale_func, to_permute=True):
+    row_replicate_dict = replicate_dict(x, y, freq, scale_func)
+    
+    # retreive character sequences (element 0 of tuple)
+    x_scaled = np.concatenate([row_replicate_dict[i][0] 
+                               for i in range(1, len(row_replicate_dict) + 1)], 
+                              axis=0)
+    
+    # retreive label sequence (element 1 of tuple)
+    # labels are replicated to match the scaled version
+    # of the character sequence
+    y_scaled = np.concatenate([np.array([row_replicate_dict[i][1],] * 
+                                        row_replicate_dict[i][0].shape[0])
+                               for i in range(1, len(row_replicate_dict) + 1)], 
+                              axis=0)
+    
+    # checks that no funky business is going on
+    n = sum([log_scale(num) for num in freq])
+    cond = x_scaled.shape[0] == n
+    cond = cond and y_scaled.shape == (n, )
+    assert cond, 'There we unexpected shapes in either of "x_scaled" or "y_scaled" variables. Please check!'
+    
+    if to_permute:
+        permute = np.random.permutation(n)
+        x_scaled = x_scaled[permute]
+        y_scaled = y_scaled[permute]
+    
+    return x_scaled, y_scaled, n
 
 
 def save(fname, obj):

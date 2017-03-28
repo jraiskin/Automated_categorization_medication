@@ -124,6 +124,20 @@ def index_transorm_xy(x,
     return X, Y, Y_dense
 
 
+def make_hparam_string(learn_rate, one_hot, keep_prob, char_embed_dim, hidden_state_size, *args, **kwargs):
+    learn_rate_str = 'learn_rate={:.1E}'.format(learn_rate)
+    one_hot_str = 'one_hot={:.1}'.format(str(one_hot))
+    keep_prob_str = 'keep_prob={:.2}'.format(keep_prob)
+    char_embed_dim_str = 'char_embed_dim={}'.format(char_embed_dim if not one_hot else 'NA')
+    hidden_state_size_str = 'hidden_state_size={}'.format(hidden_state_size)
+    output_str = ",".join([learn_rate_str, 
+                           one_hot_str, 
+                           keep_prob_str, 
+                           char_embed_dim_str, 
+                           hidden_state_size_str])
+    return '{}/'.format(output_str)
+
+
 def write_embeddings_metadata(log_dir, dictionary, file_name='metadata.tsv'):
     embed_vis_path = '{}{}'.format(log_dir, file_name)
     if not os.path.exists(log_dir):
