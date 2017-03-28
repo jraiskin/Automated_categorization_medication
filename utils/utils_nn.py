@@ -124,6 +124,21 @@ def index_transorm_xy(x,
     return X, Y, Y_dense
 
 
+def assert_no_stats_change(new_dict, kwargs):
+    # check that there are no "new" statistics popping out
+    # label_set and n_class should not be expected to be the same
+    # (and are indeed not, but it is a subset of the original label set, by definition)
+    diff_stat = []
+    for key in new_dict:
+        if not new_dict[key] == kwargs[key]:
+            diff_stat.append(key)
+    #         print('Statistics differ on {}'.format(key))
+    assert set(diff_stat) == {'label_set', 'n_class'}, \
+        'Found unexpected values between original x and x_suggest!\n' + \
+        'Differences found here: {}\n'.format(diff_stat) + \
+        '(label_set and n_class should not be expected to be the same.)'
+
+
 def make_hparam_string(learn_rate, one_hot, keep_prob, char_embed_dim, hidden_state_size, *args, **kwargs):
     learn_rate_str = 'learn_rate={:.1E}'.format(learn_rate)
     one_hot_str = 'one_hot={:.1}'.format(str(one_hot))
