@@ -2,7 +2,10 @@ import tensorflow as tf
 import numpy as np
 import os
 
-from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
+try:
+    from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
+except:
+    from utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
 
 try:
     from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map

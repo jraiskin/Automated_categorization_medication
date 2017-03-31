@@ -9,12 +9,18 @@ import pandas as pd
 import numpy as np
 from math import ceil
 
+from collections import Counter
+
+import random
+
 
 def seed():
     return 2178
 
 
+# set seeds
 np.random.seed(seed())
+random.seed(seed())
 
 
 def user_opt_gen():
@@ -24,7 +30,7 @@ def user_opt_gen():
     #         'data_path' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv',
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv', 
 #            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv'
-            'suggested_labels' : r'similarity_labels_suggestion.csv'
+            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/similarity_labels_suggestion.csv'
         },
         'raiskiny' : {
             'data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/20170303_EXPORT_for_Yarden.csv', 
@@ -95,6 +101,52 @@ def init_data_suggest():
     assert cond, 'The variable "freq_suggest" failed one of the completeness tests.'
     
     return x_suggest, y_suggest, freq_suggest
+
+
+def train_validation_split(*, x, y, freq, label_count_thresh, valid_ratio, verbose=True):
+    random.seed(seed())
+    # count each label occurence, filter out those less frequent than label_count_thresh
+    label_freq_dict = Counter(y)
+    label_freq_dict = {label:count for label,count in label_freq_dict.items() if count >= label_count_thresh}
+
+    # create a dict with a list of label:list(index), for filtered labels
+    y_enum = [(i,label) for (i,label) in enumerate(y) if label in label_freq_dict.keys()]
+    label_index_dict = {label:[] for label in label_freq_dict.keys()}
+    for (i,label) in y_enum:
+        label_index_dict[label].append(i)
+
+    # check
+    assert(min([len(x) for x in label_index_dict.values()]) >= label_count_thresh)
+
+    label_valid_index_dict = {label:random.sample(indices, int(valid_ratio * len(indices)))
+                              for label,indices in label_index_dict.items()}
+    if verbose:
+        n_val = sum([len(x) for x in label_valid_index_dict.values()])
+        print('number of potential labels to draw from: {}'.format(len(label_index_dict)))
+        print('number of potential observation to draw from: {}'.format(
+            sum([len(v) for v in label_index_dict.values()])))
+        print('{} observations sampled for validation'.format(n_val))
+        print('{} total number of observations'.format(len(y)))
+        print('{} observations for training'.format(len(y) - n_val))
+        print('The ratio of validation to total observations is about {:.3f}'.format(n_val / len(y)))
+
+    # extract all indices into a single set
+    valid_index = [item for sublist in list(label_valid_index_dict.values()) for item in sublist]
+    valid_index.sort()
+
+    # construct 2 sets of variables, validation and training
+    x_val, x_train, y_val, y_train, freq_val, freq_train = [], [], [], [], [], []
+    for i, (x, y, freq) in enumerate(zip(x, y, freq)):
+        if i in valid_index:
+            x_val.append(x)
+            y_val.append(y)
+            freq_val.append(freq)
+        else:
+            x_train.append(x)
+            y_train.append(y)
+            freq_train.append(freq)
+    
+    return x_val, x_train, y_val, y_train, freq_val, freq_train, valid_index
 
 
 def unscale(freq):
