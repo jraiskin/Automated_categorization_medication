@@ -258,3 +258,14 @@ Todo:
     - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
+- **31/3:** 
+Split data to validation and training sets. Both sets can be scaled and fed into the LSTM model.  
+Validation and training data are accepted as feeding dicts to the LSTM model.  
+Still need to make TF infer the "batch size", i.e. not specifying it 
+(rather passing it as None). Doesn't work for some reason.  
+Todo:  
+    - Fix shaping problem in TF (accept placeholders' size as None).  
+    - Report accuracy on validation data.  
+    - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+   
