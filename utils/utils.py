@@ -104,7 +104,6 @@ def init_data_suggest():
 
 
 def train_validation_split(*, x, y, freq, label_count_thresh, valid_ratio, verbose=True):
-    random.seed(seed())
     # count each label occurence, filter out those less frequent than label_count_thresh
     label_freq_dict = Counter(y)
     label_freq_dict = {label:count for label,count in label_freq_dict.items() if count >= label_count_thresh}
@@ -117,9 +116,9 @@ def train_validation_split(*, x, y, freq, label_count_thresh, valid_ratio, verbo
 
     # check
     assert(min([len(x) for x in label_index_dict.values()]) >= label_count_thresh)
-
+    
     label_valid_index_dict = {label:random.sample(indices, int(valid_ratio * len(indices)))
-                              for label,indices in label_index_dict.items()}
+                              for label,indices in sorted(label_index_dict.items())}
     if verbose:
         n_val = sum([len(x) for x in label_valid_index_dict.values()])
         print('number of potential labels to draw from: {}'.format(len(label_index_dict)))
@@ -186,7 +185,7 @@ def scale_permute_data(*, x, y, freq, scale_func, to_permute=True):
                               axis=0)
     
     # checks that no funky business is going on
-    n = sum([log_scale(num) for num in freq])
+    n = sum([scale_func(num) for num in freq])
     cond = x_scaled.shape[0] == n
     cond = cond and y_scaled.shape == (n, )
     assert cond, 'There we unexpected shapes in either of "x_scaled" or "y_scaled" variables. Please check!'
