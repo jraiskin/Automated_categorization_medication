@@ -240,3 +240,21 @@ Todo:
     - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
+- **28/3:** 
+Sampling proportional to frequency is working ("scaling"). Can you "unscaled" version to retain original proportions.
+Code has been automated and cleaned, utils migrated (and slightly modified).  
+Updated the exploratory notebook (with analyses and histograms) to accomodate merged data, made code more concide, flexible and consistent.  
+Need to start thinking of ways to split to training-validation sets (maintaining that all labels are present in training set).  
+Split should occur after merging the data sources, but possibly before scaling (after would make sense as well).  
+Todo:  
+    - Split data into training-validation sets. Possibly, sample for validation set in a multiple step process:  
+        - Restrict to a subset of labels to draw from (either uniformly or inversly proportional to frequency)  
+        - Sample from each drawn label a certain number of observations (up to, say, half of available observations)  
+        - Make sure sample size is in a certain range  
+        - Split (x,y,freq) into two sets seperate sets  
+        - Shuffle boths sets (with same permutation)  
+        - Look for possible literature on the subject  
+    - Modify LSTM class to have a training and validation feed dict. Report accuracy on validation data.  
+    - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+
