@@ -269,3 +269,18 @@ Todo:
     - Generate a "top-k" prediction method and a "top-k" accuracy measure.  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
    
+- **1/4:** 
+TF can now infer "batch-size". Changed the way data is read into the LSTM function (reshaping etc.).  
+Tried different ways to track both training and validation accuracy (including constructing a string using tf.cond).  
+Ended up with a solution of having 2 write function for each model, 
+seperating written summaries into 2 different directories.  
+Tracking training and validation accuracy seems to work, 
+but the *validation* accuracy seems to be consistently higher (suspicious).  
+There's a tf.nn.in_top_k function, should use it as well.  
+Todo:  
+    - Make sure accuracy on validation data is correct (no bugs).  
+    - Generate a "top-k" prediction method and a "top-k" accuracy measure 
+        (look at [tf.nn.in_top_k function](https://www.tensorflow.org/api_docs/python/tf/nn/in_top_k)).  
+    - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
+
+
