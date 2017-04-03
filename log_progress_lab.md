@@ -283,4 +283,20 @@ Todo:
         (look at [tf.nn.in_top_k function](https://www.tensorflow.org/api_docs/python/tf/nn/in_top_k)).  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
-
+- **3/4:** 
+Successful day overall!  
+Fixed TF summaries, now training and test error tracking works fine.  
+When evaluating test set, dropout keep probability is set to 1.  
+A new metric "is in top k" is introduced (and working). k is set to 5 (parameter).  
+SOLVED Embeddings visualizer! Tensorboard should be called from the git repo directory.  
+Ran a small-scale experiment locally. Seems to work fine.  
+A big experiment is currently running on Euler.  
+Not clear: how to relatively easily apply l2 normalization to weights.  
+Todo:  
+    - Clean up code.  
+    - Go over linear classifier code:  
+        - Data initialization;  
+        - Test-training split;  
+        - Evaluation (including top_k);  
+        - Hyperparameters optimization.  
+    - Fix tf.seed issue
