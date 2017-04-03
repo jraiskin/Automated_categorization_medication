@@ -157,12 +157,12 @@ def make_hparam_string(learn_rate, one_hot, keep_prob, char_embed_dim, hidden_st
 
 
 def write_embeddings_metadata(log_dir, dictionary, file_name='metadata.tsv'):
-    embed_vis_path = '{}{}'.format(log_dir, file_name)
+    embed_vis_path = './{}{}'.format(log_dir, file_name)
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
     file = open(embed_vis_path,'w')
     file.write('Index\tCharacter')  # tab seperated
-    for k, v in dictionary.items():
+    for k, v in sorted(dictionary.items()):
         file.write('\n{}\t{}'.format(v, k))
     file.close()
     
