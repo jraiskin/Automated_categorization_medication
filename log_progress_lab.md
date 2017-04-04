@@ -283,4 +283,56 @@ Todo:
         (look at [tf.nn.in_top_k function](https://www.tensorflow.org/api_docs/python/tf/nn/in_top_k)).  
     - Finish character embeddings visualizer (https://www.tensorflow.org/get_started/embedding_viz).  
 
+- **3/4:** 
+Successful day overall!  
+Fixed TF summaries, now training and test error tracking works fine.  
+When evaluating test set, dropout keep probability is set to 1.  
+A new metric "is in top k" is introduced (and working). k is set to 5 (parameter).  
+SOLVED Embeddings visualizer! Tensorboard should be called from the git repo directory.  
+Ran a small-scale experiment locally. Seems to work fine.  
+A big experiment is currently running on Euler.  
+Not clear: how to relatively easily apply l2 normalization to weights.  
+Todo:  
+    - Clean up code.  
+    - Go over linear classifier code:  
+        - Data initialization;  
+        - Test-training split;  
+        - Evaluation (including top_k);  
+        - Hyperparameters optimization.  
+    - Fix tf.seed issue
+
+- **4/4:** 
+Meeting with Carsten:  
+Try discarding labels that appear less than k (10) times from both training and test sets.  
+Consider applying other IR metrics, such as *Reciprocal Rank*.  
+think of ways to incorporate external knowledge into the model.  
+e.g. If we had a comprehensive list of all legal medicine (say, from swissmedic / wikipedia), 
+we could add that data as a perscription (frequency of 1) as additional labeled data, in the "data enhancement" stage.  
+Fixed dropout keep probability, set to 1.0 whenever evaluating (dropout applied only while training).  
+The procedure used to split the data to training-test sets is called stratified sampling.  
+Todo:  
+    - Track Reciprocal Rank.  
+    - Discard labels that appear less than k times from both data sets.  
+    - Apply L2 weight normalization [using compute and apply gradients]
+        (https://www.tensorflow.org/api_docs/python/tf/train/Optimizer).  
+    - Look at 3/4 experiment. Why strange behavior occurs?:  
+        - seems to be correlated with a large hidden state size (of dimension 32).  
+        - what other hyper-parameters affect the strange behavior of these graphs.  
+        - what's common for all the under-performers (learning rate of 1.0E-2).  
+    - Possible other directions to explore:  
+        - Target replication.  
+        - Dynamic learning rate schedule.  
+        - Backward / bi-directional data feeding.  
+        - LSTM up to 3 layers deep.  
+        - CNN-LSTM combined models.  
+        - GRU RNN.  
+        - Encoder-decoder(?).  
+        
+        
+    - Go over linear classifier code:  
+        - Data initialization;  
+        - Test-training split;  
+        - Evaluation (including top_k);  
+        - Hyperparameters optimization.  
+    - Fix tf.seed issue
 
