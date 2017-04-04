@@ -300,3 +300,39 @@ Todo:
         - Evaluation (including top_k);  
         - Hyperparameters optimization.  
     - Fix tf.seed issue
+
+- **4/4:** 
+Meeting with Carsten:  
+Try discarding labels that appear less than k (10) times from both training and test sets.  
+Consider applying other IR metrics, such as *Reciprocal Rank*.  
+think of ways to incorporate external knowledge into the model.  
+e.g. If we had a comprehensive list of all legal medicine (say, from swissmedic / wikipedia), 
+we could add that data as a perscription (frequency of 1) as additional labeled data, in the "data enhancement" stage.  
+Fixed dropout keep probability, set to 1.0 whenever evaluating (dropout applied only while training).  
+The procedure used to split the data to training-test sets is called stratified sampling.  
+Todo:  
+    - Track Reciprocal Rank.  
+    - Discard labels that appear less than k times from both data sets.  
+    - Apply L2 weight normalization [using compute and apply gradients]
+        (https://www.tensorflow.org/api_docs/python/tf/train/Optimizer).  
+    - Look at 3/4 experiment. Why strange behavior occurs?:  
+        - seems to be correlated with a large hidden state size (of dimension 32).  
+        - what other hyper-parameters affect the strange behavior of these graphs.  
+        - what's common for all the under-performers (learning rate of 1.0E-2).  
+    - Possible other directions to explore:  
+        - Target replication.  
+        - Dynamic learning rate schedule.  
+        - Backward / bi-directional data feeding.  
+        - LSTM up to 3 layers deep.  
+        - CNN-LSTM combined models.  
+        - GRU RNN.  
+        - Encoder-decoder(?).  
+        
+        
+    - Go over linear classifier code:  
+        - Data initialization;  
+        - Test-training split;  
+        - Evaluation (including top_k);  
+        - Hyperparameters optimization.  
+    - Fix tf.seed issue
+
