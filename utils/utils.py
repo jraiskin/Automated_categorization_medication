@@ -103,7 +103,12 @@ def init_data_suggest():
     return x_suggest, y_suggest, freq_suggest
 
 
-def train_validation_split(*, x, y, freq, label_count_thresh, valid_ratio, verbose=True):
+def train_validation_split(*, x, y, freq, 
+                           label_count_thresh, 
+                           valid_ratio, 
+                           keep_rare_labels, 
+                           verbose=True):
+    assert isinstance(keep_rare_labels, bool), 'note that keep_rare_labels should be a boolean'
     # count each label occurence, filter out those less frequent than label_count_thresh
     label_freq_dict = Counter(y)
     label_freq_dict = {label:count for label,count in label_freq_dict.items() if count >= label_count_thresh}
@@ -119,31 +124,37 @@ def train_validation_split(*, x, y, freq, label_count_thresh, valid_ratio, verbo
     
     label_valid_index_dict = {label:random.sample(indices, int(valid_ratio * len(indices)))
                               for label,indices in sorted(label_index_dict.items())}
-    if verbose:
-        n_val = sum([len(x) for x in label_valid_index_dict.values()])
-        print('number of potential labels to draw from: {}'.format(len(label_index_dict)))
-        print('number of potential observation to draw from: {}'.format(
-            sum([len(v) for v in label_index_dict.values()])))
-        print('{} observations sampled for validation'.format(n_val))
-        print('{} total number of observations'.format(len(y)))
-        print('{} observations for training'.format(len(y) - n_val))
-        print('The ratio of validation to total observations is about {:.3f}'.format(n_val / len(y)))
 
     # extract all indices into a single set
     valid_index = [item for sublist in list(label_valid_index_dict.values()) for item in sublist]
     valid_index.sort()
 
     # construct 2 sets of variables, validation and training
+    allowed_labels = set(y) if keep_rare_labels else set(label_freq_dict.keys())
+    if verbose: print('The are {} observations'.format(len(y)))
     x_val, x_train, y_val, y_train, freq_val, freq_train = [], [], [], [], [], []
     for i, (x, y, freq) in enumerate(zip(x, y, freq)):
-        if i in valid_index:
-            x_val.append(x)
-            y_val.append(y)
-            freq_val.append(freq)
+        if y not in allowed_labels:
+            continue
         else:
-            x_train.append(x)
-            y_train.append(y)
-            freq_train.append(freq)
+            if i in valid_index:
+                x_val.append(x)
+                y_val.append(y)
+                freq_val.append(freq)
+            else:
+                x_train.append(x)
+                y_train.append(y)
+                freq_train.append(freq)
+    if verbose:
+        n_val = len(x_val)
+        n_train = len(x_train)
+        print('Sampling from allowed {} labels'.format(len(allowed_labels)))
+        print('{} labels in the validation set, with'.format(len(label_index_dict)))
+        print('{} potential observation to draw from.'.format(
+            sum([len(v) for v in label_index_dict.values()])))
+        print('{} observations sampled for validation'.format(n_val))
+        print('{} observations for training'.format(n_train))
+        print('The ratio of validation to *training* is about {:.3f}'.format(n_val / n_train))
     
     return x_val, x_train, y_val, y_train, freq_val, freq_train, valid_index
 
