@@ -6,13 +6,18 @@ try:
     from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
 except:
     from utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
+# try:
+#     from utils.utils import seed
+# except:
+#     from utils import seed
 
-try:
-    from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
-except:
-    from utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
 
-    
+
+# set seeds
+# np.random.seed(seed())
+# random.seed(seed())
+
+
 def remove_dir_content(path):
     if tf.gfile.Exists(path):
         tf.gfile.DeleteRecursively(path)
@@ -40,9 +45,13 @@ def index_to_dense(index, length):
     return output_list
 
 
-def text_filter_pad_to_index(text, y, char_filter, filter_keys_chars=None, *args, **kwagrs):
-    # filter by character, appear at least 'char_filter' times in the input
-    # or except a pre-defined filter
+def text_filter_pad(text, y, char_filter, filter_keys_chars=None, *args, **kwagrs):
+    """
+    Filter characters, leaving only those that appear at least 'char_filter' times in the text.
+    Can also except a pre-defined filter if 'filter_keys_chars' is given (default is None.
+    Replaces unknown characters with an "unknown" symbol.
+    Pads each line, so that all lines are the same length
+    """
     if filter_keys_chars is None:
         filter_keys_chars = list(
             filter_dict_by_val_atleast(
@@ -60,7 +69,7 @@ def text_filter_pad_to_index(text, y, char_filter, filter_keys_chars=None, *args
     for line in x_char:
         x_char_filtered.append([char if (char in filter_keys_chars) else unknown for char in line])
     
-    # pad lines, so that all lines are same length
+    # pad lines, so that all lines are the same length
     max_line_len = int(np.max([len(line) for line in text]))
     pad = '<pad-char>'
     x_char_filtered_pad = []
@@ -72,7 +81,7 @@ def text_filter_pad_to_index(text, y, char_filter, filter_keys_chars=None, *args
     # additional statistics based on filtered features
     label_set = set(y)
     n_label = len(label_set)
-    # number of unique characters iin input ('x_char_filtered')
+    # number of unique characters in input ('x_char_filtered')
     char_set = set([char for line in x_char_filtered_pad for char in line])
     n_char = len(char_set)
     statistics_dict={'seq_len': max_line_len,
@@ -87,9 +96,15 @@ def text_filter_pad_to_index(text, y, char_filter, filter_keys_chars=None, *args
 
 
 def lookup_dicts_chars_labels(char_set, label_set, *args, **kwagrs):
+    """
+    Create the following dictionaries:
+    {character: int} and its inverse {int: character},
+    {label: int} and its inverse {int: label}
+    """
     # create lookup dict for characters (and inv)
     char_int = {}
     char_int_inv = {}
+    char_set = sorted(list(char_set))
     for i, char in enumerate(char_set):
         char_int[char] = i
         char_int_inv[i] = char
@@ -97,6 +112,7 @@ def lookup_dicts_chars_labels(char_set, label_set, *args, **kwagrs):
     # same for labels
     label_int = {}
     label_int_inv = {}
+    label_set = sorted(list(label_set))
     for i, label in enumerate(label_set):
         label_int[label] = i
         label_int_inv[i] = label
