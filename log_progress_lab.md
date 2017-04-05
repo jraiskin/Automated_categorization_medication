@@ -327,12 +327,39 @@ Todo:
         - CNN-LSTM combined models.  
         - GRU RNN.  
         - Encoder-decoder(?).  
-        
-        
     - Go over linear classifier code:  
         - Data initialization;  
         - Test-training split;  
         - Evaluation (including top_k);  
         - Hyperparameters optimization.  
-    - Fix tf.seed issue
+    - Fix tf.seed issue  
+
+- **5/4:** 
+Reproducibility problem solve! The main culprit was iterating over a sets and dictionaries (non deterministic ordering).  
+Applied L2 norm regularization for all trainable variables (with the same coefficient).  
+Discarding "rare" labels from both data sets is now an option, as part of the train-test data split.  
+Implementing reciprocal rank proves to be challenging (applying functions on tensors with unknown ranks).  
+Some ideas regarding how to implement target replication.  
+Todo:  
+    - Target replication:  
+        - create a bool placeholder  
+        - conditional duplicate each row in Y by seq_len in all feed dictionaries  
+        - conditional take all LSTM outputs (not just last) , reshape (?) so that each is like an observation  
+    - Dynamic learning rate schedule.  
+    - Backward / bi-directional data feeding.
+    - Look at 3/4 experiment. Why strange behavior occurs?:  
+        - seems to be correlated with a large hidden state size (of dimension 32).  
+        - what other hyper-parameters affect the strange behavior of these graphs.  
+        - what's common for all the under-performers (learning rate of 1.0E-2).  
+    - Possible other directions to explore:  
+        - LSTM up to 3 layers deep.  
+        - CNN-LSTM combined models.  
+        - GRU RNN.  
+        - Encoder-decoder(?).  
+    - Go over linear classifier code:  
+        - Data initialization;  
+        - Test-training split;  
+        - Evaluation (including top_k);  
+        - Hyperparameters optimization.  
+    - Track Reciprocal Rank.  
 
