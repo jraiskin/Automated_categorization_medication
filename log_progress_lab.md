@@ -363,3 +363,26 @@ Todo:
         - Hyperparameters optimization.  
     - Track Reciprocal Rank.  
 
+- **6/4:** 
+Implemented target replication!  
+Implemented bidirectional LSTM!  
+Implemented dynamic learning rate.  
+Modified hyper-parameter string generator to accommodate new functionality.  
+Fixed some side effects that happened when keep_rare_labels is False.  
+Setting keep_rare_labels to False, amends the abnormalities that arose between training-test (loss(train) < loss(test)).  
+Todo:  
+    - Look at 3/4 experiment. Why strange behavior occurs?:  
+        - seems to be correlated with a large hidden state size (of dimension 32).  
+        - what other hyper-parameters affect the strange behavior of these graphs.  
+        - what's common for all the under-performers (learning rate of 1.0E-2).  
+    - Possible other directions to explore:  
+        - LSTM up to 3 layers deep.  
+        - CNN-LSTM combined models.  
+        - GRU RNN.  
+        - Encoder-decoder(?).  
+    - Go over linear classifier code:  
+        - Data initialization;  
+        - Test-training split;  
+        - Evaluation (including top_k);  
+        - Hyperparameters optimization.  
+    - Track Reciprocal Rank.  
