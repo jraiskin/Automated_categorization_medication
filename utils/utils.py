@@ -156,7 +156,10 @@ def train_validation_split(*, x, y, freq,
         print('{} observations for training'.format(n_train))
         print('The ratio of validation to *training* is about {:.3f}'.format(n_val / n_train))
     
-    return x_val, x_train, y_val, y_train, freq_val, freq_train, valid_index
+    statistics_dict = {'label_set': allowed_labels, 
+                       'n_class': len(allowed_labels)}
+    
+    return x_val, x_train, y_val, y_train, freq_val, freq_train, valid_index, statistics_dict
 
 
 def unscale(freq):
