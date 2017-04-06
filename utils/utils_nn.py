@@ -158,17 +158,44 @@ def assert_no_stats_change(new_dict, kwargs):
         '(label_set and n_class should not be expected to be the same.)'
 
 
-def make_hparam_string(learn_rate, one_hot, keep_prob, char_embed_dim, hidden_state_size, *args, **kwargs):
-    learn_rate_str = 'learn_rate={:.1E}'.format(learn_rate)
-    one_hot_str = 'one_hot={:.1}'.format(str(one_hot))
+def make_hparam_string(*, learn_rate, 
+                          dynamic_learn_rate, 
+                          bidirection, 
+                          one_hot, 
+                          keep_prob, 
+                          char_embed_dim, 
+                          hidden_state_size, 
+                          scale_func, 
+                          keep_rare_labels, 
+                          l2_wieght_reg, 
+                          target_rep,
+                          target_rep_weight,
+                          **kwargs):
+    scale_func_str = 'scale_func={}'.format(scale_func.__name__)
+    bidirection_str = 'bidirection={:.1}'.format(str(bidirection))
+    keep_rare_labels_str = 'keep_rare_labels={:.1}'.format(str(keep_rare_labels))
+    if dynamic_learn_rate:
+        learn_rate_str = 'learn_rate=dynamic'
+    else:
+        learn_rate_str = 'learn_rate={:.1E}'.format(learn_rate)
+    # one_hot_str = 'one_hot={:.1}'.format(str(one_hot))
     keep_prob_str = 'keep_prob={:.2}'.format(keep_prob)
-    char_embed_dim_str = 'char_embed_dim={}'.format(char_embed_dim if not one_hot else 'NA')
+    if one_hot:
+        char_embed_dim_str = 'one_hot'
+    else:
+        char_embed_dim_str = 'char_embed_dim={}'.format(char_embed_dim)
     hidden_state_size_str = 'hidden_state_size={}'.format(hidden_state_size)
-    output_str = ",".join([learn_rate_str, 
-                           one_hot_str, 
+    l2_wieght_reg_str = 'l2_wieght_reg={:.1E}'.format(l2_wieght_reg)
+    target_rep_weight_str = 'target_rep_weight={}'.format(target_rep_weight if target_rep else 'NA')
+    output_str = ",".join([scale_func_str, 
+                           bidirection_str, 
+                           keep_rare_labels_str, 
+                           learn_rate_str, 
                            keep_prob_str, 
                            char_embed_dim_str, 
-                           hidden_state_size_str])
+                           hidden_state_size_str, 
+                           l2_wieght_reg_str, 
+                           target_rep_weight_str])
     return '{}/'.format(output_str)
 
 
