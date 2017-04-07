@@ -386,3 +386,21 @@ Todo:
         - Evaluation (including top_k);  
         - Hyperparameters optimization.  
     - Track Reciprocal Rank.  
+
+- **7/4:** 
+Fixed minor encoding issues (german characters).  
+Cost procedure is more transparent now. Now also reporting the different components of the cost function 
+(with name scoping).  
+Linear classifier: data initialization and merging runs as expected. Need still to split into training-validation sets.  
+Running a big experiment on Euler.  
+Todo:  
+    - Linear classifier code:  
+        - Test-training split;  
+        - Evaluation (including top_k and Reciprocal Rank);  
+        - Hyperparameters optimization.  
+    - Possible other directions to explore:  
+        - LSTM up to 3 layers deep.  
+        - CNN-LSTM combined models.  
+        - GRU RNN.  
+        - Encoder-decoder(?).  
+    - Track Reciprocal Rank.  
