@@ -52,7 +52,7 @@ def init_data():
     main_data = pd.read_csv(user_opt['data_path'], 
                             sep=';', 
                             header=0, 
-                            encoding='cp850')
+                            encoding='iso-8859-15')
 
     # only observations with ATC labels
     main_data_labeled = main_data.loc[[isinstance(k, str) for k in main_data['ATC']],:]
@@ -74,7 +74,7 @@ def init_data_suggest():
     suggested_data = pd.read_csv(user_opt['suggested_labels'], 
                                  sep=',', 
                                  names=['Text', 'ATC', 'Jaccard_sim'], 
-                                 encoding='cp850')
+                                 encoding='iso-8859-15')
     
     x_suggest = [i for i in suggested_data['Text']]
     y_suggest = [i for i in suggested_data['ATC']]
