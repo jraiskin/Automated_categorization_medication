@@ -10,7 +10,7 @@ def char_freq_map(*, input_data, filter_by_chars = None, **kwargs):
     char_dict = {}
     unknown = '<unk-char>'
     # check if dataframe or a single obs
-    if isinstance(input_data, pd.core.series.Series):
+    if isinstance(input_data, (list, pd.core.series.Series)):
         # getting line
         for line in input_data:
             # splitting into characters
@@ -35,7 +35,7 @@ def char_freq_map(*, input_data, filter_by_chars = None, **kwargs):
 def ngram_freq_map(*, input_data, width, filter_by_keys = None, **kwargs):
     ngram_dict = {}
     # check if dataframe or a single obs
-    if isinstance(input_data, pd.core.series.Series):
+    if isinstance(input_data, (list, pd.core.series.Series)):
         # getting line
         for line in input_data:
             ngram_dict = update_ngram_dict(line, width, ngram_dict, filter_by_keys)
@@ -116,7 +116,7 @@ def lin_clf_features(*, input_data,
             else:
                 print('Character filter has been detected, using those keys as filters.')
                 filter_keys_chars = filter_keys_chars
-            # apply ngram_freq_map, after figuring out which keys to keep
+            # apply char_freq_map, after figuring out which keys to keep
             X_features_chars = [char_freq_map(input_data = obs, 
                                               filter_by_chars=filter_keys_chars) 
                                 for obs in input_data]
