@@ -404,3 +404,19 @@ Todo:
         - GRU RNN.  
         - Encoder-decoder(?).  
     - Track Reciprocal Rank.  
+
+- **8/4:** 
+LSTM model can now track less summaries (such as histograms) and not save models, to save log space.  
+Running an Euler experiment again (output too big).  
+Linear SVM: implemented Mean Reciprocal Rank, train-test split and performed hyper parameter search.  
+SVM is performing surprisingly well, after discarding "rare" labels (sane procedure as in the LSTM input).  
+Todo:  
+    - Look at experiment results.  
+    - Think of SVM results meaning.  
+    - Possible other directions to explore:  
+        - LSTM up to 3 layers deep.  
+        - CNN-LSTM combined models.  
+        - GRU RNN.  
+        - Encoder-decoder(?).  
+    - Track Reciprocal Rank.  
+
