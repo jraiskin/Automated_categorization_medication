@@ -409,7 +409,7 @@ Todo:
 LSTM model can now track less summaries (such as histograms) and not save models, to save log space.  
 Running an Euler experiment again (output too big).  
 Linear SVM: implemented Mean Reciprocal Rank, train-test split and performed hyper parameter search.  
-SVM is performing surprisingly well, after discarding "rare" labels (sane procedure as in the LSTM input).  
+SVM is performing surprisingly well, after discarding "rare" labels (same procedure as in the LSTM input).  
 Todo:  
     - Look at experiment results.  
     - Think of SVM results meaning.  
@@ -418,5 +418,29 @@ Todo:
         - CNN-LSTM combined models.  
         - GRU RNN.  
         - Encoder-decoder(?).  
+    - Track Reciprocal Rank.  
+
+- **10/4:** 
+Meeting with Carsten:  
+Look closer at the SVM, compare to logistic regression. Specifically into the data preprocessing step 
+(no unfair advantage to the SVM).  
+Further investigate the parameters, see what affects the model the most and increase search variation there 
+(learning rate, hidden state size, possibly regularization constants).  
+Directions for later investigation:  
+    - Introduce noise sources, such as noisy activation functions.  
+    - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
+        e.g. plot accuracy vs how many characters the classifier "sees".  
+    - Explor ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+Next meeting on Wed (19/4) 10:00.  
+Todo:  
+    - Fix saving step to be the last step.  
+    - Check SVM data pre-processing stage, look into Logistic regression as well ('logistic' kernel).  
+    - Look at experiment results, what hyper parameters affects the model the most.  
+    - Look into noisy activation functions.  
+    - Possible other directions to explore:  
+        - Introduce noise sources, such as noisy activation functions.  
+        - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
+            e.g. plot accuracy vs how many characters the classifier "sees".  
+        - Explor ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
     - Track Reciprocal Rank.  
 
