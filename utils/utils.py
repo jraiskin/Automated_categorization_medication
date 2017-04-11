@@ -1,10 +1,8 @@
 from getpass import getuser
-# getpass.getuser()
-# 'yarden'
 
-import pickle
-#import re
-import inspect
+#~ import pickle
+#~ import re
+#~ import inspect
 import pandas as pd
 import numpy as np
 from math import ceil
@@ -30,7 +28,7 @@ def user_opt_gen():
     #         'data_path' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv',
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv', 
 #            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv'
-            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/similarity_labels_suggestion.csv'
+            'suggested_labels' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion.csv'
         },
         'raiskiny' : {
             'data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/20170303_EXPORT_for_Yarden.csv', 
@@ -184,7 +182,6 @@ def replicate_dict(x, y, freq, scale_func=unscale):
 
 def scale_permute_data(*, x, y, freq, scale_func, to_permute=True):
     row_replicate_dict = replicate_dict(x, y, freq, scale_func)
-    
     # retreive character sequences (element 0 of tuple)
     x_scaled = np.concatenate([row_replicate_dict[i][0] 
                                for i in range(1, len(row_replicate_dict) + 1)], 
@@ -211,6 +208,18 @@ def scale_permute_data(*, x, y, freq, scale_func, to_permute=True):
     
     return x_scaled, y_scaled, n
 
+
+def dict_addition(input):
+    """
+    Given a list of dictionaries, 
+    the output is a key-wise addition dictionary
+    """
+    res_dict = {}
+    for sub_dict in input:
+        res_dict = {key: res_dict.get(key, 0) + sub_dict.get(key, 0)
+                    for key in set(res_dict).union(set(sub_dict.keys()))}
+    return res_dict
+    
 
 def save(fname, obj):
     with open(fname, 'w') as f:
