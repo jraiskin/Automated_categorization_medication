@@ -444,3 +444,20 @@ Todo:
         - Explor ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
     - Track Reciprocal Rank.  
 
+- **12/4:** 
+Complete overhaul of data initialization and preprocessing stage 
+(unified into one function, branching out to linear and neural only when has to).  
+Added GRU cell functionality, including bidirectional (instead of LSTM).  
+On the first trial (before doing extensive comparison), GRU seems to outperform LSTM by a large margin.  
+Fixed saving on the last step.  
+Todo:  
+    - Check SVM data pre-processing stage, look into Logistic regression as well ('logistic' kernel).  
+    - Look at experiment results, what hyper parameters affects the model the most.  
+    - Look into noisy activation functions.  
+    - Possible other directions to explore:  
+        - Introduce noise sources, such as noisy activation functions.  
+        - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
+            e.g. plot accuracy vs how many characters the classifier "sees".  
+        - Explor ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+    - Track Reciprocal Rank.  
+
