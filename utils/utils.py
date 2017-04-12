@@ -16,11 +16,6 @@ def seed():
     return 2178
 
 
-# set seeds
-np.random.seed(seed())
-random.seed(seed())
-
-
 def user_opt_gen():
     user_opt = {
         'yarden' : {
@@ -66,7 +61,10 @@ def init_data():
 
 # initialize data from suggestions CSV file
 def init_data_suggest():
-    _, _, _, main_data = init_data()
+    x, y, n, main_data = init_data()
+    
+    x = [i for i in x]
+    freq = [i for i in main_data['CNT'][:n]]  # frequencies, turned into a list
     
     user_opt = user_opt_gen()
     suggested_data = pd.read_csv(user_opt['suggested_labels'], 
@@ -98,15 +96,171 @@ def init_data_suggest():
     # list(zip(x_suggest, freq_suggest))[:10]
     assert cond, 'The variable "freq_suggest" failed one of the completeness tests.'
     
-    return x_suggest, y_suggest, freq_suggest
+    return x, y, freq, x_suggest, y_suggest, freq_suggest
+
+
+def data_load_preprocess(*args,
+                         ngram_filter,
+                         allowed_ngrams,
+                         ngram_width,
+                         valid_ratio,
+                         label_count_thresh,
+                         allowed_chars,
+                         model,
+                         mk_ngrams,
+                         scale_func,
+                         keep_infreq_labels,
+                         to_permute,
+                         mk_chars,
+                         char_filter, 
+                         **kwargs):
+    
+    try:
+        from utils.utils_nn import lookup_dicts_chars_labels, text_filter_pad
+    except:
+        from utils_nn import lookup_dicts_chars_labels, text_filter_pad
+    
+    assert model in ['linear', 'neural'],\
+        'Model has to be identified as either linear or neural'
+
+    ### initialize data from MAIN and SUGGESTION CSV files ###
+    x, y, freq, x_suggest, y_suggest, freq_suggest =\
+        init_data_suggest()
+    
+    ### global counter: characters ###
+    if mk_chars:
+        char_counter = dict_addition([Counter(obs) for obs in x])
+        allowed_chars = [key for key,value in char_counter.items() 
+                         if value >= char_filter]
+        allowed_chars.sort()
+
+        # replacing unknown characters with UNKNOWN symbol
+        unknown_char = '<unk-char>'
+        x_unk = [list(obs) for obs in x]
+        x_unk = [[char if char in allowed_chars 
+                  else unknown_char for char in obs]
+                 for obs in x_unk]
+        x_suggest_unk = [list(obs) for obs in x_suggest]  # same for x_suggest
+        x_suggest_unk = [[char if char in allowed_chars 
+                          else unknown_char for char in obs]
+                         for obs in x_suggest_unk]
+    else:
+        allowed_chars = list({char for obs in x for char in obs})
+        allowed_chars.sort()
+        x_unk = x
+        x_suggest_unk = x_suggest
+
+    ### global counter: ngrams ###
+    # note: AFTER applying 'unknown' to characters
+    if model == 'neural':
+        pass
+    elif mk_ngrams:
+        ngram_counter = dict_addition(
+            [Counter(join_sliding_window(obs, ngram_width))
+             for obs in x_unk])
+        allowed_ngrams = [key for key,value in ngram_counter.items() 
+                         if value >= ngram_filter]
+        allowed_ngrams.sort()  # len(.) 1925
+    else:
+        ngrams_list = [join_sliding_window(obs, ngram_width) 
+                       for obs in x_unk]
+        allowed_ngrams = list({ngram for obs in ngrams_list for ngram in obs})
+        allowed_ngrams.sort()  # len(.) 17495
+
+    ### merging ###
+    x_merge, y_merge, freq_merge = \
+        x_unk + x_suggest_unk, \
+        y + y_suggest, \
+        freq + freq_suggest
+
+    ### discard infrequent labels ###
+    # train-validation split
+    x_val, x_train, y_val, y_train, freq_val, freq_train, valid_index, statistics_dict = \
+        train_validation_split(x=x_merge, y=y_merge, freq=freq_merge, 
+                               label_count_thresh=label_count_thresh, 
+                               valid_ratio=valid_ratio, 
+                               keep_rare_labels=keep_infreq_labels)
+
+    ### a fork for linear model ###
+    # returns a list of dictionaries with counters
+    if model == 'linear':
+        ### apply ngrams if needed ###
+        if mk_ngrams:
+            # add filtered ngrams, 
+            # introduce UNKNOWN if ngram is not in 'allowed_ngrams'
+            unknown_ngram = '<unk-ngram>'
+            x_train = [obs + [ngram 
+                              if ngram in allowed_ngrams
+                              else unknown_ngram
+                              for ngram in join_sliding_window(obs, 
+                                  ngram_width)]
+                       for obs in x_train]
+            x_val = [obs + [ngram 
+                            if ngram in allowed_ngrams
+                            else unknown_ngram
+                            for ngram in join_sliding_window(obs, 
+                                ngram_width)]
+                       for obs in x_val]
+        x_train = [Counter(obs) for obs in x_train]
+        x_val = [Counter(obs) for obs in x_val]
+        return x_train, x_val, y_train, y_val
+
+    ### a fork for nueral model ###
+    # returns an array of indecies and their corresponding dicts
+    # i.e. {char:int}, {label:int} and their corresponding inverses
+    elif model == 'neural':   
+        ### padding ###
+        # makes all sequences the same (max) length 
+        # pads with 'pad' character
+        x_train_filtered_pad, statistics_dict_second = \
+            text_filter_pad(text=x_train, y=y_train, 
+                            char_filter=char_filter, 
+                            filter_keys_chars=allowed_chars)
+        # update stats dict
+        statistics_dict = {**statistics_dict, 
+                           **statistics_dict_second}
+
+        x_val_filtered_pad, _ = \
+            text_filter_pad(text=x_val, y=y_val, 
+                            char_filter=char_filter, 
+                            filter_keys_chars=allowed_chars)
+
+        ### scale up and permute ("shuffle") ###
+        # training data
+        x_train_scaled, y_train_scaled, _ = \
+            scale_permute_data(x=x_train_filtered_pad, 
+                               y=y_train, 
+                               freq=freq_train, 
+                               scale_func=scale_func, 
+                               to_permute=to_permute)
+
+        # validation data
+        x_val_scaled, y_val_scaled, _ = \
+            scale_permute_data(x=x_val_filtered_pad, 
+                               y=y_val, 
+                               freq=freq_val, 
+                               scale_func=scale_func, 
+                               to_permute=to_permute)
+
+        ### create look-up dictionaries (and inverse) for an index representation ###
+        char_int, char_int_inv, label_int, label_int_inv = \
+            lookup_dicts_chars_labels(char_set=statistics_dict['char_set'], 
+                                      label_set=statistics_dict['label_set'], 
+                                      max_line_len=statistics_dict['seq_len'])
+
+        return x_train_scaled, y_train_scaled, x_val_scaled, y_val_scaled,\
+            char_int, char_int_inv, label_int, label_int_inv, \
+            statistics_dict
 
 
 def train_validation_split(*, x, y, freq, 
                            label_count_thresh, 
                            valid_ratio, 
                            keep_rare_labels, 
+                           seed=seed(),
                            verbose=True):
     assert isinstance(keep_rare_labels, bool), 'note that keep_rare_labels should be a boolean'
+    random.seed(seed)
     # count each label occurence, filter out those less frequent than label_count_thresh
     label_freq_dict = Counter(y)
     label_freq_dict = {label:count for label,count in label_freq_dict.items() if count >= label_count_thresh}
@@ -126,7 +280,7 @@ def train_validation_split(*, x, y, freq,
     # extract all indices into a single set
     valid_index = [item for sublist in list(label_valid_index_dict.values()) for item in sublist]
     valid_index.sort()
-
+    
     # construct 2 sets of variables, validation and training
     allowed_labels = set(y) if keep_rare_labels else set(label_freq_dict.keys())
     if verbose: print('The are {} observations'.format(len(y)))
@@ -176,11 +330,10 @@ def replicate_dict(x, y, freq, scale_func=unscale):
     #     print(ind, obs, label, freq)
         row_replicate_dict[ind] = (np.array([obs, ] * scale_func(freq)), 
                                    label)
-        
     return row_replicate_dict
 
 
-def scale_permute_data(*, x, y, freq, scale_func, to_permute=True):
+def scale_permute_data(*, x, y, freq, scale_func, to_permute=True, seed=seed()):
     row_replicate_dict = replicate_dict(x, y, freq, scale_func)
     # retreive character sequences (element 0 of tuple)
     x_scaled = np.concatenate([row_replicate_dict[i][0] 
@@ -202,6 +355,8 @@ def scale_permute_data(*, x, y, freq, scale_func, to_permute=True):
     assert cond, 'There we unexpected shapes in either of "x_scaled" or "y_scaled" variables. Please check!'
     
     if to_permute:
+        # set seed
+        random.seed(seed)
         permute = np.random.permutation(n)
         x_scaled = x_scaled[permute]
         y_scaled = y_scaled[permute]
@@ -219,7 +374,25 @@ def dict_addition(input):
         res_dict = {key: res_dict.get(key, 0) + sub_dict.get(key, 0)
                     for key in set(res_dict).union(set(sub_dict.keys()))}
     return res_dict
-    
+
+
+def sliding_window(input_str, width):
+    """
+    Returns a list with a sliding window
+    over the string with given width
+    """
+    assert len(input_str) >= width, 'Cannot slide with width larger than the string!'
+    return [input_str[i:i + width] for i in range(len(input_str) - width + 1)]
+
+
+def join_sliding_window(input, width):
+    """
+    Joins a list of strings (by applying a sliding window)
+    into a list of contiguously joined strings
+    """
+    return [''.join(ngram) for ngram 
+            in sliding_window(input, width)]
+
 
 def save(fname, obj):
     with open(fname, 'w') as f:

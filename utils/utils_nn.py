@@ -1,15 +1,12 @@
 import tensorflow as tf
 import numpy as np
 import os
+from collections import Counter
 
 try:
-    from utils.utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
+    from utils.utils import seed, dict_addition
 except:
-    from utils_baseline_svm import filter_dict_by_val_atleast, char_freq_map
-# try:
-#     from utils.utils import seed
-# except:
-#     from utils import seed
+    from utils import seed, dict_addition
 
 
 
@@ -33,19 +30,15 @@ def pad_list(*, input_list, max_length, pad_symbol):
     return output_list
 
 
-def reset_graph():
-    if 'sess' in globals() and sess:
-        sess.close()
-    tf.reset_default_graph()
-    
-
 def index_to_dense(index, length):
     output_list = [0.0] * length
     output_list[index] = 1.0
     return output_list
 
 
-def text_filter_pad(text, y, char_filter, filter_keys_chars=None, *args, **kwagrs):
+def text_filter_pad(text, y, 
+                    char_filter, filter_keys_chars=None, 
+                    max_line_len=None, *args, **kwagrs):
     """
     Filter characters, leaving only those that appear at least 'char_filter' times in the text.
     Can also except a pre-defined filter if 'filter_keys_chars' is given (default is None.
@@ -53,11 +46,11 @@ def text_filter_pad(text, y, char_filter, filter_keys_chars=None, *args, **kwagr
     Pads each line, so that all lines are the same length
     """
     if filter_keys_chars is None:
-        filter_keys_chars = list(
-            filter_dict_by_val_atleast(
-                input_dict=char_freq_map(input_data=text), 
-                value=char_filter)
-            .keys())    
+        filter_keys_chars = dict_addition([Counter(line)
+                                           for line in text])
+        filter_keys_chars = list({key:value 
+                                  for key,value in filter_keys_chars
+                                  if key in char_filter}.keys())
     else:
         filter_keys_chars = filter_keys_chars
     
@@ -70,7 +63,10 @@ def text_filter_pad(text, y, char_filter, filter_keys_chars=None, *args, **kwagr
         x_char_filtered.append([char if (char in filter_keys_chars) else unknown for char in line])
     
     # pad lines, so that all lines are the same length
-    max_line_len = int(np.max([len(line) for line in text]))
+    if max_line_len is None:
+        max_line_len = int(np.max([len(line) for line in text]))
+    else:
+        max_line_len = max_line_len
     pad = '<pad-char>'
     x_char_filtered_pad = []
     for i, line in enumerate(x_char_filtered):
@@ -160,20 +156,22 @@ def assert_no_stats_change(new_dict, kwargs):
 
 def make_hparam_string(*, learn_rate, 
                           dynamic_learn_rate, 
+                          rnn_type, 
                           bidirection, 
                           one_hot, 
                           keep_prob, 
                           char_embed_dim, 
                           hidden_state_size, 
                           scale_func, 
-                          keep_rare_labels, 
+                          keep_infreq_labels, 
                           l2_wieght_reg, 
                           target_rep,
                           target_rep_weight,
                           **kwargs):
     scale_func_str = 'scale_func={}'.format(scale_func.__name__)
+    rnn_type_str = 'rnn_type={}'.format(rnn_type)
     bidirection_str = 'bidirection={:.1}'.format(str(bidirection))
-    keep_rare_labels_str = 'keep_rare_labels={:.1}'.format(str(keep_rare_labels))
+    keep_infreq_labels = 'keep_infreq_labels={:.1}'.format(str(keep_infreq_labels))
     if dynamic_learn_rate:
         learn_rate_str = 'learn_rate=dynamic'
     else:
@@ -188,8 +186,9 @@ def make_hparam_string(*, learn_rate,
     l2_wieght_reg_str = 'l2_wieght_reg={:.1E}'.format(l2_wieght_reg)
     target_rep_weight_str = 'target_rep_weight={}'.format(target_rep_weight if target_rep else 'NA')
     output_str = ",".join([scale_func_str, 
+                           rnn_type, 
                            bidirection_str, 
-                           keep_rare_labels_str, 
+                           keep_infreq_labels, 
                            learn_rate_str, 
                            keep_prob_str, 
                            char_embed_dim_str, 
