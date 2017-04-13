@@ -9,19 +9,12 @@ except:
     from utils import seed, dict_addition
 
 
-
-# set seeds
-# np.random.seed(seed())
-# random.seed(seed())
-
-
 def remove_dir_content(path):
     if tf.gfile.Exists(path):
         tf.gfile.DeleteRecursively(path)
         print('Log directory was deleted.')
     else:
         print('Log directory was not found.')
-#         print(path)
 
 
 # pad a list to max_length with the pad_symbol
@@ -139,19 +132,19 @@ def index_transorm_xy(x,
     return X, Y, Y_dense
 
 
-def assert_no_stats_change(new_dict, kwargs):
-    # check that there are no "new" statistics popping out
-    # label_set and n_class should not be expected to be the same
-    # (and are indeed not, but it is a subset of the original label set, by definition)
-    diff_stat = []
-    for key in new_dict:
-        if not new_dict[key] == kwargs[key]:
-            diff_stat.append(key)
-    #         print('Statistics differ on {}'.format(key))
-    assert set(diff_stat) == {'label_set', 'n_class'}, \
-        'Found unexpected values between original x and x_suggest!\n' + \
-        'Differences found here: {}\n'.format(diff_stat) + \
-        '(label_set and n_class should not be expected to be the same.)'
+#~ def assert_no_stats_change(new_dict, kwargs):
+    #~ # check that there are no "new" statistics popping out
+    #~ # label_set and n_class should not be expected to be the same
+    #~ # (and are indeed not, but it is a subset of the original label set, by definition)
+    #~ diff_stat = []
+    #~ for key in new_dict:
+        #~ if not new_dict[key] == kwargs[key]:
+            #~ diff_stat.append(key)
+    #~ #         print('Statistics differ on {}'.format(key))
+    #~ assert set(diff_stat) == {'label_set', 'n_class'}, \
+        #~ 'Found unexpected values between original x and x_suggest!\n' + \
+        #~ 'Differences found here: {}\n'.format(diff_stat) + \
+        #~ '(label_set and n_class should not be expected to be the same.)'
 
 
 def make_hparam_string(*, learn_rate, 
