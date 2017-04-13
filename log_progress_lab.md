@@ -430,7 +430,7 @@ Directions for later investigation:
     - Introduce noise sources, such as noisy activation functions.  
     - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
         e.g. plot accuracy vs how many characters the classifier "sees".  
-    - Explor ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+    - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
 Next meeting on Wed (19/4) 10:00.  
 Todo:  
     - Fix saving step to be the last step.  
@@ -441,7 +441,7 @@ Todo:
         - Introduce noise sources, such as noisy activation functions.  
         - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
             e.g. plot accuracy vs how many characters the classifier "sees".  
-        - Explor ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+        - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
     - Track Reciprocal Rank.  
 
 - **12/4:** 
@@ -458,6 +458,29 @@ Todo:
         - Introduce noise sources, such as noisy activation functions.  
         - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
             e.g. plot accuracy vs how many characters the classifier "sees".  
-        - Explor ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+        - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
     - Track Reciprocal Rank.  
+
+- **13/4:** 
+Applied logistic regression in the linear classifier file. Got similar results (identical to s certain SVM setup).  
+Mean Reciprocal Rank works in TF.  
+Launched 4 experiment with variations in:  
+    - increased hidden_state_size;  
+    - lower learning rate;  
+    - higher regularization constants (l2 norm and target replication);  
+    - X [GRU, LSTM] X [feed-forward, bidirectional-feed].  
+Todo:  
+    - Look into noisy activation functions:  
+        - [Noisy Activation Functions](https://arxiv.org/abs/1603.00391)  
+        - [Rectified Linear Units Improve Restricted Boltzmann Machines](http://machinelearning.wustl.edu/mlpapers/paper_files/icml2010_NairH10.pdf)  
+    - Read ref from Crasten 
+        [Identification and Correction of Misspelled Drugs’ Names in Electronic Medical Records](https://www.researchgate.net/publication/295857707_Identification_and_Correction_of_Misspelled_Drugs%27_Names_in_Electronic_Medical_Records_EMR)  
+    - Look into variation between training and test data-sets.  
+    - Think of (and write procedure) of introducing noise into the input 
+    (cutting the input short or replacing with <UNKNOWN> symbol)  
+    - Possible other directions to explore:  
+        - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
+            e.g. plot accuracy vs how many characters the classifier "sees".  
+        - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+
 
