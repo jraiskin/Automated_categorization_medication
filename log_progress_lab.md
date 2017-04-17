@@ -432,7 +432,8 @@ Directions for later investigation:
         e.g. plot accuracy vs how many characters the classifier "sees".  
     - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
 Next meeting on Wed (19/4) 10:00.  
-Todo:  
+
+    Todo:  
     - Fix saving step to be the last step.  
     - Check SVM data pre-processing stage, look into Logistic regression as well ('logistic' kernel).  
     - Look at experiment results, what hyper parameters affects the model the most.  
@@ -469,13 +470,38 @@ Launched 4 experiment with variations in:
     - lower learning rate;  
     - higher regularization constants (l2 norm and target replication);  
     - X [GRU, LSTM] X [feed-forward, bidirectional-feed].  
-Todo:  
+
+    Todo:  
     - Look into noisy activation functions:  
         - [Noisy Activation Functions](https://arxiv.org/abs/1603.00391)  
         - [Rectified Linear Units Improve Restricted Boltzmann Machines](http://machinelearning.wustl.edu/mlpapers/paper_files/icml2010_NairH10.pdf)  
     - Read ref from Crasten 
         [Identification and Correction of Misspelled Drugs’ Names in Electronic Medical Records](https://www.researchgate.net/publication/295857707_Identification_and_Correction_of_Misspelled_Drugs%27_Names_in_Electronic_Medical_Records_EMR)  
     - Look into variation between training and test data-sets.  
+    - Think of (and write procedure) of introducing noise into the input 
+    (cutting the input short or replacing with <UNKNOWN> symbol)  
+    - Possible other directions to explore:  
+        - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
+            e.g. plot accuracy vs how many characters the classifier "sees".  
+        - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+
+
+- **17/4:** 
+Analyzed experiments' results. Analysis and notes are in [this log file](./log_experiments.md).  
+Looked into variation between training and test data-sets. Some observations are similar, by the nature of the data 
+(seems like there's no bug in the split procedure).  
+Read papers on noisy activation functions:  
+    - [Noisy Activation Functions](https://arxiv.org/abs/1603.00391)  
+    - [Rectified Linear Units Improve Restricted Boltzmann Machines](http://machinelearning.wustl.edu/mlpapers/paper_files/icml2010_NairH10.pdf)  
+    - [Estimating or Propagating Gradients Through Stochastic Neurons](https://arxiv.org/abs/1305.2982)  
+
+    Working on a custom activation function implementation in TF, based on [this stackoverflow post](http://stackoverflow.com/questions/39921607/tensorflow-how-to-make-a-custom-activation-function-with-only-python).  
+Todo:  
+    - Complete custom activation function:  
+        - use a non-linear activation or use a first-order Taylor expansion about zero and clipping?  
+        - what noise to apply, what's the variance, should it be a learned parameter?  
+        - when to add noise? conditional on a neuron being saturated?  
+        - add noise before / after applying the activation function  
     - Think of (and write procedure) of introducing noise into the input 
     (cutting the input short or replacing with <UNKNOWN> symbol)  
     - Possible other directions to explore:  
