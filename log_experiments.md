@@ -37,10 +37,10 @@ Experiemnt run on 4 different batches, (LSTM, GRU) X (feed-forward, bidirectiona
     - SAME Target replication  
 
 - Bidirectional LSTM (best test accuracy ~90.5%)  
-- SAME learning rate  
-- SAME one hot (one hot even better here)  
-- hidden_state_size: similar, 128 could be slightly better but not clear  
-- L2 wieghts regularization: 10^-3 slightly out performs  
-- SAME Target replication  
+    - SAME learning rate  
+    - SAME one hot (one hot even better here)  
+    - hidden_state_size: similar, 128 could be slightly better but not clear  
+    - L2 wieghts regularization: 10^-3 slightly out performs  
+    - SAME Target replication  
 
 
