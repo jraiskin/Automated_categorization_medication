@@ -509,4 +509,23 @@ Todo:
             e.g. plot accuracy vs how many characters the classifier "sees".  
         - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
 
+- **18/4:** 
+Tried (with limited success) to implement a custom activation function. 
+Function and gradient are registering on simple examples, however not quite working in an RNN context.  
+Realized that noisy activation functions could be implemented using built in TF functions.  
+Refer to the [paper's code](https://github.com/caglar/noisy_units/blob/master/codes/tf/nunits.py). 
+I suspect some mistakes in the implementation there ("delta" should be zero in unsaturated regime).  
+Todo (unchanged):  
+    - Complete custom activation function:  
+        - use a non-linear activation or use a first-order Taylor expansion about zero and clipping?  
+        - what noise to apply, what's the variance, should it be a learned parameter?  
+        - when to add noise? conditional on a neuron being saturated?  
+        - add noise before / after applying the activation function  
+    - Think of (and write procedure) of introducing noise into the input 
+    (cutting the input short or replacing with <UNKNOWN> symbol)  
+    - Possible other directions to explore:  
+        - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
+            e.g. plot accuracy vs how many characters the classifier "sees".  
+        - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
+
 
