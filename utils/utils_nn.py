@@ -151,6 +151,8 @@ def make_hparam_string(*, learn_rate,
                           dynamic_learn_rate, 
                           rnn_type, 
                           bidirection, 
+                          activation_function, 
+                          learn_p_delta_scale, 
                           one_hot, 
                           keep_prob, 
                           char_embed_dim, 
@@ -161,9 +163,22 @@ def make_hparam_string(*, learn_rate,
                           target_rep,
                           target_rep_weight,
                           **kwargs):
-    scale_func_str = 'scale_func={}'.format(scale_func.__name__)
+    if scale_func.__name__ == 'unscale':
+        scale_func_str = None
+    else:
+        scale_func_str = 'scale_func={}'.format(scale_func.__name__)
     rnn_type_str = 'rnn_type={}'.format(rnn_type)
-    bidirection_str = 'bidirection={:.1}'.format(str(bidirection))
+    bidirection_str = 'bidir={:.1}'.format(str(bidirection))
+    # activation_function_str
+    if hasattr(activation_function, '__name__'):
+        activation_function_str = activation_function.__name__
+    else:
+        activation_function_str = activation_function
+    # learn_p_delta_scale_str
+    if activation_function == 'noisy_tanh':
+        learn_p_delta_scale_str = 'learn_p={:.1}'.format(str(learn_p_delta_scale))
+    else:
+        learn_p_delta_scale_str = None
     keep_infreq_labels = 'keep_infreq_labels={:.1}'.format(str(keep_infreq_labels))
     if dynamic_learn_rate:
         learn_rate_str = 'learn_rate=dynamic'
@@ -178,16 +193,20 @@ def make_hparam_string(*, learn_rate,
     hidden_state_size_str = 'hidden_state_size={}'.format(hidden_state_size)
     l2_wieght_reg_str = 'l2_wieght_reg={:.1E}'.format(l2_wieght_reg)
     target_rep_weight_str = 'target_rep_weight={}'.format(target_rep_weight if target_rep else 'NA')
-    output_str = ",".join([scale_func_str, 
-                           rnn_type, 
-                           bidirection_str, 
-                           keep_infreq_labels, 
-                           learn_rate_str, 
-                           keep_prob_str, 
-                           char_embed_dim_str, 
-                           hidden_state_size_str, 
-                           l2_wieght_reg_str, 
-                           target_rep_weight_str])
+    strings_list = [scale_func_str, 
+                    rnn_type, 
+                    bidirection_str, 
+                    activation_function_str, 
+                    learn_p_delta_scale_str, 
+                    keep_infreq_labels, 
+                    learn_rate_str, 
+                    keep_prob_str, 
+                    char_embed_dim_str, 
+                    hidden_state_size_str, 
+                    l2_wieght_reg_str, 
+                    target_rep_weight_str]
+    output_str = ",".join([string for string in strings_list 
+                           if string is not None])
     return '{}/'.format(output_str)
 
 
@@ -202,4 +221,12 @@ def write_embeddings_metadata(log_dir, dictionary, file_name='metadata.tsv'):
     file.close()
     
     return embed_vis_path
-    
+
+
+def hard_tanh(x):
+    """
+    First-order Taylor expansion around zero of the tanh function gives the identity.
+    Hard saturating tanh function, with clipping applied
+    """
+    return tf.minimum(tf.maximum(x, -1.0), 1.0)
+
