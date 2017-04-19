@@ -546,12 +546,9 @@ Directions for later investigation (context in which the RNN outperforms linear 
         Might look into MeSH / UMLS (look for substance / drug semantic type).  
         
     Next meeting on Wed (26/4) 10:00.  
-    Todo (unchanged):  
-    - Complete custom activation function:  
-        - use a non-linear activation or use a first-order Taylor expansion about zero and clipping?  
-        - what noise to apply, what's the variance, should it be a learned parameter?  
-        - when to add noise? conditional on a neuron being saturated?  
-        - add noise before / after applying the activation function  
+    Noisy tanh activation function is now working!  
+    Can choose whether to learn "p" hyper-parameter (involved with noise scaling when unit is saturated).  
+    Todo:  
     - Think of (and write procedure) of introducing noise into the input 
     (cutting the input short or replacing with <UNKNOWN> symbol)  
     - Possible other directions to explore:  
