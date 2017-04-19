@@ -463,7 +463,7 @@ Todo:
     - Track Reciprocal Rank.  
 
 - **13/4:** 
-Applied logistic regression in the linear classifier file. Got similar results (identical to s certain SVM setup).  
+Applied logistic regression in the linear classifier file. Got similar results (identical to a certain SVM setup).  
 Mean Reciprocal Rank works in TF.  
 Launched 4 experiment with variations in:  
     - increased hidden_state_size;  
@@ -528,4 +528,34 @@ Todo (unchanged):
             e.g. plot accuracy vs how many characters the classifier "sees".  
         - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
 
+- **19/4:** 
+Meeting with Carsten:  
+Regarding [Identification and Correction of Misspelled Drugs’ Names in Electronic Medical Records](https://www.researchgate.net/publication/295857707_Identification_and_Correction_of_Misspelled_Drugs%27_Names_in_Electronic_Medical_Records_EMR),  
+read again, see if we can leverage a part of the proposed pipeline in order to extract or correct drug names.  
+Keep working on noisy activation functions.  
+We are not experiencing over-fitting in the sense that training and test data metrics start to diverge.  
+This might be a product of simply under-fitting due to too small data-set.  
+It would be interesting to check whether over-fitting occurs, e.g. with a high hidden state dimensionality.  
+Directions for later investigation (context in which the RNN outperforms linear classifiers):  
+    - Cutting the text sequence short, plot evaluation metrics against the number of visible characters.  
+    - Injecting UNKNOWN symbols at random, plot evaluation metrics against amount of randomn curroption.  
+
+    Thing to keep in mind (currently not a high priority):  
+    - Ensemble methods.  
+    - Leverage external sources of information. We dont have context (like patient file).  
+        Might look into MeSH / UMLS (look for substance / drug semantic type).  
+        
+    Next meeting on Wed (26/4) 10:00.  
+    Todo (unchanged):  
+    - Complete custom activation function:  
+        - use a non-linear activation or use a first-order Taylor expansion about zero and clipping?  
+        - what noise to apply, what's the variance, should it be a learned parameter?  
+        - when to add noise? conditional on a neuron being saturated?  
+        - add noise before / after applying the activation function  
+    - Think of (and write procedure) of introducing noise into the input 
+    (cutting the input short or replacing with <UNKNOWN> symbol)  
+    - Possible other directions to explore:  
+        - Context where LSTM outperforms, such as shorter key strokes, random unknown characters. 
+            e.g. plot accuracy vs how many characters the classifier "sees".  
+        - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
 
