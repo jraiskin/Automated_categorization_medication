@@ -153,6 +153,8 @@ def make_hparam_string(*, learn_rate,
                           bidirection, 
                           activation_function, 
                           learn_p_delta_scale, 
+                          noise_act_alpha, 
+                          noise_act_half_normal, 
                           one_hot, 
                           keep_prob, 
                           char_embed_dim, 
@@ -177,8 +179,12 @@ def make_hparam_string(*, learn_rate,
     # learn_p_delta_scale_str
     if activation_function == 'noisy_tanh':
         learn_p_delta_scale_str = 'learn_p={:.1}'.format(str(learn_p_delta_scale))
+        noise_act_alpha_str = 'noise_alpha={}'.format(str(noise_act_alpha))
+        noise_act_half_normal_str = 'noise_half_normal={:.1}'.format(str(noise_act_half_normal))
     else:
         learn_p_delta_scale_str = None
+        noise_act_alpha_str = None
+        noise_act_half_normal_str = None
     keep_infreq_labels = 'keep_infreq_labels={:.1}'.format(str(keep_infreq_labels))
     if dynamic_learn_rate:
         learn_rate_str = 'learn_rate=dynamic'
@@ -198,6 +204,8 @@ def make_hparam_string(*, learn_rate,
                     bidirection_str, 
                     activation_function_str, 
                     learn_p_delta_scale_str, 
+                    noise_act_alpha_str, 
+                    noise_act_half_normal_str, 
                     keep_infreq_labels, 
                     learn_rate_str, 
                     keep_prob_str, 
