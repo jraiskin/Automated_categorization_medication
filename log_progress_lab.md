@@ -556,3 +556,23 @@ Directions for later investigation (context in which the RNN outperforms linear 
             e.g. plot accuracy vs how many characters the classifier "sees".  
         - Explore ensemble methods, e.g. a joint prediction based on weighted LSTM and linear classifiers.  
 
+- **20/4:** 
+Added flexibility in noisy tanh activation function: "alpha" and "half-normal" hyper parameters.  
+Added the ability to feed in to python args from command line (to specify log dir etc.).  
+Launched 4 experiments to explore noisy tanh potential.  
+Todo:  
+    - extend LSTM (rename to RNN?) class by adding methods:  
+        - save weights; 
+        - load weights; 
+        - load and predict from feed dict.
+    - read again [Identification and Correction of Misspelled Drugs’ Names in Electronic Medical Records](https://www.researchgate.net/publication/295857707_Identification_and_Correction_of_Misspelled_Drugs%27_Names_in_Electronic_Medical_Records_EMR), 
+    keep on the look out for methodology that could be implemented.  
+    - transform input data (for both neural and linear forms):  
+        - cut sequence after k characters;  
+        - inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
+        
+
