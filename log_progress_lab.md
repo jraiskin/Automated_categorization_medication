@@ -7,9 +7,12 @@ ethmathSFTP
 **Guides / Useful Links:**  
 https://wiki.math.ethz.ch/SfSInfo/RemoteAccessIntern  
 https://blogs.ethz.ch/isgdmath/tensorflow/  
-**Long-Term Goals / Guidelines:**  
+**Long-Term Goals / Guidelines / Notes:**  
 Explain why we did not use Mimic data for training (GSN codes, text too clean w/o variation).  
 Potentially validate LSTM architecture on Mimic data. Perform prediction on text (+timestamp), the class would be the perscription given shortly after (given timestamp). Look for literature if something similar has been done before.  
+Explain why we did not use batch normalization.  
+Mention that dynamic learning rate with GD optimizer was tested and not chosen.  
+Mention that character embedding was tested and not chosen (one hot representation was superior).  
 
 - **1/3:**
 Fixed a lot of small latex and bibtex related bugs. 
