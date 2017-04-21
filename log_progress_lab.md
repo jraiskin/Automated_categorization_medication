@@ -575,4 +575,16 @@ Todo:
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
         
-
+- **21/4:** 
+Modified the RNN class (renamed) to load weights from checkpoint, load and update feed dict and evaluate ("predict").  
+Additional minor changes of the RNN class, when reading inputs and at evaluation step.  
+Todo:  
+    - read again [Identification and Correction of Misspelled Drugs’ Names in Electronic Medical Records](https://www.researchgate.net/publication/295857707_Identification_and_Correction_of_Misspelled_Drugs%27_Names_in_Electronic_Medical_Records_EMR), 
+    keep on the look out for methodology that could be implemented.  
+    - transform input data (for both neural and linear forms):  
+        - cut sequence after k characters;  
+        - inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
