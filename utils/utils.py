@@ -113,6 +113,7 @@ def data_load_preprocess(*args,
                          to_permute,
                          mk_chars,
                          char_filter, 
+                         linear_counters=True, 
                          **kwargs):
     
     try:
@@ -201,8 +202,9 @@ def data_load_preprocess(*args,
                             for ngram in join_sliding_window(obs, 
                                 ngram_width)]
                        for obs in x_val]
-        x_train = [Counter(obs) for obs in x_train]
-        x_val = [Counter(obs) for obs in x_val]
+        if linear_counters:
+            x_train = [Counter(obs) for obs in x_train]
+            x_val = [Counter(obs) for obs in x_val]
         return x_train, x_val, y_train, y_val
 
     ### a fork for nueral model ###
@@ -392,6 +394,32 @@ def join_sliding_window(input, width):
     """
     return [''.join(ngram) for ngram 
             in sliding_window(input, width)]
+
+
+def keep_first_k_chars(*, input, k, 
+                       model, 
+                       counters=True, 
+                       char_int=None, 
+                       pad='<pad-char>'):
+    """
+    Take the input and returns a list (or Counters) of the first k elements.
+    model should be either 'linear' or 'neural'.
+    Use counters to specify if the output should be a list of Counter-s.
+    char_int is a dict pointing from characters to their integer encoding.
+    
+    """
+    assert model in ['linear', 'neural'],\
+        'Model has to be identified as either linear or neural'
+    
+    if model == 'linear':
+        func = Counter if counters else lambda x: x
+        return [func(line[:k]) for line in input]
+    
+    if model == 'neural':
+        pad_enc = char_int[pad]
+        return np.asarray([[char_enc if i < k else pad_enc 
+                            for i, char_enc in enumerate(line)] 
+                           for line in input])
 
 
 def save(fname, obj):
