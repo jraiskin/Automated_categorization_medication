@@ -591,3 +591,19 @@ Todo:
         - Ensemble methods.  
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
+- **24/4 (also 22/4):** 
+Implemented a function to cut (or pad) the input sequence.  
+Updated the exploratory code, updated data init procedure, added visualizations regarding characters and labels distributions.  
+Prepared to update meeting with Marloes.  
+Todo:  
+    - read again [Identification and Correction of Misspelled Drugs’ Names in Electronic Medical Records](https://www.researchgate.net/publication/295857707_Identification_and_Correction_of_Misspelled_Drugs%27_Names_in_Electronic_Medical_Records_EMR), 
+    keep on the look out for methodology that could be implemented.  
+    - transform input data (for both neural and linear forms):  
+        - inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
+
