@@ -114,6 +114,7 @@ def data_load_preprocess(*args,
                          mk_chars,
                          char_filter, 
                          linear_counters=True, 
+                         output_intermediate=False,
                          **kwargs):
     
     try:
@@ -167,7 +168,11 @@ def data_load_preprocess(*args,
                        for obs in x_unk]
         allowed_ngrams = list({ngram for obs in ngrams_list for ngram in obs})
         allowed_ngrams.sort()  # len(.) 17495
-
+    
+    # output for data inspection
+    if output_intermediate:
+        return x_unk, x_suggest_unk, y, y_suggest, freq, freq_suggest
+    
     ### merging ###
     x_merge, y_merge, freq_merge = \
         x_unk + x_suggest_unk, \
