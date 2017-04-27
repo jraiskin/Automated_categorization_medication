@@ -606,4 +606,19 @@ Todo:
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
-
+- **27/4:** 
+Sent Patrick a message, regarding the label suggestion procedure, based on Jaccard similarity.  
+Changed the procedure to fit the updated code, saving intermediary result dictionaries for a closer inspection later.  
+Currently rerunning the job on Euler.  
+Migrated the RNN class to file.  
+Todo:  
+    - Log experiments. Come up with a way to get numerical information from summaries to better analyze the data, 
+    such as keeping a dict of {model_str:(step, accuracy, mean reciprocal rank)} for the max mean reciprocal rank.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Could we generate label suggestions, using the SVM model?
+    - Think / try running the classifiers without filtering characters.  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
