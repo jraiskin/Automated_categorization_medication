@@ -161,7 +161,7 @@ def make_hparam_string(*, learn_rate,
                           hidden_state_size, 
                           scale_func, 
                           keep_infreq_labels, 
-                          l2_wieght_reg, 
+                          l2_weight_reg, 
                           target_rep,
                           target_rep_weight,
                           **kwargs):
@@ -197,7 +197,7 @@ def make_hparam_string(*, learn_rate,
     else:
         char_embed_dim_str = 'char_embed_dim={}'.format(char_embed_dim)
     hidden_state_size_str = 'hidden_state_size={}'.format(hidden_state_size)
-    l2_wieght_reg_str = 'l2_wieght_reg={:.1E}'.format(l2_wieght_reg)
+    l2_weight_reg_str = 'l2_weight_reg={:.1E}'.format(l2_weight_reg)
     target_rep_weight_str = 'target_rep_weight={}'.format(target_rep_weight if target_rep else 'NA')
     strings_list = [scale_func_str, 
                     rnn_type, 
@@ -211,7 +211,7 @@ def make_hparam_string(*, learn_rate,
                     keep_prob_str, 
                     char_embed_dim_str, 
                     hidden_state_size_str, 
-                    l2_wieght_reg_str, 
+                    l2_weight_reg_str, 
                     target_rep_weight_str]
     output_str = ",".join([string for string in strings_list 
                            if string is not None])
