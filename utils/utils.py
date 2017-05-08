@@ -1,6 +1,6 @@
 from getpass import getuser
 
-#~ import pickle
+import pickle
 #~ import re
 #~ import inspect
 import pandas as pd
@@ -428,12 +428,12 @@ def keep_first_k_chars(*, input, k,
 
 
 def save(fname, obj):
-    with open(fname, 'w') as f:
+    with open(fname, 'wb') as f:
         pickle.dump(obj, f)
 
 
 def load(fname):
-    with open(fname, 'r') as f:
+    with open(fname, 'rb') as f:
         return pickle.load(f)
 
 
