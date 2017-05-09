@@ -616,9 +616,27 @@ Todo:
     such as keeping a dict of {model_str:(step, accuracy, mean reciprocal rank)} for the max mean reciprocal rank.  
     - Transform input data (for both neural and linear forms):  
         - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
-    - Could we generate label suggestions, using the SVM model?
+    - Could we generate label suggestions, using the SVM model?  
     - Think / try running the classifiers without filtering characters.  
     - Thing to keep in mind (currently not a high priority):  
         - Ensemble methods.  
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
+- **9/5:** 
+No message back from Patrick (was away from the office).  
+Data from Tensorboard log directories is loaded into python.  
+Pandas Dataframe of evaluation metrics was created, with some conditional formatting.  
+Todo:  
+    - Read in the dictionary returned by the  label suggestion procedure ran on Euler. 
+        Look if there are contradicting label suggestions.  
+    - Could we generate label suggestions, using the SVM model?
+    - Think / try running the classifiers without filtering characters.  
+    - Run SVM model again *with* ngrams.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
