@@ -640,3 +640,20 @@ Todo:
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
+- **10/5:** 
+Analyzed label suggestion results, at thresholds betweeb 0.5 to 1.0.  
+Looked at mean similarities, how many label suggestions there are per text, 
+count of unanimous suggestion (i.e. there's only 1 label suggested) etc.  
+Analysis results are plotted for easy inspection. 
+Also, results for a fixed threshold can be written to file (sorted by similarity).  
+Still waiting for Patrick's response before sending.  
+Todo (not much has changed):  
+    - Run SVM model again *with* ngrams.  
+    - Could we generate label suggestions, using the SVM model?
+    - Think / try running the classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
