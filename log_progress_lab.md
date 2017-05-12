@@ -657,3 +657,37 @@ Todo (not much has changed):
         - Ensemble methods.  
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
+- **12/5:** 
+Investigated generating suggestions from a SVM classifier (that was the highest performer on the labeled data-set).  
+This method produced only 936 suggestions with a confidence of at least 0.5 
+(some of which would probably needed to be sifted out).  
+Since this method appears to produce inferior results, it would not be investigated any further.  
+Looked into running SVM classifier with ngrams and without filterring.  
+Adding ngrams marginally increases performance (a slight increase in accuracy, but no change in MRR).  
+Some rudimentary filtering is required, since the algorithm needs to know how to cope with new tokens 
+(e.g. in the validation set).  
+Trained multiple SVM configurations with filtering set to 2 (i.e. replace with unknown if only seen once).  
+This was called "near no filtering".  
+Near no filtering slightly increases performance, both in MRR and in accuracy.  
+Started working on including ngrams to the keep_first_k_chars function. 
+Works on small data-set but buggy on the entire data-set.  
+Todo (not much has changed):  
+    - Finish fixing keep_first_k_chars. 
+        Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes.  
+    - Run RNN classifiers without filtering characters.  
+    - Look into the following papers (haven't read yet so not sure if relevant):  
+        - http://dl.acm.org/citation.cfm?id=1143891  
+        - http://www.mitpressjournals.org/doi/abs/10.1162/neco.1995.7.1.108  
+        - http://ieeexplore.ieee.org/abstract/document/548170/?reload=true  
+        - http://ieeexplore.ieee.org/abstract/document/4470224/  
+        - http://papers.nips.cc/paper/5073-learning-with-noisy-labels  
+        - http://www.mitpressjournals.org/doi/abs/10.1162/neco.1996.8.3.643  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
+
