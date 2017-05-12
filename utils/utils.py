@@ -210,7 +210,7 @@ def data_load_preprocess(*args,
         if linear_counters:
             x_train = [Counter(obs) for obs in x_train]
             x_val = [Counter(obs) for obs in x_val]
-        return x_train, x_val, y_train, y_val
+        return x_train, x_val, y_train, y_val, allowed_ngrams
 
     ### a fork for nueral model ###
     # returns an array of indecies and their corresponding dicts
@@ -405,7 +405,11 @@ def keep_first_k_chars(*, input, k,
                        model, 
                        counters=True, 
                        char_int=None, 
-                       pad='<pad-char>'):
+                       pad='<pad-char>', 
+                       ngram_width=None, 
+                       mk_ngrams=None, 
+                       allowed_ngrams=None, 
+                       unknown_ngram='<unk-ngram>'):
     """
     Take the input and returns a list (or Counters) of the first k elements.
     model should be either 'linear' or 'neural'.
@@ -413,12 +417,28 @@ def keep_first_k_chars(*, input, k,
     char_int is a dict pointing from characters to their integer encoding.
     
     """
-    assert model in ['linear', 'neural'],\
+    assert model in ['linear', 'neural'], \
         'Model has to be identified as either linear or neural'
     
     if model == 'linear':
+        need_to_make_ngrams = mk_ngrams is True and \
+            k >= ngram_width
+        # return self or Counters
         func = Counter if counters else lambda x: x
-        return [func(line[:k]) for line in input]
+        # return a sliding window, filtered with allowed_ngrams
+        filter_join_sliding_window = lambda x, allowed_ngrams: \
+            [ngram if ngram in allowed_ngrams else unknown_ngram
+             for ngram in join_sliding_window(x[:k], ngram_width)]
+        # return a slice or a slice and ngrams
+        line_rep = lambda x: x[:k] if not need_to_make_ngrams \
+            else x[:k] + filter_join_sliding_window(x, allowed_ngrams)
+        
+        if need_to_make_ngrams:
+            assert allowed_ngrams is not None, \
+                'If ngrams should be made,' + \
+                'please provide the allowed ngrams set.'
+        return [func(line_rep(line))
+                for line in input]
     
     if model == 'neural':
         pad_enc = char_int[pad]
