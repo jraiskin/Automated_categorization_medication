@@ -415,6 +415,10 @@ def keep_first_k_chars(*, input, k,
     model should be either 'linear' or 'neural'.
     Use counters to specify if the output should be a list of Counter-s.
     char_int is a dict pointing from characters to their integer encoding.
+    If ngrams are given, cutting the sequence short 
+    doesn't distinguish between ngrams and characters.
+    That's why ngrams needs to be discarded and generated again
+    from the shorter sequence.
     
     """
     assert model in ['linear', 'neural'], \
@@ -428,10 +432,13 @@ def keep_first_k_chars(*, input, k,
         # return a sliding window, filtered with allowed_ngrams
         filter_join_sliding_window = lambda x, allowed_ngrams: \
             [ngram if ngram in allowed_ngrams else unknown_ngram
-             for ngram in join_sliding_window(x[:k], ngram_width)]
+             for ngram in join_sliding_window(x, ngram_width)]
+        # keep only characters
+        keep_chars = lambda x: [elem for elem in x if len(elem)==1]
         # return a slice or a slice and ngrams
-        line_rep = lambda x: x[:k] if not need_to_make_ngrams \
-            else x[:k] + filter_join_sliding_window(x, allowed_ngrams)
+        line_rep = lambda x: keep_chars(x)[:k] if not need_to_make_ngrams \
+            else keep_chars(x)[:k] + \
+            filter_join_sliding_window(keep_chars(x)[:k], allowed_ngrams)
         
         if need_to_make_ngrams:
             assert allowed_ngrams is not None, \
