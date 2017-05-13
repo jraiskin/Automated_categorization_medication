@@ -690,4 +690,23 @@ Todo (not much has changed):
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
+- **13/5:** 
+Fixed keep_first_k_chars implementation for linear model with ngrams 
+(keep only characters, then cut and generate new ngrams).  
+Found a bug in the SVM accuracy calculation. Will re-run all SVM hyper-parameters summary files.  
+Started working on a script to evaluate the SVM and RNN classifiers on changing input length.  
+RNN models needs to be run again and save weights (checkpoint).  
+It makes sense to do this again after settling the suggestion procedure (label suggestions from unlabeled data).  
+Todo:  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Settle the label suggestion procedure (discuss with Carsten).  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
 
