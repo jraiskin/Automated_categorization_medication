@@ -709,4 +709,26 @@ Todo:
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
-
+- **17/5:** 
+Worked on scraping data from [compendium.ch](https://compendium.ch/home/de).  
+It seems to work, albeit quite slow, since the site works with ajax so I'm forced to use Selenium.  
+I'll launch the scraping procedure tomorrow.  
+Todo:  
+    - Run scraping procedure on compendium.  
+    - Look into scraping from wikipedia.de as well. 
+        Start with categories, such as https://de.wikipedia.org/wiki/Kategorie:ATC-Code, 
+        https://de.wikipedia.org/wiki/Kategorie:ATC-N02.  
+        Example page for an active agent would be https://de.wikipedia.org/wiki/Metamizol.  
+    - After getting the scraped data, run the Jaccard sim procedure again, with the enhanced data 
+        (using both prescriptions and active agents).  
+    - Send Patrick a CSV file to assess the procedure's accuracy at different similarity thresholds. 
+        Sample more at lower similarity thresholds.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
