@@ -742,7 +742,7 @@ Started working on Wikipedia scraping script.
 Todo:  
     - Continue scraping procedure on compendium (step 6k).  
     - Work on scraping from wikipedia.de.  
- as well    - After getting the scraped data, run the Jaccard sim procedure again, with the enhanced data 
+    - After getting the scraped data, run the Jaccard sim procedure again, with the enhanced data 
         (using both prescriptions and active agents).  
     - Send Patrick a CSV file to assess the procedure's accuracy at different similarity thresholds. 
         Sample more at lower similarity thresholds.  
@@ -756,4 +756,28 @@ Todo:
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
+- **19/5:** 
+Still working on scraping from Compendium.de. Fixed some bugs (special cases, waiting times etc.).  
+Scraping procedure from Wikipedia ATC-code related articles is ready (,however, rather slow).  
+Downloaded the data-base from Drugbank (xml). The file is quite big (>500mb) and needs thorough exploration.  
+Look into similarity measures between strings: 
+[Gestalt Pattern Matching](http://stackoverflow.com/questions/17388213/find-the-similarity-percent-between-two-strings).  
+Todo:  
+    - Continue scraping procedure on compendium (step 6.3k-6.6K).  
+    - Scrape from wikipedia.de.  
+    - Look into Drugbank data-set.  
+    - Look into string / sequence similarity measures.  
+    - After getting the scraped data, run the Jaccard sim procedure again, with the enhanced data 
+        (using both prescriptions and active agents).  
+    - Send Patrick a CSV file to assess the procedure's accuracy at different similarity thresholds. 
+        Sample more at lower similarity thresholds.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
