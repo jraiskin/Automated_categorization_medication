@@ -57,7 +57,10 @@ driver.get(url)
 
 # In[ ]:
 
+# find all elements with an id attr
 # driver.find_elements_by_xpath('//*[@id]')
+# find xpath of element based on its text
+# driver.find_element_by_xpath("//*[text()='{}']".format(TEXT_HERE))
 drop_down_menus_xpath = ['//*[@id="ctl00_MainContent_ddlGalForm"]',
  '//*[@id="ctl00_MainContent_ddlGeoForm"]',
  '//*[@id="ctl00_MainContent_ddlColor"]',
@@ -104,23 +107,32 @@ def log_results(d=driver,
     """
     
     res_list = []
+    
+    product_list_left = d.find_element_by_id(product_list_left_id)
+    product_links = product_list_left.find_elements_by_tag_name('a')
 
-    for num in range(top_left_panel_digits()[1]):
+    for num in range(len(product_links)):
         # get product links (updates after each click / fetch)
+        # so needs to run again (NOT REDUNDANT)
         product_list_left = d.find_element_by_id(product_list_left_id)
         product_links = product_list_left.find_elements_by_tag_name('a')
-        if 'num_of_products' not in globals():
+        if 'num_of_products' not in globals():  # check only once
             num_of_products =  len(product_links)
-            assert num_of_products == top_left_panel_digits()[1]
+            # check that the number of links matches the number of products listed,
+            # except for products without a link (class 'dlProductRowDisable')
+            assert top_left_panel_digits()[1] - num_of_products                 == len(product_list_left.find_elements_by_class_name('dlProductRowDisable'))
         
         product_links[num].click()
         
-        sleep(2.5)
+        sleep(4)
         
         res_list.append(
             OrderedDict(
                 [(item_id, driver.find_element_by_id(item_id).text) 
                  for item_id in product_details_ids]))
+        
+        sleep(0.5)
+        
     return res_list
 
 
@@ -182,16 +194,16 @@ driver.implicitly_wait(2)  # seconds
 data_collector_list = []
 
 if start_itr is None:
-    start_itr = 392
+    start_itr = 8148
 if stop_itr is None:
-    stop_itr = 500
+    stop_itr = start_itr+1
 
 iterable = islice(menu_combinations, 
                   start_itr, 
                   stop_itr)
 for itr in iterable:
     click(reset_id)    
-    sleep(0.5)
+    sleep(1)
     
     step, cart_prod = itr
     # set the drop-down menu state
@@ -205,7 +217,7 @@ for itr in iterable:
 
     # perform search
     click(search_id)
-    sleep(0.2)
+    sleep(3)
     
     if cart_prod[j] == 1:  # if lengths = "Alle" 
         if no_results():  # returns no results
@@ -222,10 +234,10 @@ for itr in iterable:
             continue  # iterate over lengths in the length menu
         else:
             click_results_table()
-            sleep(2.2)  # wait for new page to load
+            sleep(5)  # wait for new page to load
             data_collector_list =                 data_collector_list + log_results()
             driver.get(url)
-            sleep(0.2)
+            sleep(1.5)
             # it is safe to skip all iterations on lengths menu
             try:
                 [iterable.__next__() 
@@ -242,10 +254,10 @@ for itr in iterable:
             continue
         else:
             click_results_table()
-            sleep(2.2)  # wait for new page to load
+            sleep(5)  # wait for new page to load
             data_collector_list =                 data_collector_list + log_results()
             driver.get(url)
-            sleep(0.2)
+            sleep(1.5)
 
 
 # In[ ]:
