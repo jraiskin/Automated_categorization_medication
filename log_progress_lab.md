@@ -781,3 +781,27 @@ Todo:
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
+- **22/5:** 
+Abandoned trying to scrape Compendium (slow, not a good use of my time).  
+Scraped Wikipedia.de ATC-code related articles over the weekend.  
+Explored the wiki data, filtered, created additional observations for each entry in "other names".  
+The wiki data is now available as a Pandas df.  
+Started working on sequentially parsing the Drugbank data (XML and schema).  
+Todo:  
+    - Look into Drugbank data-set.  
+    - Look into string / sequence similarity measures.  
+    - After getting the scraped data, run the Jaccard sim procedure again, with the enhanced data 
+        (using both prescriptions and active agents).  
+    - Send Patrick a CSV file to assess the procedure's accuracy at different similarity thresholds. 
+        Sample more at lower similarity thresholds.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
+
