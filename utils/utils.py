@@ -6,6 +6,7 @@ import pickle
 import pandas as pd
 import numpy as np
 from math import ceil
+import csv
 
 from collections import Counter
 
@@ -23,12 +24,16 @@ def user_opt_gen():
     #         'data_path' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv',
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv', 
 #            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv'
-            'suggested_labels' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion.csv'
+            'suggested_labels' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion.csv', 
+            'wiki_atc_code' : r'/home/yarden/git/Automated_categorization_medication/resources/wiki_scrape_filter.csv', 
+            'drugbank_atc_code' : r'/home/yarden/git/Automated_categorization_medication/resources/drugbank_filter.csv'
         },
         'raiskiny' : {
             'data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/20170303_EXPORT_for_Yarden.csv', 
             'atc_conversion_data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv',
-            'suggested_labels' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion.csv'
+            'suggested_labels' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion.csv', 
+            'wiki_atc_code' : r'/cluster/home/raiskiny/thesis_code_and_data/data/wiki_scrape_filter.csv', 
+            'drugbank_atc_code' : r'/cluster/home/raiskiny/thesis_code_and_data/data/drugbank_filter.csv'
         },
         'Yarden-' : {
             'data_path' : None, 
@@ -57,6 +62,32 @@ def init_data():
     y = [i for i in y]  # make into a list
     
     return x, y, n, main_data
+
+
+def init_data_other_atc(data_key):
+    """
+    Initializes data_key from external sources, reads from CSV files.
+    data_key refers to the key in the user_opt_gen() object.
+    data_key can be in ('wiki_atc_code', 'drugbank_atc_code')
+    """
+    user_opt = user_opt_gen()
+    
+    if data_key not in ('wiki_atc_code', 
+                        'drugbank_atc_code'):
+        raise ValueError('Encoutered unknown data_key')
+    
+    data = pd.read_csv(user_opt[data_key], 
+                       sep=',', 
+                       header=0, 
+                       encoding='iso-8859-15')
+    
+    if data_key == 'wiki_atc_code':
+        x = [elem for elem in data['Name']]
+        y = [elem for elem in data['ATC-Code']]
+    else:
+        x = [elem for elem in data['name']]
+        y = [elem for elem in data['atc_codes']]
+    return x, y
 
 
 # initialize data from suggestions CSV file
@@ -462,6 +493,22 @@ def save(fname, obj):
 def load(fname):
     with open(fname, 'rb') as f:
         return pickle.load(f)
+
+
+def save_csv(fname, obj, 
+             headers, 
+             encoding='iso-8859-15'):
+    """
+    Write to a CSV file.
+    fname: file name (str).
+    obj: the objec to save ([str]).
+    headers: a tuple of strings, to be used as headers ([str]).
+    """
+    with open(fname, 'w', 
+              encoding=encoding) as f:
+        writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_ALL)
+        writer.writerows([headers])
+        writer.writerows(obj)
 
 
 # dict with a more convenient way of calling (key, val)
