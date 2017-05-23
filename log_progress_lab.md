@@ -13,6 +13,11 @@ Potentially validate LSTM architecture on Mimic data. Perform prediction on text
 Explain why we did not use batch normalization.  
 Mention that dynamic learning rate with GD optimizer was tested and not chosen.  
 Mention that character embedding was tested and not chosen (one hot representation was superior).  
+Mention revisiting the similarity-based label-suggestion suggestion procedure.  
+    - Analysis done on varying thresholds.  
+    - Near-no-filtering approach and reasons (deal with unknown on later encounters).  
+    - Scraping Wikipedia.de, scraping attempt of Compendium.ch, Drugbank data-base (20/5).  
+    - Credit for https://github.com/dhimmel/drugbank and https://petscan.wmflabs.org/?psid=1039824.  
 
 - **1/3:**
 Fixed a lot of small latex and bibtex related bugs. 
@@ -804,4 +809,22 @@ Todo:
         - Leverage external sources of information. We dont have context (like patient file).  
             Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
+- **23/5:** 
+Wikipedia.de data saved to CSV file.  
+Found a [Drugbank XML parser](https://github.com/dhimmel/drugbank), Drugbank data cleaned and saved to CSV file.  
+Label suggestion procedure was adapted to the new data structure.  
+Running the label suggestion procedure on Euler.  
+Todo:  
+    - Analyze label suggestion procedure.  
+    - Send Patrick a CSV file to assess the procedure's accuracy at different similarity thresholds. 
+        Sample more at lower similarity thresholds.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+        - Leverage external sources of information. We dont have context (like patient file).  
+            Might look into MeSH / UMLS (look for substance / drug semantic type).  
 
