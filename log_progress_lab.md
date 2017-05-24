@@ -825,6 +825,35 @@ Todo:
         - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
     - Thing to keep in mind (currently not a high priority):  
         - Ensemble methods.  
-        - Leverage external sources of information. We dont have context (like patient file).  
-            Might look into MeSH / UMLS (look for substance / drug semantic type).  
+
+- **23/5:** 
+Analyzed similarity-based label-suggestion results.  
+It seems like there are fewer non-conflicting (unanimous) results in the *external in internal* data-set,
+for any given threshold.  
+I've consulted with Carsten regarding further analysis, before sending a sample to Patrick.  
+We've decided that it would be informative to learn about coverage, 
+i.e. the size of the set of ATC codes in the labeled data, the external data, the difference and intersection of the sets 
+(perhaps a bar plot of each ATC code's frequeny).  
+Also, analyze the number of unanimous suggestions that have at least k (10) examples, both labeled and suggested.  
+Analyze conflicts, how far "up" the ATC code category tree we need to go to get to a common node.  
+Atc_code class introduced, along with relevant ATC-code analysis functions (common node, levels).  
+Todo:  
+    - Analyze label suggestion procedure:  
+        - Set sizes of ATC labels in internal and external data sources.  
+        - Number of unanimous suggestions that have at least k (10) examples, both labeled and suggested.  
+        - Normalized ATC code that is shared ("lowest" common node).  
+    - Send Patrick a CSV file to assess the procedure's accuracy at different similarity thresholds. 
+        Sample more at lower similarity thresholds.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+    - Thing to keep in mind (currently not a high priority):  
+        - Ensemble methods.  
+
+
+
+
+
 
