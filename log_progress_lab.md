@@ -18,6 +18,8 @@ Mention revisiting the similarity-based label-suggestion suggestion procedure.
     - Near-no-filtering approach and reasons (deal with unknown on later encounters).  
     - Scraping Wikipedia.de, scraping attempt of Compendium.ch, Drugbank data-base (20/5).  
     - Credit for https://github.com/dhimmel/drugbank and https://petscan.wmflabs.org/?psid=1039824.  
+Mention that we considered other methods, such as ensemble methods, 
+analysis based on common "lowest node" in ATC category tree.  
 
 - **1/3:**
 Fixed a lot of small latex and bibtex related bugs. 
@@ -826,7 +828,7 @@ Todo:
     - Thing to keep in mind (currently not a high priority):  
         - Ensemble methods.  
 
-- **23/5:** 
+- **24/5:** 
 Analyzed similarity-based label-suggestion results.  
 It seems like there are fewer non-conflicting (unanimous) results in the *external in internal* data-set,
 for any given threshold.  
@@ -852,7 +854,19 @@ Todo:
     - Thing to keep in mind (currently not a high priority):  
         - Ensemble methods.  
 
-
+- **25/5:** 
+Continued analysis of the similarity-based label-suggestion results.  
+Added new statistics and changed plots (ATC-level based similarity, filtered # of obs with suggestions).  
+Sampling procedure from each threshold slice is in place, ready to export to CSV.  
+Todo:  
+    - Think of a smart way to export the results, without the similary, such that later analysis would be easier.  
+    - Send Patrick a CSV file to assess the procedure's accuracy at different similarity thresholds. 
+        Sample more at lower similarity thresholds.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
 
 
 
