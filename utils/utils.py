@@ -511,6 +511,9 @@ def save_csv(fname, obj,
         writer.writerows(obj)
 
 
+flatten_list = lambda l: [item for sublist in l for item in sublist]
+
+
 # dict with a more convenient way of calling (key, val)
 class nice_dict(dict):
 
