@@ -868,6 +868,19 @@ Todo:
     - Transform input data (for both neural and linear forms):  
         - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
 
-
+- **26/5:** 
+Created a CSV file with the similarity-based label-suggestion results.  
+Resulst were more heavily sampled in low similarity areas.  
+The reuslts were shuffled so that the order does not give any similarity-related information.  
+The SCV file, without the similarities, was sent to Patrick for assessment.  
+Todo:  
+    - Get label-suggestion assessment from Patrick, 
+    plot results (stacked histogram?) of the assessment, to infer "true" threshold.   
+    - Determine new threshold, update kwargs across files, re-train RNNs with the new data.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
 
 
