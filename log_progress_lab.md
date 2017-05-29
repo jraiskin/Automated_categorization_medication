@@ -883,4 +883,18 @@ Todo:
     - Transform input data (for both neural and linear forms):  
         - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
 
-
+- **29/5:** 
+Got Patrick's feedback on the similarity-based label-suggestion results.  
+Generated some plots, however, not sure on the threshold selection method and 
+the implications on the rest of the unlabeled data-set.  
+Todo:  
+    - Settle on a selection method of the similarity threshold.   
+    - Determine new threshold, then:  
+        - Update kwargs across files,  
+        - Update utils suggetion data init function and data preprocessing functions (collect functions/lambdas created),  
+        - Re-train RNNs with the new data *and* with the original labeled data.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+    - Run RNN classifiers without filtering characters.  
+    - Transform input data (for both neural and linear forms):  
+        - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
