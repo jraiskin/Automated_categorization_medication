@@ -20,6 +20,12 @@ Mention revisiting the similarity-based label-suggestion suggestion procedure.
     - Credit for https://github.com/dhimmel/drugbank and https://petscan.wmflabs.org/?psid=1039824.  
 Mention that we considered other methods, such as ensemble methods, 
 analysis based on common "lowest node" in ATC category tree.  
+Mention training SVM and RNN with filtering and with "near-no-filtering", 
+mention that "nnf" seemed to work better and requires less assumptions / arbitrary decisions.  
+Mention that we considered scaling cost associated with certain perscription.  
+Mention that we considered injecting noise / corrupting perscriptions and evaluate both classifiers, 
+testing which one is more resilient w.r.t. signal corruption.  
+
 
 - **1/3:**
 Fixed a lot of small latex and bibtex related bugs. 
@@ -898,3 +904,22 @@ Todo:
     - Run RNN classifiers without filtering characters.  
     - Transform input data (for both neural and linear forms):  
         - Inject random noise (pick line proportional to its length and inject noise proportional to hyper parameter).  
+
+- **1/6:** 
+Fixed the similarity threshold to be 0.8, exported the new information to file 
+(similarity_labels_suggestion_revised_31_5_internal_data_filtered.csv).  
+I can treat the similarity-based label-suggestion results evaluation as draws from a cetrain band of similarities. 
+The lowest lower bound of the band that did not exhibit false positives is 0.8 
+(should also consider the uncertainty given small smaple).  
+Kwargs were migrated to a single file, for ease of management (kwargs_file.py).  
+We would like to compare the algorithm's performance with and without using the label suggestions. 
+For this, reason, using the addtional suggetions data is now optional.  
+Updated RNN training file to accept use_suggestions as a command line argument.  
+Ran all SVM optimization, exported results to files and plot the optimal performance for each data-set configuration.  
+Todo:  
+    - Check whether Marloes responded to my offer to consult regarding the similarity threshold selection method.  
+    - Finish analysis and kwargs adaptation on 'test_load_data.ipynb'.  
+    - Start re-training RNNs with the new data *and* with the original labeled data.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+
