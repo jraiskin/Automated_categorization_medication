@@ -24,14 +24,14 @@ def user_opt_gen():
     #         'data_path' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv',
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv', 
 #            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv'
-            'suggested_labels' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion.csv', 
+            'suggested_labels' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion_revised_31_5_internal_data_filtered.csv', 
             'wiki_atc_code' : r'/home/yarden/git/Automated_categorization_medication/resources/wiki_scrape_filter.csv', 
             'drugbank_atc_code' : r'/home/yarden/git/Automated_categorization_medication/resources/drugbank_filter.csv'
         },
         'raiskiny' : {
             'data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/20170303_EXPORT_for_Yarden.csv', 
             'atc_conversion_data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv',
-            'suggested_labels' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion.csv', 
+            'suggested_labels' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion_revised_31_5_internal_data_filtered.csv', 
             'wiki_atc_code' : r'/cluster/home/raiskiny/thesis_code_and_data/data/wiki_scrape_filter.csv', 
             'drugbank_atc_code' : r'/cluster/home/raiskiny/thesis_code_and_data/data/drugbank_filter.csv'
         },
@@ -91,29 +91,35 @@ def init_data_other_atc(data_key):
 
 
 # initialize data from suggestions CSV file
-def init_data_suggest():
+def init_data_suggest(use_suggestions):
     x, y, n, main_data = init_data()
     
     x = [i for i in x]
     freq = [i for i in main_data['CNT'][:n]]  # frequencies, turned into a list
     
-    user_opt = user_opt_gen()
-    suggested_data = pd.read_csv(user_opt['suggested_labels'], 
-                                 sep=',', 
-                                 names=['Text', 'ATC', 'Jaccard_sim'], 
-                                 encoding='iso-8859-15')
-    
-    x_suggest = [i for i in suggested_data['Text']]
-    y_suggest = [i for i in suggested_data['ATC']]
-    
     main_freq = main_data['CNT']
     main_text = main_data['FREETXT']
     
-    # match frequency from main file with text from suggestions CSV file
-    freq_suggest = [main_freq[[text == t for t in main_text]] for text in x_suggest]
-    # extract values and convert to int (instead of np.int64)
-    freq_suggest = [int(i.values[0]) for i in freq_suggest]
-    # n_suggest = len(freq_suggest)
+    user_opt = user_opt_gen()
+    # if use_suggestions, load suggestion data from CSV file
+    # if not, returning empty lists works
+    if use_suggestions:
+        print('Using label suggestion data')
+        suggested_data = pd.read_csv(user_opt['suggested_labels'], 
+                                     sep=',', 
+                                     names=['Text', 'ATC', 'Jaccard_sim'], 
+                                     encoding='iso-8859-15')
+        
+        x_suggest = [i for i in suggested_data['Text']]
+        y_suggest = [i for i in suggested_data['ATC']]
+        
+        # match frequency from main file with text from suggestions CSV file
+        freq_suggest = [main_freq[[text == t for t in main_text]] for text in x_suggest]
+        # extract values and convert to int (instead of np.int64)
+        freq_suggest = [int(i.values[0]) for i in freq_suggest]
+    else:
+        print('Not using label suggestion data')
+        x_suggest, y_suggest, freq_suggest = [], [], []
     
     # check that lengths match
     cond = len(freq_suggest) == len(x_suggest)
@@ -130,6 +136,30 @@ def init_data_suggest():
     return x, y, freq, x_suggest, y_suggest, freq_suggest
 
 
+def make_chars(input, 
+               allowed_chars, 
+               unknown_char='<unk-char>'):
+    
+    result = [list(obs) for obs in input]
+    result = [[char if char in allowed_chars 
+              else unknown_char for char in obs]
+             for obs in result]
+    return result
+
+
+def make_ngrams(input, 
+                allowed_ngrams, 
+                ngram_width, 
+                unknown_ngram='<unk-ngram>'):
+    return [obs + [ngram
+                   if ngram in allowed_ngrams
+                   else unknown_ngram
+                   for ngram in 
+                   join_sliding_window(obs, 
+                       ngram_width)]
+            for obs in input]
+
+
 def data_load_preprocess(*args,
                          ngram_filter,
                          allowed_ngrams,
@@ -144,6 +174,7 @@ def data_load_preprocess(*args,
                          to_permute,
                          mk_chars,
                          char_filter, 
+                         use_suggestions, 
                          linear_counters=True, 
                          output_intermediate=False,
                          **kwargs):
@@ -158,7 +189,7 @@ def data_load_preprocess(*args,
 
     ### initialize data from MAIN and SUGGESTION CSV files ###
     x, y, freq, x_suggest, y_suggest, freq_suggest =\
-        init_data_suggest()
+        init_data_suggest(use_suggestions)
     
     ### global counter: characters ###
     if mk_chars:
@@ -169,14 +200,22 @@ def data_load_preprocess(*args,
 
         # replacing unknown characters with UNKNOWN symbol
         unknown_char = '<unk-char>'
-        x_unk = [list(obs) for obs in x]
-        x_unk = [[char if char in allowed_chars 
-                  else unknown_char for char in obs]
-                 for obs in x_unk]
-        x_suggest_unk = [list(obs) for obs in x_suggest]  # same for x_suggest
-        x_suggest_unk = [[char if char in allowed_chars 
-                          else unknown_char for char in obs]
-                         for obs in x_suggest_unk]
+        # for x
+        x_unk = make_chars(x, 
+                           allowed_chars=allowed_chars)
+        
+#         x_unk = [list(obs) for obs in x]
+#         x_unk = [[char if char in allowed_chars 
+#                   else unknown_char for char in obs]
+#                  for obs in x_unk]
+        
+        # for suggestion x
+        x_suggest_unk = make_chars(x_suggest, 
+                                   allowed_chars=allowed_chars)
+#         x_suggest_unk = [list(obs) for obs in x_suggest]  # same for x_suggest
+#         x_suggest_unk = [[char if char in allowed_chars 
+#                           else unknown_char for char in obs]
+#                          for obs in x_suggest_unk]
     else:
         allowed_chars = list({char for obs in x for char in obs})
         allowed_chars.sort()
@@ -226,18 +265,26 @@ def data_load_preprocess(*args,
             # add filtered ngrams, 
             # introduce UNKNOWN if ngram is not in 'allowed_ngrams'
             unknown_ngram = '<unk-ngram>'
-            x_train = [obs + [ngram 
-                              if ngram in allowed_ngrams
-                              else unknown_ngram
-                              for ngram in join_sliding_window(obs, 
-                                  ngram_width)]
-                       for obs in x_train]
-            x_val = [obs + [ngram 
-                            if ngram in allowed_ngrams
-                            else unknown_ngram
-                            for ngram in join_sliding_window(obs, 
-                                ngram_width)]
-                       for obs in x_val]
+            # for x
+            x_train = make_ngrams(x_train, 
+                                  allowed_ngrams=allowed_ngrams, 
+                                  ngram_width=ngram_width)
+#             x_train = [obs + [ngram 
+#                               if ngram in allowed_ngrams
+#                               else unknown_ngram
+#                               for ngram in join_sliding_window(obs, 
+#                                   ngram_width)]
+#                        for obs in x_train]
+            # for suggestion x
+            x_val = make_ngrams(x_val, 
+                                allowed_ngrams=allowed_ngrams, 
+                                ngram_width=ngram_width)
+#             x_val = [obs + [ngram 
+#                             if ngram in allowed_ngrams
+#                             else unknown_ngram
+#                             for ngram in join_sliding_window(obs, 
+#                                 ngram_width)]
+#                        for obs in x_val]
         if linear_counters:
             x_train = [Counter(obs) for obs in x_train]
             x_val = [Counter(obs) for obs in x_val]
@@ -496,7 +543,7 @@ def load(fname):
 
 
 def save_csv(fname, obj, 
-             headers, 
+             headers=None, 
              encoding='iso-8859-15'):
     """
     Write to a CSV file.
@@ -507,7 +554,8 @@ def save_csv(fname, obj,
     with open(fname, 'w', 
               encoding=encoding) as f:
         writer = csv.writer(f, delimiter=',', quoting=csv.QUOTE_ALL)
-        writer.writerows([headers])
+        if headers is not None:
+            writer.writerows([headers])
         writer.writerows(obj)
 
 
