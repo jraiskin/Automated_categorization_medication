@@ -923,3 +923,22 @@ Todo:
     - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
         For this I need to train the RNN model and checkpoint.  
 
+- **2/6:** 
+Finished analysis and kwargs adaptation on 'test_load_data.ipynb' (might need revisiting for better graphics).  
+Added command line arguments parsing for RNN training script.  
+Also, training multiple RNN model configurations is now easier, using itertools.product.  
+Added some instructions (to self) on how to run experiments on Euler with all the currently available flags.  
+Currently running 4 experiments on Euler. 
+The focus here is on learning rates (including dynamic rates), hidden state sizes 
+and one hot representation vs. character embeddings.  
+Todo:  
+    - Think of thesis document structure. [I have worked on structure before](log_discussion_literature.md), 
+        yet need to rethink and get more specific. Also use given theses are referrence for structure.  
+    - Keep re-training RNNs with the new data *and* with the original labeled data. 
+        Next experiments might focus on keep_prob, regularization constants.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+
+
+
+
