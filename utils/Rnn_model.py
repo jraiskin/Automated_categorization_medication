@@ -113,6 +113,8 @@ class Rnn_model(object):
             pass
         elif self.activation_function == 'noisy_tanh':
             self.activation_function = self.noise_tanh_p
+        elif self.activation_function == 'tf.tanh':
+            self.activation_function = tf.tanh
         else:
             raise ValueError('Received an unknown activation function')
         
@@ -357,7 +359,7 @@ class Rnn_model(object):
                       'training accuracy is {:.5f} and '.format(train_accuracy) + 
                       'test accuracy is {:.5f}, '.format(test_accuracy))
                 print('training cost is {:.5f} and '.format(train_cost) + 
-                      'test cost is {:.5f} and '.format(test_cost))
+                      'test cost is {:.5f}'.format(test_cost))
                 
             if i % self.save_step == 0:
                 print('Saving step {}'.format(i))

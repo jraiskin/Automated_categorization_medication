@@ -49,14 +49,14 @@ kwargs_rnn = nice_dict({
     # learning hyper-params
     'learn_rate': 1E-2, 
     'dynamic_learn_rate': False, 
-    'rnn_type': 'GRU',
+    'rnn_type': 'LSTM',
     'bidirection': False, 
     'char_embed_dim': 4, 
     'one_hot': True,
     'hidden_state_size': 32, 
     'keep_prob': 0.7, 
     # noisy activation hyper params
-    'activation_function': 'noisy_tanh',  # tf.tanh / 'noisy_tanh'
+    'activation_function': 'tf.tanh',  # tf.tanh / 'noisy_tanh'
     'learn_p_delta_scale': False,   # noise scale param in noisy activation
     'noise_act_alpha': 1.15,  # mixing in the linear activation
     'noise_act_half_normal': False,
@@ -65,7 +65,7 @@ kwargs_rnn = nice_dict({
     'target_rep': True, 
     'target_rep_weight': 0.3, 
     # training settings
-    'epochs': 20,
+    'epochs': 1000,
     'summary_step': 10, 
     'save_step': inf,
     'to_save': False, 
