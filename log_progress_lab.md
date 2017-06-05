@@ -939,7 +939,7 @@ Todo:
     - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
         For this I need to train the RNN model and checkpoint.  
 
-- **2/6:** 
+- **3/6:** 
 Still waiting for results from Euler (slowly back from maintenance, 120 queue not yet online).  
 Formulated [detailed outline of the thesis document](proposed_doc_structure.md). Meeting with Carsten on Tuesday (tomorrow) on the subject.  
 Meeting with Marloes scheduled on Wednesday 11:00.  
