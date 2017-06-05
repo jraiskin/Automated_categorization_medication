@@ -9,7 +9,7 @@ https://wiki.math.ethz.ch/SfSInfo/RemoteAccessIntern
 https://blogs.ethz.ch/isgdmath/tensorflow/  
 **Long-Term Goals / Guidelines / Notes:**  
 Explain why we did not use Mimic data for training (GSN codes, text too clean w/o variation).  
-Potentially validate LSTM architecture on Mimic data. Perform prediction on text (+timestamp), the class would be the perscription given shortly after (given timestamp). Look for literature if something similar has been done before.  
+Potentially validate LSTM architecture on Mimic data. Perform prediction on text (+timestamp), the class would be the prescription given shortly after (given timestamp). Look for literature if something similar has been done before.  
 Explain why we did not use batch normalization.  
 Mention that dynamic learning rate with GD optimizer was tested and not chosen.  
 Mention that character embedding was tested and not chosen (one hot representation was superior).  
@@ -22,8 +22,8 @@ Mention that we considered other methods, such as ensemble methods,
 analysis based on common "lowest node" in ATC category tree.  
 Mention training SVM and RNN with filtering and with "near-no-filtering", 
 mention that "nnf" seemed to work better and requires less assumptions / arbitrary decisions.  
-Mention that we considered scaling cost associated with certain perscription.  
-Mention that we considered injecting noise / corrupting perscriptions and evaluate both classifiers, 
+Mention that we considered scaling cost associated with certain prescription.  
+Mention that we considered injecting noise / corrupting prescriptions and evaluate both classifiers, 
 testing which one is more resilient w.r.t. signal corruption.  
 
 
@@ -49,7 +49,7 @@ Todo:
 - **2/3:** 
 Try and secure a work-station in CAB E81.  
 Focus on state-of-the-art, no so much on a review of methods.  
-Set up connection to math deprtment cluster, have TF1.0! (see _commands_).  
+Set up connection to math department cluster, have TF1.0! (see _commands_).  
 Finished writing about feed-forward NN, backprop (shallow).  
 [Convert ris to bib file] (https://www.bruot.org/ris2bib/)  
 Todo:  
@@ -323,7 +323,7 @@ Try discarding labels that appear less than k (10) times from both training and 
 Consider applying other IR metrics, such as *Reciprocal Rank*.  
 think of ways to incorporate external knowledge into the model.  
 e.g. If we had a comprehensive list of all legal medicine (say, from swissmedic / wikipedia), 
-we could add that data as a perscription (frequency of 1) as additional labeled data, in the "data enhancement" stage.  
+we could add that data as a prescription (frequency of 1) as additional labeled data, in the "data enhancement" stage.  
 Fixed dropout keep probability, set to 1.0 whenever evaluating (dropout applied only while training).  
 The procedure used to split the data to training-test sets is called stratified sampling.  
 Todo:  
@@ -939,6 +939,14 @@ Todo:
     - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
         For this I need to train the RNN model and checkpoint.  
 
-
+- **2/6:** 
+Still waiting for results from Euler (slowly back from maintenance, 120 queue not yet online).  
+Formulated [detailed outline of the thesis document](proposed_doc_structure.md). Meeting with Carsten on Tuesday (tomorrow) on the subject.  
+Meeting with Marloes scheduled on Wednesday 11:00.  
+Todo:  
+    - Keep running experiments on Euler (with the new data *and* with the original labeled data).  
+    - Write thesis, after discussing the document structure.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
 
 
