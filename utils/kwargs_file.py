@@ -20,6 +20,7 @@ ngram_width = 5
 ngram_filter = 2
 
 # other pre-processing parameters
+use_suggestions = '0.8'
 keep_infreq_labels = False
 label_count_thresh = 10
 valid_ratio = 0.25
@@ -35,7 +36,7 @@ kwargs_neural_data_init = nice_dict(
      'keep_infreq_labels': keep_infreq_labels, 'label_count_thresh': label_count_thresh, 
      'valid_ratio': valid_ratio, 
      'scale_func': unscale, 'to_permute': True, 
-     'use_suggestions': True})
+     'use_suggestions': use_suggestions})
 
 kwargs_rnn = nice_dict({
     # log
@@ -81,7 +82,7 @@ kwargs_lin_data_init = nice_dict({'model': 'linear',
                                   'keep_infreq_labels': keep_infreq_labels, 'label_count_thresh': label_count_thresh, 
                                   'valid_ratio': valid_ratio, 
                                   'scale_func': unscale, 'to_permute': True, 
-                                  'use_suggestions': True
+                                  'use_suggestions': use_suggestions
                                   })
 
 kwargs_svm = nice_dict({'C': 0.10,  # penalty term

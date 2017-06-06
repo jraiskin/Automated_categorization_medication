@@ -24,14 +24,16 @@ def user_opt_gen():
     #         'data_path' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv',
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv', 
 #            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv'
-            'suggested_labels' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion_revised_31_5_internal_data_filtered.csv', 
+            'suggested_labels_080' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion_revised_080_internal_data_filtered.csv', 
+            'suggested_labels_070' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion_revised_070_internal_data_filtered.csv', 
             'wiki_atc_code' : r'/home/yarden/git/Automated_categorization_medication/resources/wiki_scrape_filter.csv', 
             'drugbank_atc_code' : r'/home/yarden/git/Automated_categorization_medication/resources/drugbank_filter.csv'
         },
         'raiskiny' : {
             'data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/20170303_EXPORT_for_Yarden.csv', 
             'atc_conversion_data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv',
-            'suggested_labels' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion_revised_31_5_internal_data_filtered.csv', 
+            'suggested_labels_080' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion_revised_080_internal_data_filtered.csv', 
+            'suggested_labels_070' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion_revised_070_internal_data_filtered.csv', 
             'wiki_atc_code' : r'/cluster/home/raiskiny/thesis_code_and_data/data/wiki_scrape_filter.csv', 
             'drugbank_atc_code' : r'/cluster/home/raiskiny/thesis_code_and_data/data/drugbank_filter.csv'
         },
@@ -92,6 +94,15 @@ def init_data_other_atc(data_key):
 
 # initialize data from suggestions CSV file
 def init_data_suggest(use_suggestions):
+    # handle the different data suggestion options
+    if use_suggestions not in {'0.7', '0.8', 'F'}:
+        raise ValueError("use_suggestions parameter has to be a string '+\
+            'with values of either {'0.7', '0.8', 'F'}")
+    if use_suggestions == '0.7':
+        suggestion_data_key = 'suggested_labels_070'
+    elif use_suggestions == '0.8':
+        suggestion_data_key = 'suggested_labels_080'
+    
     x, y, n, main_data = init_data()
     
     x = [i for i in x]
@@ -103,9 +114,9 @@ def init_data_suggest(use_suggestions):
     user_opt = user_opt_gen()
     # if use_suggestions, load suggestion data from CSV file
     # if not, returning empty lists works
-    if use_suggestions:
-        print('Using label suggestion data')
-        suggested_data = pd.read_csv(user_opt['suggested_labels'], 
+    if use_suggestions in {'0.7', '0.8'}:
+        print('Using label suggestion data with similarity threshold of {}'.format(use_suggestions))
+        suggested_data = pd.read_csv(user_opt[suggestion_data_key], 
                                      sep=',', 
                                      names=['Text', 'ATC', 'Jaccard_sim'], 
                                      encoding='iso-8859-15')
