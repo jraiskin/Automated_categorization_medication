@@ -24,6 +24,7 @@ def user_opt_gen():
     #         'data_path' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv',
             'atc_conversion_data_path' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv', 
 #            'suggested_labels' : r'/home/yarden/git/Automated_categorization_medication/data/20170303_EXPORT_for_Yarden.csv'
+            'suggested_labels_090' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion_revised_090_internal_data_filtered.csv', 
             'suggested_labels_080' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion_revised_080_internal_data_filtered.csv', 
             'suggested_labels_070' : r'/media/yarden/OS/Users/Yarden-/Desktop/ETH Autumn 2016/Master Thesis/Data/similarity_labels_suggestion_revised_070_internal_data_filtered.csv', 
             'wiki_atc_code' : r'/home/yarden/git/Automated_categorization_medication/resources/wiki_scrape_filter.csv', 
@@ -32,6 +33,7 @@ def user_opt_gen():
         'raiskiny' : {
             'data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/20170303_EXPORT_for_Yarden.csv', 
             'atc_conversion_data_path' : r'/cluster/home/raiskiny/thesis_code_and_data/data/Complete_ATCs_and_lacking_translations_V03a_20161206.csv',
+            'suggested_labels_090' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion_revised_090_internal_data_filtered.csv', 
             'suggested_labels_080' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion_revised_080_internal_data_filtered.csv', 
             'suggested_labels_070' : r'/cluster/home/raiskiny/thesis_code_and_data/data/similarity_labels_suggestion_revised_070_internal_data_filtered.csv', 
             'wiki_atc_code' : r'/cluster/home/raiskiny/thesis_code_and_data/data/wiki_scrape_filter.csv', 
@@ -95,13 +97,15 @@ def init_data_other_atc(data_key):
 # initialize data from suggestions CSV file
 def init_data_suggest(use_suggestions):
     # handle the different data suggestion options
-    if use_suggestions not in {'0.7', '0.8', 'F'}:
+    if use_suggestions not in {'0.7', '0.8', '0.9', 'F'}:
         raise ValueError("use_suggestions parameter has to be a string '+\
-            'with values of either {'0.7', '0.8', 'F'}")
+            'with values of either {'0.7', '0.8', '0.9', 'F'}")
     if use_suggestions == '0.7':
         suggestion_data_key = 'suggested_labels_070'
     elif use_suggestions == '0.8':
         suggestion_data_key = 'suggested_labels_080'
+    elif use_suggestions == '0.9':
+        suggestion_data_key = 'suggested_labels_090'
     
     x, y, n, main_data = init_data()
     
@@ -255,6 +259,7 @@ def data_load_preprocess(*args,
         return x_unk, x_suggest_unk, y, y_suggest, freq, freq_suggest
     
     ### merging ###
+    original_set_len = len(y)
     x_merge, y_merge, freq_merge = \
         x_unk + x_suggest_unk, \
         y + y_suggest, \
@@ -264,6 +269,7 @@ def data_load_preprocess(*args,
     # train-validation split
     x_val, x_train, y_val, y_train, freq_val, freq_train, valid_index, statistics_dict = \
         train_validation_split(x=x_merge, y=y_merge, freq=freq_merge, 
+                               original_set_len=original_set_len,  
                                label_count_thresh=label_count_thresh, 
                                valid_ratio=valid_ratio, 
                                keep_rare_labels=keep_infreq_labels)
@@ -350,6 +356,7 @@ def data_load_preprocess(*args,
 
 
 def train_validation_split(*, x, y, freq, 
+                           original_set_len,
                            label_count_thresh, 
                            valid_ratio, 
                            keep_rare_labels, 
@@ -370,8 +377,20 @@ def train_validation_split(*, x, y, freq,
     # check
     assert(min([len(x) for x in label_index_dict.values()]) >= label_count_thresh)
     
-    label_valid_index_dict = {label:random.sample(indices, int(valid_ratio * len(indices)))
+    label_valid_index_dict = {label:random.sample([ind for ind in indices 
+                                                   if ind < original_set_len], 
+                              min(
+                                int(valid_ratio * len(indices)), 
+                                len(
+                                    [ind for ind in indices 
+                                     if ind < original_set_len]
+                                    )
+                                  )
+                                                  )
                               for label,indices in sorted(label_index_dict.items())}
+
+#     label_valid_index_dict = {label:random.sample(indices, int(valid_ratio * len(indices)))
+#                               for label,indices in sorted(label_index_dict.items())}
 
     # extract all indices into a single set
     valid_index = [item for sublist in list(label_valid_index_dict.values()) for item in sublist]
