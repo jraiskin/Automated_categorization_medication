@@ -949,4 +949,18 @@ Todo:
     - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
         For this I need to train the RNN model and checkpoint.  
 
+- **7/6:** 
+Consulted with Marloes regarding determining the similarity threshold.  
+She suggested exploring different classifiers, trained on different data-sets 
+(threhsolds of 0.7, 0.8, 0.9, no suggestions which is equivalent to 1.0). 
+Carsten agrees and is on board.  
+Created the data-set derived from 0.7 similarity threshold, exported to file and updated everywhere.  
+Revised the validation procedure, such that validation set would only be drawn from the original data-set.  
+Launched all current experiments on Euler.  
+Changed / deleted parts in the document regarding NN. Wrote about GRU.  
+Todo:  
+    - Keep running experiments on Euler (without suggestions, with 0.7, 0.8, 0.9 similarities).  
+    - Write thesis, next could be the method section.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
 
