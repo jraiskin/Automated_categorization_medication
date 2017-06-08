@@ -964,3 +964,13 @@ Todo:
     - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
         For this I need to train the RNN model and checkpoint.  
 
+- **8/6:** 
+Started writing the Methods chapter.  
+Created a notebook for generating figures (illustrations).  
+Todo:  
+    - Keep running experiments on Euler (without suggestions, with 0.7, 0.8, 0.9 similarities).  
+    - Write thesis.  
+    - Plot evaluation metrics for RNN and linear classifier vs. # of keystrokes. 
+        For this I need to train the RNN model and checkpoint.  
+
+
