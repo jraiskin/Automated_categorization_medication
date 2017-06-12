@@ -19,7 +19,7 @@
         
             Introduced LSTM  
         
-        - [ ] [Learning to Diagnose with LSTM Recurrent Neural Networks](https://arxiv.org/abs/1511.03677)
+        - [x] [Learning to Diagnose with LSTM Recurrent Neural Networks](https://arxiv.org/abs/1511.03677)
         
             TBC  
         
