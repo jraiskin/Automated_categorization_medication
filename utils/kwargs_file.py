@@ -41,7 +41,7 @@ kwargs_neural_data_init = nice_dict(
 kwargs_rnn = nice_dict({
     # log
     'log_dir': 'logdir/', 
-    'del_log': True, 
+    'del_log': False, 
     # preprocessing and data
     'scale_func': kwargs_neural_data_init.scale_func, 
     'keep_infreq_labels': kwargs_neural_data_init.keep_infreq_labels, 
