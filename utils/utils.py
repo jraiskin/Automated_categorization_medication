@@ -118,7 +118,7 @@ def init_data_suggest(use_suggestions):
     user_opt = user_opt_gen()
     # if use_suggestions, load suggestion data from CSV file
     # if not, returning empty lists works
-    if use_suggestions in {'0.7', '0.8'}:
+    if use_suggestions in {'0.7', '0.8', '0.9'}:
         print('Using label suggestion data with similarity threshold of {}'.format(use_suggestions))
         suggested_data = pd.read_csv(user_opt[suggestion_data_key], 
                                      sep=',', 
