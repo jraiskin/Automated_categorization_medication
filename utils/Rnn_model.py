@@ -108,6 +108,9 @@ class Rnn_model(object):
         else:
             self.p_delta_scale = 1.0
         
+        # keep track of highest MRR seen so far, init at 0.0
+        self.max_seen_mrr = 0.0
+        
         # set activation function
         if hasattr(self.activation_function, '__call__'):
             pass
@@ -345,13 +348,13 @@ class Rnn_model(object):
             if i % self.summary_step == 0:
                 # train summary
                 # use self.feed_dict_train_eval for evaluation (keep probability set to 1.0)
-                [train_accuracy, train_cost, _, train_top_k] = \
+                [train_accuracy, train_cost, _, train_top_k, _] = \
                     self.run_eval(feed_dict=self.feed_dict_train_eval,
                                   step=i, 
                                   summary=self.summ_train)
                 print('{:.3f} of observations in the top is {}'.format(train_top_k, self.top_k))
                 # test summary
-                [test_accuracy, test_cost, _, test_top_k] = \
+                [test_accuracy, test_cost, test_mrr, test_top_k, _] = \
                     self.run_eval(feed_dict=self.feed_dict_test,
                                   step=i, 
                                   summary=self.summ_test)
@@ -361,8 +364,11 @@ class Rnn_model(object):
                 print('training cost is {:.5f} and '.format(train_cost) + 
                       'test cost is {:.5f}'.format(test_cost))
                 
-            if i % self.save_step == 0:
+            if i > self.save_step and test_mrr > self.max_seen_mrr:
+                # update the max seen MRR
+                self.max_seen_mrr = test_mrr
                 print('Saving step {}'.format(i))
+                print('MRR is {:.5f}'.format(self.max_seen_mrr))
                 self.saver.save(self.sess, os.path.join(self.log_dir, 
                                                         self.hparam_str, 
                                                         'model.ckpt'), i)
@@ -389,7 +395,7 @@ class Rnn_model(object):
             feed_dict = self.feed_dict_test
         
         if summary is not None:
-            [accuracy, cost,_ , _, _, recip_rank, top_k, s] = \
+            [accuracy, cost,_ , _, _, recip_rank, top_k, logits, s] = \
                 session.run([self.accuracy, 
                              self.cost, 
                              self.cost_targetrep, 
@@ -397,21 +403,23 @@ class Rnn_model(object):
                              self.cost_l2reg, 
                              self.recip_rank, 
                              self.top_k_res, 
+                             self.logits,
                              summary],
                             feed_dict=feed_dict)
             self.writer.add_summary(s, step)
         else:
-            [accuracy, cost,_ , _, _, recip_rank, top_k] = \
+            [accuracy, cost,_ , _, _, recip_rank, top_k, logits] = \
                 session.run([self.accuracy, 
                              self.cost, 
                              self.cost_targetrep, 
                              self.cost_crossent, 
                              self.cost_l2reg, 
                              self.recip_rank, 
-                             self.top_k_res],
+                             self.top_k_res, 
+                             self.logits],
                             feed_dict=feed_dict)
 
-        return [accuracy, cost, recip_rank, top_k]
+        return [accuracy, cost, recip_rank, top_k, logits[-1]]
     
     
     def update_test_dict(self, feed_dict_test):

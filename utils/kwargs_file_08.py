@@ -59,9 +59,9 @@ kwargs_rnn_GRU = nice_dict({
     'target_rep': True, 
     'target_rep_weight': 0.5, 
     # training settings
-    'epochs': 1000,
+    'epochs': 3000,
     'summary_step': 10, 
-    'save_step': 810,
+    'save_step': 400,
     'to_save': True, 
     'verbose_summary': False
 })
@@ -94,9 +94,9 @@ kwargs_rnn_LSTM = nice_dict({
     'target_rep': True, 
     'target_rep_weight': 0.5, 
     # training settings
-    'epochs': 1000,
+    'epochs': 3000,
     'summary_step': 10, 
-    'save_step': 800,
+    'save_step': 400,
     'to_save': True, 
     'verbose_summary': False
 })
