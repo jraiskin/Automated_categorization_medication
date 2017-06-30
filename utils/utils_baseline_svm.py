@@ -26,11 +26,15 @@ def in_top_k(y_dense, log_pred, k):
 
 
 # returns the mean reciprocal rank
-def mean_reciprocal_rank(y_dense, log_pred):
+def mean_reciprocal_rank(y_dense, log_pred, average=True):
     assert len(y_dense) == len(log_pred), 'y and predictions are not of same length'
-    return np.mean(
-        [1.0 / get_rank_order(log_pred[i])[np.argmax(y_dense[i])]
-         for i in range(len(y_dense))])
+    if average:
+        return np.mean(
+            [1.0 / get_rank_order(log_pred[i])[np.argmax(y_dense[i])]
+             for i in range(len(y_dense))])
+    else:
+        return [1.0 / get_rank_order(log_pred[i])[np.argmax(y_dense[i])]
+                for i in range(len(y_dense))]
 
 
 if __name__ == '__main__':

@@ -85,7 +85,7 @@ kwargs_lin_data_init = nice_dict({'model': 'linear',
                                   'use_suggestions': use_suggestions
                                   })
 
-kwargs_svm = nice_dict({'C': 0.10,  # penalty term
+kwargs_svm = nice_dict({'C': 1.00,  # penalty term
                         'decision_function_shape': 'ovr',  # one-vs-rest (‘ovr’) / one-vs-one (‘ovo’) 
                         'random_state': seed(), 
                         'kernel': 'linear', 

@@ -33,7 +33,7 @@ kwargs_neural_data_init = nice_dict(
 
 kwargs_rnn_GRU = nice_dict({
     # log
-    'log_dir': 'rnn_final_batch/sim_08/', 
+    'log_dir': 'rnn_final_batch_trained_models/sim_08/', 
     'del_log': False, 
     # preprocessing and data
     'scale_func': kwargs_neural_data_init.scale_func, 
@@ -68,7 +68,7 @@ kwargs_rnn_GRU = nice_dict({
 
 kwargs_rnn_LSTM = nice_dict({
     # log
-    'log_dir': 'rnn_final_batch/sim_08/', 
+    'log_dir': 'rnn_final_batch_trained_models/sim_08/', 
     'del_log': False, 
     # preprocessing and data
     'scale_func': kwargs_neural_data_init.scale_func, 

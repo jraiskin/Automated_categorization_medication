@@ -13,7 +13,7 @@ ngram_width = 5
 ngram_filter = 2
 
 # other pre-processing parameters
-use_suggestions = '0.8'
+use_suggestions = '0.9'
 keep_infreq_labels = False
 label_count_thresh = 10
 valid_ratio = 0.25
@@ -33,7 +33,7 @@ kwargs_neural_data_init = nice_dict(
 
 kwargs_rnn_GRU = nice_dict({
     # log
-    'log_dir': 'rnn_final_batch/sim_09/', 
+    'log_dir': 'rnn_final_batch_trained_models/sim_09/', 
     'del_log': False, 
     # preprocessing and data
     'scale_func': kwargs_neural_data_init.scale_func, 
@@ -68,7 +68,7 @@ kwargs_rnn_GRU = nice_dict({
 
 kwargs_rnn_LSTM = nice_dict({
     # log
-    'log_dir': 'rnn_final_batch/sim_09/', 
+    'log_dir': 'rnn_final_batch_trained_models/sim_09/', 
     'del_log': False, 
     # preprocessing and data
     'scale_func': kwargs_neural_data_init.scale_func, 
